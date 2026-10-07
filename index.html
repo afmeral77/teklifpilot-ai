@@ -3,84 +3,279 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>TeklifPilot</title>
 
 <style>
-body{
-font-family:Arial,sans-serif;
-background:#f5f7fb;
+
+*{
 margin:0;
 padding:0;
-text-align:center;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f8fafc;
+color:#111827;
+}
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px;
+background:white;
+box-shadow:0 2px 10px rgba(0,0,0,.05);
+position:sticky;
+top:0;
+}
+
+.logo{
+font-size:28px;
+font-weight:bold;
+}
+
+nav a{
+margin-left:15px;
+text-decoration:none;
+color:#333;
 }
 
 .hero{
 padding:80px 20px;
+text-align:center;
 }
 
-h1{
+.hero h1{
 font-size:48px;
-margin-bottom:10px;
+margin-bottom:20px;
 }
 
-p{
+.hero p{
 font-size:20px;
-color:#555;
 max-width:700px;
 margin:auto;
+color:#555;
+}
+
+.buttons{
+margin-top:30px;
 }
 
 .btn{
 display:inline-block;
-margin:10px;
 padding:15px 30px;
-background:#000;
-color:white;
-text-decoration:none;
+margin:10px;
 border-radius:10px;
+text-decoration:none;
+font-weight:bold;
+}
+
+.primary{
+background:black;
+color:white;
+}
+
+.secondary{
+border:2px solid black;
+color:black;
 }
 
 .features{
-margin-top:60px;
-padding:20px;
+padding:60px 20px;
+max-width:1100px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
 }
 
 .card{
 background:white;
-max-width:600px;
-margin:15px auto;
-padding:20px;
-border-radius:12px;
-box-shadow:0 2px 10px rgba(0,0,0,.08);
+padding:25px;
+border-radius:15px;
+box-shadow:0 4px 15px rgba(0,0,0,.05);
+text-align:center;
 }
+
+.card h3{
+margin-bottom:10px;
+}
+
+.how{
+padding:80px 20px;
+background:white;
+text-align:center;
+}
+
+.steps{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:20px;
+margin-top:40px;
+}
+
+.step{
+width:280px;
+padding:25px;
+background:#f3f4f6;
+border-radius:15px;
+}
+
+.pricing{
+padding:80px 20px;
+text-align:center;
+}
+
+.pricing-grid{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:20px;
+margin-top:40px;
+}
+
+.price-card{
+background:white;
+padding:30px;
+width:280px;
+border-radius:15px;
+box-shadow:0 4px 15px rgba(0,0,0,.05);
+}
+
+.price{
+font-size:40px;
+font-weight:bold;
+margin:20px 0;
+}
+
+footer{
+padding:40px;
+text-align:center;
+background:#111827;
+color:white;
+margin-top:50px;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="hero">
-<h1>🚀 TeklifPilot</h1>
+<header>
+<div class="logo">🚀 TeklifPilot</div>
+
+<nav>
+<a href="#">Özellikler</a>
+<a href="#">Fiyatlar</a>
+<a href="#">İletişim</a>
+</nav>
+</header>
+
+<section class="hero">
+
+<h1>30 Saniyede Profesyonel Teklif Hazırlayın</h1>
 
 <p>
-Dakikalar içinde profesyonel teklifler oluşturun,
-PDF olarak paylaşın ve müşteri takibini tek yerden yönetin.
+Yapay zeka destekli teklif oluşturma sistemi.
+PDF üretin, WhatsApp'tan paylaşın ve müşterilerinizi yönetin.
 </p>
 
-<a class="btn" href="#">Teklif Oluştur</a>
-<a class="btn" href="#">Demo Gör</a>
+<div class="buttons">
+<a class="btn primary" href="#">Ücretsiz Dene</a>
+<a class="btn secondary" href="#">Demo Gör</a>
 </div>
 
-<div class="features">
+</section>
 
-<div class="card">✅ 30 saniyede teklif oluştur</div>
+<section class="features">
 
-<div class="card">✅ PDF çıktısı al</div>
+<div class="card">
+<h3>⚡ Hızlı Teklif</h3>
+<p>30 saniyede profesyonel teklif oluştur.</p>
+</div>
 
-<div class="card">✅ WhatsApp ile paylaş</div>
+<div class="card">
+<h3>📄 PDF Çıktısı</h3>
+<p>Tek tıkla PDF üret.</p>
+</div>
 
-<div class="card">✅ Müşteri kayıtlarını sakla</div>
+<div class="card">
+<h3>📱 WhatsApp Paylaş</h3>
+<p>Müşterine anında gönder.</p>
+</div>
+
+<div class="card">
+<h3>👥 Müşteri Yönetimi</h3>
+<p>Tüm müşterilerini tek panelden takip et.</p>
+</div>
+
+</section>
+
+<section class="how">
+
+<h2>Nasıl Çalışır?</h2>
+
+<div class="steps">
+
+<div class="step">
+<h3>1️⃣ Bilgileri Gir</h3>
+<p>Müşteri bilgilerini ekle.</p>
+</div>
+
+<div class="step">
+<h3>2️⃣ Teklif Oluştur</h3>
+<p>AI teklif metnini hazırlasın.</p>
+</div>
+
+<div class="step">
+<h3>3️⃣ Paylaş</h3>
+<p>PDF veya WhatsApp ile gönder.</p>
+</div>
 
 </div>
+
+</section>
+
+<section class="pricing">
+
+<h2>Fiyatlandırma</h2>
+
+<div class="pricing-grid">
+
+<div class="price-card">
+<h3>Başlangıç</h3>
+<div class="price">99₺</div>
+<p>Aylık kullanım</p>
+</div>
+
+<div class="price-card">
+<h3>Profesyonel</h3>
+<div class="price">299₺</div>
+<p>Gelişmiş özellikler</p>
+</div>
+
+<div class="price-card">
+<h3>Kurumsal</h3>
+<div class="price">Özel</div>
+<p>Kuruma özel çözümler</p>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<h2>TeklifPilot</h2>
+
+<p>
+Teklif hazırlamayı kolaylaştıran yapay zeka destekli platform.
+</p>
+
+</footer>
 
 </body>
 </html>
