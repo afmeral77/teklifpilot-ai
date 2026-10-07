@@ -269,6 +269,7 @@ PDF üretin, WhatsApp'tan paylaşın ve müşterilerinizi yönetin.
 
 <footer>
 
+
 <h2>TeklifPilot</h2>
 
 <p>
@@ -276,6 +277,74 @@ Teklif hazırlamayı kolaylaştıran yapay zeka destekli platform.
 </p>
 
 </footer>
+<section style="padding:50px 20px;max-width:700px;margin:auto;">
 
+<h2 style="text-align:center;margin-bottom:30px;">
+Teklif Oluştur
+</h2>
+
+<input id="firma" placeholder="Firma Adı"
+style="width:100%;padding:15px;margin-bottom:10px;">
+
+<input id="yetkili" placeholder="Yetkili Kişi"
+style="width:100%;padding:15px;margin-bottom:10px;">
+
+<input id="telefon" placeholder="Telefon"
+style="width:100%;padding:15px;margin-bottom:10px;">
+
+<input id="hizmet" placeholder="Hizmet"
+style="width:100%;padding:15px;margin-bottom:10px;">
+
+<input id="tutar" placeholder="Tutar (TL)"
+style="width:100%;padding:15px;margin-bottom:10px;">
+
+<button onclick="olustur()"
+style="width:100%;padding:15px;background:black;color:white;border:none;border-radius:10px;">
+Teklif Oluştur
+</button>
+
+<div id="sonuc"
+style="margin-top:30px;background:white;padding:20px;border-radius:15px;display:none;">
+</div>
+
+</section>
+
+<script>
+
+function olustur(){
+
+let firma=document.getElementById("firma").value;
+let yetkili=document.getElementById("yetkili").value;
+let telefon=document.getElementById("telefon").value;
+let hizmet=document.getElementById("hizmet").value;
+let tutar=document.getElementById("tutar").value;
+
+document.getElementById("sonuc").style.display="block";
+
+document.getElementById("sonuc").innerHTML=`
+
+<h2>📄 Teklif</h2>
+
+<p><b>Firma:</b> ${firma}</p>
+
+<p><b>Yetkili:</b> ${yetkili}</p>
+
+<p><b>Telefon:</b> ${telefon}</p>
+
+<p><b>Hizmet:</b> ${hizmet}</p>
+
+<p><b>Tutar:</b> ${tutar} TL</p>
+
+<hr>
+
+<p>
+TeklifPilot tarafından oluşturulmuştur.
+</p>
+
+`;
+
+}
+
+</script>
 </body>
 </html>
