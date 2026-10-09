@@ -217,6 +217,39 @@ form.addEventListener("submit", async function(event) {
     teslimat: oku("teslimat")
   };
 
+  const { data: oturumBilgisi } = await client.auth.getUser();
+  const kullanici = oturumBilgisi.user;
+
+  if (!kullanici) {
+    alert("Teklif kaydetmek için önce giriş yapmalısın.");
+    return;
+  }
+
+  const { error: kayitHatasi } = await client
+    .from("teklifler")
+    .insert({
+      user_id: kullanici.id,
+      teklif_no: sonTeklif.no,
+      sektor: sonTeklif.sektor,
+      firma: sonTeklif.firma,
+      musteri: sonTeklif.musteri,
+      telefon: sonTeklif.telefon || null,
+      hizmet: sonTeklif.hizmet,
+      detay: sonTeklif.detay || null,
+      tutar: Number(oku("tutar")),
+      kdv: sonTeklif.kdv,
+      odeme: sonTeklif.odeme || null,
+      teslimat: sonTeklif.teslimat || null,
+      gecerlilik_sonu: sonGun.toISOString().slice(0, 10)
+    });
+
+  if (kayitHatasi) {
+    alert("Teklif kaydedilemedi: " + kayitHatasi.message);
+    return;
+  }
+
+  alert("Teklif başarıyla veri tabanına kaydedildi!");
+
   yaz("rNo", sonTeklif.no);
   yaz("rTarih", sonTeklif.tarih);
   yaz("rSonGun", sonTeklif.sonGun);
