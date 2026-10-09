@@ -43,8 +43,20 @@ button{padding:13px 16px;border:0;border-radius:9px;font-size:15px;font-weight:7
 .feature h3{font-size:16px;margin-bottom:5px}
 .feature p{font-size:13px;color:#64748b}
 footer{text-align:center;padding:27px 15px;background:#111827;color:#cbd5e1;font-size:13px}
+#teklifListesi .teklif-karti{background:#fff;border:1px solid #dbe3ef;border-radius:12px;padding:16px;margin:12px 0}
+#teklifListesi .teklif-karti h3{margin-bottom:8px}
+#teklifListesi .teklif-karti p{margin:5px 0}
+#teklifListesi .teklif-ac{background:#1d4ed8;color:#fff;width:100%;margin-top:10px}
+#teklifListesi .teklif-karti{cursor:pointer}
+#teklifListesi .teklif-ac{cursor:pointer}
 @media(max-width:520px){.grid,.features{grid-template-columns:1fr}.panel{padding:17px}.actions{flex-direction:column}}
-@media print{body{background:#fff}header,.hero,form,.features,footer,.no-print,.muted,#hesap-paneli,#tekliflerim{display:none!important}.wrap{padding:0}.panel{border:0;box-shadow:none;padding:0}.result{display:block!important;border:0;margin:0;padding:0}}
+@media print{
+body{background:#fff}
+header,.hero,form,.features,footer,.no-print,#hesap-paneli,#tekliflerim{display:none!important}
+.wrap{padding:0}
+.panel{border:0;box-shadow:none;padding:0}
+.result{display:block!important;border:0;margin:0;padding:0}
+}
 </style>
 </head>
 <body>
@@ -442,50 +454,122 @@ document.getElementById("teklifleriGetir").addEventListener("click", async funct
   const liste = document.getElementById("teklifListesi");
   liste.textContent = "Teklifler yükleniyor...";
 
-  const { data: oturum, error: oturumHatasi } = await client.auth.getUser();
+  try {
+    const { data: oturum, error: oturumHatasi } =
+      await client.auth.getUser();
 
-  if (oturumHatasi || !oturum.user) {
-    liste.textContent = "Lütfen önce hesabına giriş yap.";
-    return;
+    if (oturumHatasi || !oturum.user) {
+      liste.textContent = "Lütfen önce hesabına giriş yap.";
+      return;
+    }
+
+    const { data, error } = await client
+      .from("teklifler")
+      .select("*")
+      .eq("user_id", oturum.user.id)
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      liste.textContent = "Teklifler alınamadı: " + error.message;
+      return;
+    }
+
+    if (!data || data.length === 0) {
+      liste.textContent = "Henüz kayıtlı teklifin yok.";
+      return;
+    }
+
+    liste.replaceChildren();
+
+    data.forEach(function (teklif) {
+      const kart = document.createElement("div");
+      kart.className = "teklif-karti";
+
+      const baslik = document.createElement("h3");
+      baslik.textContent = teklif.musteri || "İsimsiz müşteri";
+
+      const hizmet = document.createElement("p");
+      hizmet.textContent =
+        "Ürün / Hizmet: " + (teklif.hizmet || "-");
+
+      const tutar = document.createElement("p");
+      tutar.textContent =
+        "Tutar: " +
+        Number(teklif.tutar || 0).toLocaleString("tr-TR", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        }) + " TL";
+
+      const tarih = document.createElement("p");
+      tarih.textContent =
+        "Oluşturulma: " +
+        (teklif.created_at
+          ? new Date(teklif.created_at).toLocaleDateString("tr-TR")
+          : "-");
+
+      const acBtn = document.createElement("button");
+      acBtn.type = "button";
+      acBtn.className = "teklif-ac";
+      acBtn.textContent = "📄 Teklifi Aç";
+
+      acBtn.addEventListener("click", function () {
+        function tarihFormatla(deger) {
+          if (!deger) return "Belirtilmedi";
+          const parcalar = deger.slice(0, 10).split("-");
+          if (parcalar.length !== 3) return deger;
+          return parcalar[2] + "." + parcalar[1] + "." + parcalar[0];
+        }
+
+        const tarihObjesi = teklif.created_at
+          ? new Date(teklif.created_at)
+          : new Date();
+
+        sonTeklif = {
+          no: teklif.teklif_no || "-",
+          tarih: tarihObjesi.toLocaleDateString("tr-TR"),
+          sonGun: tarihFormatla(teklif.gecerlilik_sonu),
+          sektor: teklif.sektor || "",
+          firma: teklif.firma || "",
+          musteri: teklif.musteri || "",
+          telefon: teklif.telefon || "",
+          hizmet: teklif.hizmet || "",
+          detay: teklif.detay || "",
+          tutar: Number(teklif.tutar || 0).toLocaleString("tr-TR", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          }) + " TL",
+          kdv: teklif.kdv || "Belirtilmedi",
+          odeme: teklif.odeme || "",
+          teslimat: teklif.teslimat || ""
+        };
+
+        yaz("rNo", sonTeklif.no);
+        yaz("rTarih", sonTeklif.tarih);
+        yaz("rSonGun", sonTeklif.sonGun);
+        yaz("rSektor", sonTeklif.sektor);
+        yaz("rFirma", sonTeklif.firma);
+        yaz("rMusteri", sonTeklif.musteri);
+        yaz("rTelefon", sonTeklif.telefon);
+        yaz("rHizmet", sonTeklif.hizmet);
+        yaz("rDetay", sonTeklif.detay);
+        yaz("rTutar", sonTeklif.tutar);
+        yaz("rKdv", sonTeklif.kdv);
+        yaz("rOdeme", sonTeklif.odeme);
+        yaz("rTeslimat", sonTeklif.teslimat);
+
+        sonuc.style.display = "block";
+        sonuc.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+
+      kart.append(baslik, hizmet, tutar, tarih, acBtn);
+      liste.appendChild(kart);
+    });
+  } catch (hata) {
+    liste.textContent = "Bir hata oluştu. Lütfen tekrar dene.";
   }
-
-  const { data, error } = await client
-    .from("teklifler")
-    .select("*")
-    .eq("user_id", oturum.user.id)
-    .order("created_at", { ascending: false });
-
-  if (error) {
-    liste.textContent = "Teklifler alınamadı: " + error.message;
-    return;
-  }
-
-  if (!data || data.length === 0) {
-    liste.textContent = "Henüz kayıtlı teklifin yok.";
-    return;
-  }
-
-  liste.replaceChildren();
-
-  data.forEach(function (teklif) {
-    const kart = document.createElement("div");
-    kart.style.cssText = "border:1px solid #ddd;border-radius:10px;padding:16px;margin:12px 0;";
-
-    const baslik = document.createElement("h3");
-    baslik.textContent = teklif.musteri || "İsimsiz müşteri";
-
-    const hizmet = document.createElement("p");
-    hizmet.textContent = "Ürün / Hizmet: " + (teklif.hizmet || "-");
-
-    const tutar = document.createElement("p");
-    tutar.textContent = "Tutar: " + Number(teklif.tutar || 0).toLocaleString("tr-TR") + " TL";
-
-    const tarih = document.createElement("p");
-    tarih.textContent = "Oluşturulma: " + new Date(teklif.created_at).toLocaleDateString("tr-TR");
-
-    kart.append(baslik, hizmet, tutar, tarih);
-    liste.appendChild(kart);
-  });
 });
 </script>
 
