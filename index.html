@@ -185,7 +185,7 @@ function yaz(id, value) {
   document.getElementById(id).textContent = value || "Belirtilmedi";
 }
 
-form.addEventListener("submit", function(event) {
+form.addEventListener("submit", async function(event) {
   event.preventDefault();
 
   const tutar = Number(oku("tutar"));
