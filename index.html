@@ -2,18 +2,15 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TeklifPilot AI | Akıllı Teklif Asistanı</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const SUPABASE_URL = "https://ckochcakoiegwikstyew.supabase.co";
 const SUPABASE_KEY = "sb_publishable_s10Fz4cCqyYKLkmtvBE-1g_ZGiKu9HN";
-const client = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 </script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TeklifPilot AI | Akıllı Teklif Asistanı</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Arial,sans-serif;background:#f4f6fb;color:#172033;line-height:1.6}
@@ -47,7 +44,7 @@ button{padding:13px 16px;border:0;border-radius:9px;font-size:15px;font-weight:7
 .feature p{font-size:13px;color:#64748b}
 footer{text-align:center;padding:27px 15px;background:#111827;color:#cbd5e1;font-size:13px}
 @media(max-width:520px){.grid,.features{grid-template-columns:1fr}.panel{padding:17px}.actions{flex-direction:column}}
-@media print{body{background:#fff}header,.hero,form,.features,footer,.no-print,.muted{display:none!important}.wrap{padding:0}.panel{border:0;box-shadow:none;padding:0}.result{display:block!important;border:0;margin:0;padding:0}}
+@media print{body{background:#fff}header,.hero,form,.features,footer,.no-print,.muted,#hesap-paneli,#tekliflerim{display:none!important}.wrap{padding:0}.panel{border:0;box-shadow:none;padding:0}.result{display:block!important;border:0;margin:0;padding:0}}
 </style>
 </head>
 <body>
@@ -93,6 +90,11 @@ footer{text-align:center;padding:27px 15px;background:#111827;color:#cbd5e1;font
     <label for="detay">İşin / ürünün detayları</label>
     <textarea id="detay" maxlength="3000" placeholder="Miktar, kapsam, özellikler ve müşteriye sunulacak detaylar..."></textarea>
 
+    <button class="secondary" type="button" id="otomatikMetinBtn" style="width:100%;margin-top:10px">
+      ✨ Ücretsiz Teklif Metni Oluştur
+    </button>
+    <p id="otomatikMetinDurum" aria-live="polite" style="font-size:13px;color:#64748b;margin-top:8px"></p>
+
     <div class="grid">
       <div>
         <label for="tutar">Toplam teklif tutarı (TL) *</label>
@@ -125,7 +127,7 @@ footer{text-align:center;padding:27px 15px;background:#111827;color:#cbd5e1;font
     </select>
 
     <div class="actions">
-      <button class="primary" type="submit">Teklif Oluştur</button>
+      <button class="primary" type="submit">Teklif Oluştur ve Kaydet</button>
     </div>
   </form>
 
@@ -140,7 +142,7 @@ footer{text-align:center;padding:27px 15px;background:#111827;color:#cbd5e1;font
     <p><strong>Telefon:</strong> <span id="rTelefon"></span></p>
     <hr>
     <p><strong>Ürün / Hizmet:</strong> <span id="rHizmet"></span></p>
-    <p><strong>Detaylar:</strong></p>
+    <p><strong>Detaylar ve teklif açıklaması:</strong></p>
     <p id="rDetay" style="white-space:pre-wrap"></p>
     <hr>
     <p class="amount" id="rTutar"></p>
@@ -189,6 +191,56 @@ function yaz(id, value) {
   document.getElementById(id).textContent = value || "Belirtilmedi";
 }
 
+/* ÜCRETSİZ ŞABLONLA TEKLİF METNİ OLUŞTURMA */
+document.getElementById("otomatikMetinBtn").addEventListener("click", function () {
+  const durum = document.getElementById("otomatikMetinDurum");
+  const sektor = oku("sektor");
+  const firma = oku("firma");
+  const musteri = oku("musteri");
+  const hizmet = oku("hizmet");
+  const detay = oku("detay");
+  const tutar = Number(oku("tutar"));
+
+  if (!sektor || !firma || !musteri || !hizmet) {
+    durum.textContent = "Lütfen sektör, firma, müşteri ve hizmet alanlarını doldur.";
+    return;
+  }
+
+  if (!Number.isFinite(tutar) || tutar <= 0) {
+    durum.textContent = "Lütfen geçerli bir teklif tutarı gir.";
+    return;
+  }
+
+  const fiyat = tutar.toLocaleString("tr-TR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }) + " TL";
+
+  const metin = [
+    "TEKLİF ÖZETİ",
+    firma + " tarafından " + musteri + " için hazırlanmıştır.",
+    "",
+    "HİZMET KAPSAMI",
+    sektor + " alanında " + hizmet + " hizmeti sunulacaktır.",
+    detay ? "İşin ve hizmetin detayları: " + detay : "",
+    "",
+    "FİYAT VE KOŞULLAR",
+    "Toplam teklif tutarı: " + fiyat,
+    "KDV durumu: " + oku("kdv"),
+    "Ödeme koşulları: " + (oku("odeme") || "Taraflarca belirlenecek"),
+    "Teslimat: " + (oku("teslimat") || "Taraflarca belirlenecek"),
+    "",
+    "SONRAKİ ADIM",
+    "Teklifin incelenmesi ve koşulların karşılıklı onaylanması sonrasında süreç başlatılabilir.",
+    "",
+    "Not: Bu açıklama girilen bilgilerden şablonla oluşturulmuştur. Göndermeden önce kontrol ediniz."
+  ].filter(Boolean).join("\n");
+
+  document.getElementById("detay").value = metin;
+  durum.textContent = "Teklif metni oluşturuldu. İstersen metni düzenleyebilirsin.";
+});
+
+/* TEKLİF OLUŞTURMA VE VERİTABANINA KAYDETME */
 form.addEventListener("submit", async function(event) {
   event.preventDefault();
 
@@ -221,55 +273,59 @@ form.addEventListener("submit", async function(event) {
     teslimat: oku("teslimat")
   };
 
-  const { data: oturumBilgisi } = await client.auth.getUser();
-  const kullanici = oturumBilgisi.user;
+  try {
+    const { data: oturumBilgisi, error: oturumHatasi } = await client.auth.getUser();
 
-  if (!kullanici) {
-    alert("Teklif kaydetmek için önce giriş yapmalısın.");
-    return;
+    if (oturumHatasi || !oturumBilgisi.user) {
+      alert("Teklif kaydetmek için önce hesabına giriş yapmalısın.");
+      return;
+    }
+
+    const kullanici = oturumBilgisi.user;
+
+    const { error: kayitHatasi } = await client
+      .from("teklifler")
+      .insert({
+        user_id: kullanici.id,
+        teklif_no: sonTeklif.no,
+        sektor: sonTeklif.sektor,
+        firma: sonTeklif.firma,
+        musteri: sonTeklif.musteri,
+        telefon: sonTeklif.telefon || null,
+        hizmet: sonTeklif.hizmet,
+        detay: sonTeklif.detay || null,
+        tutar: tutar,
+        kdv: sonTeklif.kdv,
+        odeme: sonTeklif.odeme || null,
+        teslimat: sonTeklif.teslimat || null,
+        gecerlilik_sonu: sonGun.toISOString().slice(0, 10)
+      });
+
+    if (kayitHatasi) {
+      alert("Teklif kaydedilemedi: " + kayitHatasi.message);
+      return;
+    }
+
+    yaz("rNo", sonTeklif.no);
+    yaz("rTarih", sonTeklif.tarih);
+    yaz("rSonGun", sonTeklif.sonGun);
+    yaz("rSektor", sonTeklif.sektor);
+    yaz("rFirma", sonTeklif.firma);
+    yaz("rMusteri", sonTeklif.musteri);
+    yaz("rTelefon", sonTeklif.telefon);
+    yaz("rHizmet", sonTeklif.hizmet);
+    yaz("rDetay", sonTeklif.detay);
+    yaz("rTutar", sonTeklif.tutar);
+    yaz("rKdv", sonTeklif.kdv);
+    yaz("rOdeme", sonTeklif.odeme);
+    yaz("rTeslimat", sonTeklif.teslimat);
+
+    sonuc.style.display = "block";
+    sonuc.scrollIntoView({behavior:"smooth",block:"start"});
+    alert("Teklif başarıyla veritabanına kaydedildi!");
+  } catch (hata) {
+    alert("Bir bağlantı hatası oluştu. Lütfen tekrar dene.");
   }
-
-  const { error: kayitHatasi } = await client
-    .from("teklifler")
-    .insert({
-      user_id: kullanici.id,
-      teklif_no: sonTeklif.no,
-      sektor: sonTeklif.sektor,
-      firma: sonTeklif.firma,
-      musteri: sonTeklif.musteri,
-      telefon: sonTeklif.telefon || null,
-      hizmet: sonTeklif.hizmet,
-      detay: sonTeklif.detay || null,
-      tutar: Number(oku("tutar")),
-      kdv: sonTeklif.kdv,
-      odeme: sonTeklif.odeme || null,
-      teslimat: sonTeklif.teslimat || null,
-      gecerlilik_sonu: sonGun.toISOString().slice(0, 10)
-    });
-
-  if (kayitHatasi) {
-    alert("Teklif kaydedilemedi: " + kayitHatasi.message);
-    return;
-  }
-
-  alert("Teklif başarıyla veri tabanına kaydedildi!");
-
-  yaz("rNo", sonTeklif.no);
-  yaz("rTarih", sonTeklif.tarih);
-  yaz("rSonGun", sonTeklif.sonGun);
-  yaz("rSektor", sonTeklif.sektor);
-  yaz("rFirma", sonTeklif.firma);
-  yaz("rMusteri", sonTeklif.musteri);
-  yaz("rTelefon", sonTeklif.telefon);
-  yaz("rHizmet", sonTeklif.hizmet);
-  yaz("rDetay", sonTeklif.detay);
-  yaz("rTutar", sonTeklif.tutar);
-  yaz("rKdv", sonTeklif.kdv);
-  yaz("rOdeme", sonTeklif.odeme);
-  yaz("rTeslimat", sonTeklif.teslimat);
-
-  sonuc.style.display = "block";
-  sonuc.scrollIntoView({behavior:"smooth",block:"start"});
 });
 
 document.getElementById("pdfBtn").addEventListener("click", function() {
@@ -320,13 +376,6 @@ document.getElementById("waBtn").addEventListener("click", function() {
   const durum = document.getElementById("hesap-durum");
   const email = document.getElementById("hesap-email");
   const sifre = document.getElementById("hesap-sifre");
-
-  if (!window.supabase || typeof SUPABASE_URL === "undefined" || typeof SUPABASE_KEY === "undefined") {
-    durum.textContent = "Supabase bağlantı kütüphanesi veya bağlantı bilgileri eksik.";
-    return;
-  }
-
-  const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
   function mesaj(yazi) {
     durum.textContent = yazi;
