@@ -1,400 +1,260 @@
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>TeklifPilot</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TeklifPilot AI | Akıllı Teklif Asistanı</title>
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
-body{
-background:#f8fafc;
-color:#111827;
-}
-
-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px;
-background:white;
-box-shadow:0 2px 10px rgba(0,0,0,.05);
-position:sticky;
-top:0;
-}
-
-.logo{
-font-size:28px;
-font-weight:bold;
-}
-
-nav a{
-margin-left:15px;
-text-decoration:none;
-color:#333;
-}
-
-.hero{
-padding:80px 20px;
-text-align:center;
-}
-
-.hero h1{
-font-size:48px;
-margin-bottom:20px;
-}
-
-.hero p{
-font-size:20px;
-max-width:700px;
-margin:auto;
-color:#555;
-}
-
-.buttons{
-margin-top:30px;
-}
-
-.btn{
-display:inline-block;
-padding:15px 30px;
-margin:10px;
-border-radius:10px;
-text-decoration:none;
-font-weight:bold;
-}
-
-.primary{
-background:black;
-color:white;
-}
-
-.secondary{
-border:2px solid black;
-color:black;
-}
-
-.features{
-padding:60px 20px;
-max-width:1100px;
-margin:auto;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-}
-
-.form-box{
-background:white;
-padding:30px;
-border-radius:15px;
-max-width:600px;
-margin:50px auto;
-box-shadow:0 4px 15px rgba(0,0,0,.05);
-}
-
-.form-box input{
-width:100%;
-padding:12px;
-margin-bottom:15px;
-border:1px solid #ddd;
-border-radius:10px;
-font-size:16px;
-}
-
-.form-box button{
-width:100%;
-padding:15px;
-background:#111827;
-color:white;
-border:none;
-border-radius:10px;
-font-size:18px;
-}
-{
-background:white;
-padding:25px;
-border-radius:15px;
-box-shadow:0 4px 15px rgba(0,0,0,.05);
-text-align:center;
-}
-
-.card h3{
-margin-bottom:10px;
-}
-
-.how{
-padding:80px 20px;
-background:white;
-text-align:center;
-}
-
-.steps{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:20px;
-margin-top:40px;
-}
-
-.step{
-width:280px;
-padding:25px;
-background:#f3f4f6;
-border-radius:15px;
-}
-
-.pricing{
-padding:80px 20px;
-text-align:center;
-}
-
-.pricing-grid{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:20px;
-margin-top:40px;
-}
-
-.price-card{
-background:white;
-padding:30px;
-width:280px;
-border-radius:15px;
-box-shadow:0 4px 15px rgba(0,0,0,.05);
-}
-
-.price{
-font-size:40px;
-font-weight:bold;
-margin:20px 0;
-}
-
-footer{
-padding:40px;
-text-align:center;
-background:#111827;
-color:white;
-margin-top:50px;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f4f6fb;color:#172033;line-height:1.6}
+header{background:#fff;padding:16px 5%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e5e7eb}
+.logo{font-size:22px;font-weight:800;color:#1d4ed8}
+header a{color:#1d4ed8;text-decoration:none;font-size:14px}
+.hero{text-align:center;padding:45px 18px 25px}
+.hero h1{font-size:clamp(29px,5vw,43px);line-height:1.2;margin-bottom:14px}
+.hero p{color:#64748b;max-width:650px;margin:auto}
+.wrap{max-width:760px;margin:auto;padding:16px}
+.panel{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:22px;box-shadow:0 6px 24px #1720330a}
+h2{font-size:23px;margin-bottom:5px}
+.muted{color:#64748b;font-size:14px;margin-bottom:18px}
+label{display:block;font-weight:700;font-size:14px;margin:13px 0 6px}
+input,textarea,select{width:100%;padding:13px;border:1px solid #cbd5e1;border-radius:9px;font-size:16px;font-family:inherit;background:#fff;color:#172033}
+textarea{min-height:95px;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:2px solid #93c5fd;border-color:#2563eb}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+button{padding:13px 16px;border:0;border-radius:9px;font-size:15px;font-weight:700;cursor:pointer}
+.primary{background:#1d4ed8;color:white}
+.secondary{background:#e8efff;color:#1d4ed8}
+.actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.actions button{flex:1}
+.result{display:none;background:white;border:1px solid #dbe3ef;border-radius:12px;padding:20px;margin-top:22px;overflow-wrap:anywhere}
+.result p{margin:8px 0}
+.result hr{border:0;border-top:1px solid #e5e7eb;margin:15px 0}
+.amount{font-size:27px;font-weight:800;color:#1d4ed8}
+.features{max-width:900px;margin:25px auto 45px;padding:0 16px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.feature{background:#fff;padding:17px;border:1px solid #e5e7eb;border-radius:12px}
+.feature h3{font-size:16px;margin-bottom:5px}
+.feature p{font-size:13px;color:#64748b}
+footer{text-align:center;padding:27px 15px;background:#111827;color:#cbd5e1;font-size:13px}
+@media(max-width:520px){.grid,.features{grid-template-columns:1fr}.panel{padding:17px}.actions{flex-direction:column}}
+@media print{body{background:#fff}header,.hero,form,.features,footer,.no-print,.muted{display:none!important}.wrap{padding:0}.panel{border:0;box-shadow:none;padding:0}.result{display:block!important;border:0;margin:0;padding:0}}
 </style>
 </head>
-
 <body>
 
 <header>
-<div class="logo">🚀 TeklifPilot</div>
-
-<nav>
-<a href="#">Özellikler</a>
-<a href="#">Fiyatlar</a>
-<a href="#">İletişim</a>
-</nav>
+  <div class="logo">✦ TeklifPilot AI</div>
+  <a href="#teklif">Teklif Oluştur</a>
 </header>
 
 <section class="hero">
-
-<h1>30 Saniyede Profesyonel Teklif Hazırlayın</h1>
-
-<p>
-Yapay zeka destekli teklif oluşturma sistemi.
-PDF üretin, WhatsApp'tan paylaşın ve müşterilerinizi yönetin.
-</p>
-
-<div class="buttons">
-<a class="btn primary" href="#">Ücretsiz Dene</a><a class="btn secondary" href="#demo">Demo Gör</a>
-
+  <h1>Her İş İçin Akıllı Teklif Asistanı</h1>
+  <p>Sektörünüz ne olursa olsun, müşteri ve hizmet bilgilerinizi girin; profesyonel teklifinizi hazırlayın.</p>
 </section>
+
+<main class="wrap" id="teklif">
+<section class="panel">
+  <h2>Yeni Teklif Oluştur</h2>
+  <p class="muted">Bilgileri doldurun ve teklif belgenizi hazırlayın.</p>
+
+  <form id="teklifFormu">
+    <div class="grid">
+      <div>
+        <label for="sektor">Sektörünüz *</label>
+        <input id="sektor" required maxlength="100" placeholder="Örn. İnşaat, emlak, danışmanlık">
+      </div>
+      <div>
+        <label for="firma">Firma / İşletme adı *</label>
+        <input id="firma" required maxlength="120" placeholder="Firmanızın adı">
+      </div>
+      <div>
+        <label for="musteri">Müşteri / Firma adı *</label>
+        <input id="musteri" required maxlength="120" placeholder="Müşteri adı">
+      </div>
+      <div>
+        <label for="telefon">Müşteri telefonu</label>
+        <input id="telefon" type="tel" maxlength="30" placeholder="05XX XXX XX XX">
+      </div>
+    </div>
+
+    <label for="hizmet">Ürün veya hizmet adı *</label>
+    <input id="hizmet" required maxlength="200" placeholder="Ne için teklif hazırlıyorsunuz?">
+
+    <label for="detay">İşin / ürünün detayları</label>
+    <textarea id="detay" maxlength="3000" placeholder="Miktar, kapsam, özellikler ve müşteriye sunulacak detaylar..."></textarea>
+
+    <div class="grid">
+      <div>
+        <label for="tutar">Toplam teklif tutarı (TL) *</label>
+        <input id="tutar" type="number" min="0.01" step="0.01" required placeholder="Örn. 25000">
+      </div>
+      <div>
+        <label for="kdv">KDV durumu</label>
+        <select id="kdv">
+          <option value="Belirtilmedi">Belirtilmedi</option>
+          <option value="KDV dahil">KDV dahil</option>
+          <option value="KDV hariç">KDV hariç</option>
+        </select>
+      </div>
+      <div>
+        <label for="odeme">Ödeme koşulları</label>
+        <input id="odeme" maxlength="250" placeholder="Örn. Peşin, taksitli, vadeli">
+      </div>
+      <div>
+        <label for="teslimat">Teslimat / İşin tamamlanması</label>
+        <input id="teslimat" maxlength="250" placeholder="Örn. 7 iş günü">
+      </div>
+    </div>
+
+    <label for="gecerlilik">Teklif geçerlilik süresi</label>
+    <select id="gecerlilik">
+      <option value="3">3 gün</option>
+      <option value="7" selected>7 gün</option>
+      <option value="15">15 gün</option>
+      <option value="30">30 gün</option>
+    </select>
+
+    <div class="actions">
+      <button class="primary" type="submit">Teklif Oluştur</button>
+    </div>
+  </form>
+
+  <section id="sonuc" class="result" aria-live="polite">
+    <h2>PROFESYONEL TEKLİF</h2>
+    <p><strong>Teklif numarası:</strong> <span id="rNo"></span></p>
+    <p><strong>Tarih:</strong> <span id="rTarih"></span></p>
+    <hr>
+    <p><strong>Sektör:</strong> <span id="rSektor"></span></p>
+    <p><strong>Teklif veren:</strong> <span id="rFirma"></span></p>
+    <p><strong>Müşteri:</strong> <span id="rMusteri"></span></p>
+    <p><strong>Telefon:</strong> <span id="rTelefon"></span></p>
+    <hr>
+    <p><strong>Ürün / Hizmet:</strong> <span id="rHizmet"></span></p>
+    <p><strong>Detaylar:</strong></p>
+    <p id="rDetay" style="white-space:pre-wrap"></p>
+    <hr>
+    <p class="amount" id="rTutar"></p>
+    <p><strong>KDV:</strong> <span id="rKdv"></span></p>
+    <p><strong>Ödeme koşulları:</strong> <span id="rOdeme"></span></p>
+    <p><strong>Teslimat:</strong> <span id="rTeslimat"></span></p>
+    <p><strong>Geçerlilik sonu:</strong> <span id="rSonGun"></span></p>
+    <hr>
+    <p>Bu teklif, belirtilen ürün veya hizmet ve ticari koşullar esas alınarak hazırlanmıştır. Nihai koşullar tarafların onayına bağlıdır.</p>
+    <p><strong>TeklifPilot AI</strong></p>
+    <div class="actions no-print">
+      <button class="primary" type="button" id="pdfBtn">PDF / Yazdır</button>
+      <button class="secondary" type="button" id="waBtn">WhatsApp ile paylaş</button>
+    </div>
+  </section>
+</section>
+</main>
 
 <section class="features">
-
-<div class="card">
-<h3>⚡ Hızlı Teklif</h3>
-<p>30 saniyede profesyonel teklif oluştur.</p>
-</div>
-
-<div class="card">
-<h3>📄 PDF Çıktısı</h3>
-<p>Tek tıkla PDF üret.</p>
-</div>
-
-<div class="card">
-<h3>📱 WhatsApp Paylaş</h3>
-<p>Müşterine anında gönder.</p>
-</div>
-
-<div class="card">
-<h3>👥 Müşteri Yönetimi</h3>
-<p>Tüm müşterilerini tek panelden takip et.</p>
-</div>
-
+  <article class="feature">
+    <h3>⚡ Hızlı teklif</h3>
+    <p>Bilgileri tek formda toplayın.</p>
+  </article>
+  <article class="feature">
+    <h3>📄 Teklif belgesi</h3>
+    <p>Belgenizi yazdırın veya PDF kaydedin.</p>
+  </article>
+  <article class="feature">
+    <h3>📱 Kolay paylaşım</h3>
+    <p>Teklif özetini WhatsApp üzerinden gönderin.</p>
+  </article>
 </section>
 
-<section id="teklif-formu">
-
-<h2>Ücretsiz Teklif Oluştur</h2>
-
-<input type="text" id="firma" placeholder="Firma Adı"><br><br>
-
-<input type="text" id="yetkili" placeholder="Yetkili Kişi"><br><br>
-
-<input type="text" id="telefon" placeholder="Telefon"><br><br>
-
-<input type="text" id="hizmet" placeholder="Hizmet"><br><br>
-
-<input type="number" id="tutar" placeholder="Tutar"><br><br>
-
-<button onclick="teklifOlustur()">
-Teklif Oluştur
-</button>
-
-<div id="sonuc" style="display:none;margin-top:20px;"></div>
-
-</section>
-
-<section id="demo" class="how">
-
-<h2>Nasıl Çalışır?</h2>
-
-<div class="steps">
-
-<div class="step">
-<h3>1️⃣ Bilgileri Gir</h3>
-<p>Müşteri bilgilerini ekle.</p>
-</div>
-
-<div class="step">
-<h3>2️⃣ Teklif Oluştur</h3>
-<p>AI teklif metnini hazırlasın.</p>
-</div>
-
-<div class="step">
-<h3>3️⃣ Paylaş</h3>
-<p>PDF veya WhatsApp ile gönder.</p>
-</div>
-
-</div>
-
-</section>
-
-<section class="pricing">
-
-<h2>Fiyatlandırma</h2>
-
-<div class="pricing-grid">
-
-<div class="price-card">
-<h3>Başlangıç</h3>
-<div class="price">99₺</div>
-<p>Aylık kullanım</p>
-</div>
-
-<div class="price-card">
-<h3>Profesyonel</h3>
-<div class="price">299₺</div>
-<p>Gelişmiş özellikler</p>
-</div>
-
-<div class="price-card">
-<h3>Kurumsal</h3>
-<div class="price">Özel</div>
-<p>Kuruma özel çözümler</p>
-</div>
-
-</div>
-
-</section>
-
-<footer>
-
-
-<h2>TeklifPilot</h2>
-
-<p>
-Teklif hazırlamayı kolaylaştıran yapay zeka destekli platform.
-</p>
-
-</footer>
-
-
-<h2 style="text-align:center;margin-bottom:30px;">
-Teklif Oluştur
-</h2>
-
-<input id="firma" placeholder="Firma Adı"
-style="width:100%;padding:15px;margin-bottom:10px;">
-
-<input id="yetkili" placeholder="Yetkili Kişi"
-style="width:100%;padding:15px;margin-bottom:10px;">
-
-<input id="telefon" placeholder="Telefon"
-style="width:100%;padding:15px;margin-bottom:10px;">
-
-<input id="hizmet" placeholder="Hizmet"
-style="width:100%;padding:15px;margin-bottom:10px;">
-
-<input id="tutar" placeholder="Tutar (TL)"
-style="width:100%;padding:15px;margin-bottom:10px;">
-
-<button onclick="olustur()"
-style="width:100%;padding:15px;background:black;color:white;border:none;border-radius:10px;">
-Teklif Oluştur
-</button>
-
-<div id="sonuc"
-style="margin-top:30px;background:white;padding:20px;border-radius:15px;display:none;">
-</div>
-
-</section>
+<footer>© 2026 TeklifPilot AI · Her sektör için akıllı teklif hazırlama</footer>
 
 <script>
+const form = document.getElementById("teklifFormu");
+const sonuc = document.getElementById("sonuc");
+let sonTeklif = null;
 
-function olustur(){
-alert("Fonksiyon çalışıyor!");
-let firma=document.getElementById("firma").value;
-let yetkili=document.getElementById("yetkili").value;
-let telefon=document.getElementById("telefon").value;
-let hizmet=document.getElementById("hizmet").value;
-let tutar=document.getElementById("tutar").value;
-
-document.getElementById("sonuc").style.display="block";
-
-document.getElementById("sonuc").innerHTML=`
-
-<h2>📄 Teklif</h2>
-
-<p><b>Teklif No:</b> TP-${Date.now()}</p>
-
-<p><b>Tarih:</b> ${new Date().toLocaleDateString('tr-TR')}</p>
-<p><b>Firma:</b> ${firma}</p>
-
-<p><b>Yetkili:</b> ${yetkili}</p>
-
-<p><b>Telefon:</b> ${telefon}</p>
-
-<p><b>Hizmet:</b> ${hizmet}</p>
-
-<p><b>Tutar:</b> ${tutar} TL</p>
-
-<hr>
-
-<p>
-TeklifPilot tarafından oluşturulmuştur.
-</p>
-
-`;
-
+function oku(id) {
+  return document.getElementById(id).value.trim();
 }
 
+function yaz(id, value) {
+  document.getElementById(id).textContent = value || "Belirtilmedi";
+}
+
+form.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const tutar = Number(oku("tutar"));
+  if (!Number.isFinite(tutar) || tutar <= 0) {
+    alert("Lütfen geçerli bir teklif tutarı girin.");
+    return;
+  }
+
+  const tarih = new Date();
+  const sonGun = new Date(tarih);
+  sonGun.setDate(sonGun.getDate() + Number(oku("gecerlilik")));
+
+  sonTeklif = {
+    no: "TP-" + tarih.getTime().toString().slice(-8),
+    tarih: tarih.toLocaleDateString("tr-TR"),
+    sonGun: sonGun.toLocaleDateString("tr-TR"),
+    sektor: oku("sektor"),
+    firma: oku("firma"),
+    musteri: oku("musteri"),
+    telefon: oku("telefon"),
+    hizmet: oku("hizmet"),
+    detay: oku("detay"),
+    tutar: tutar.toLocaleString("tr-TR", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }) + " TL",
+    kdv: oku("kdv"),
+    odeme: oku("odeme"),
+    teslimat: oku("teslimat")
+  };
+
+  yaz("rNo", sonTeklif.no);
+  yaz("rTarih", sonTeklif.tarih);
+  yaz("rSonGun", sonTeklif.sonGun);
+  yaz("rSektor", sonTeklif.sektor);
+  yaz("rFirma", sonTeklif.firma);
+  yaz("rMusteri", sonTeklif.musteri);
+  yaz("rTelefon", sonTeklif.telefon);
+  yaz("rHizmet", sonTeklif.hizmet);
+  yaz("rDetay", sonTeklif.detay);
+  yaz("rTutar", sonTeklif.tutar);
+  yaz("rKdv", sonTeklif.kdv);
+  yaz("rOdeme", sonTeklif.odeme);
+  yaz("rTeslimat", sonTeklif.teslimat);
+
+  sonuc.style.display = "block";
+  sonuc.scrollIntoView({behavior:"smooth",block:"start"});
+});
+
+document.getElementById("pdfBtn").addEventListener("click", function() {
+  window.print();
+});
+
+document.getElementById("waBtn").addEventListener("click", function() {
+  if (!sonTeklif) return;
+
+  const mesaj = [
+    "TEKLİFPİLOT AI - TEKLİF",
+    "Teklif No: " + sonTeklif.no,
+    "Firma: " + sonTeklif.firma,
+    "Müşteri: " + sonTeklif.musteri,
+    "Sektör: " + sonTeklif.sektor,
+    "Ürün/Hizmet: " + sonTeklif.hizmet,
+    "Detay: " + (sonTeklif.detay || "Belirtilmedi"),
+    "Toplam: " + sonTeklif.tutar,
+    "KDV: " + sonTeklif.kdv,
+    "Ödeme: " + (sonTeklif.odeme || "Belirtilmedi"),
+    "Teslimat: " + (sonTeklif.teslimat || "Belirtilmedi"),
+    "Geçerlilik sonu: " + sonTeklif.sonGun
+  ].join("\n");
+
+  window.open("https://wa.me/?text=" + encodeURIComponent(mesaj), "_blank");
+});
 </script>
+
 </body>
 </html>
