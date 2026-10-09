@@ -261,5 +261,86 @@ document.getElementById("waBtn").addEventListener("click", function() {
 });
 </script>
 
+<section id="hesap-paneli" style="max-width:600px;margin:30px auto;padding:20px;background:white;border:1px solid #ddd;border-radius:14px;">
+  <h2>TeklifPilot AI Hesabım</h2>
+  <p id="hesap-durum">Giriş yapın veya yeni hesap oluşturun.</p>
+
+  <label for="hesap-email">E-posta</label>
+  <input id="hesap-email" type="email" autocomplete="email" placeholder="ornek@firma.com" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ccc;border-radius:8px;">
+
+  <label for="hesap-sifre">Şifre</label>
+  <input id="hesap-sifre" type="password" autocomplete="current-password" placeholder="En az 6 karakter" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ccc;border-radius:8px;">
+
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
+    <button id="hesap-kayit" type="button" style="padding:12px;background:#1d4ed8;color:white;border:0;border-radius:8px;">Kayıt Ol</button>
+    <button id="hesap-giris" type="button" style="padding:12px;background:#e8efff;color:#1d4ed8;border:0;border-radius:8px;">Giriş Yap</button>
+    <button id="hesap-cikis" type="button" style="padding:12px;background:#eee;border:0;border-radius:8px;">Çıkış Yap</button>
+  </div>
+</section>
+
+<script>
+(async function () {
+  const durum = document.getElementById("hesap-durum");
+  const email = document.getElementById("hesap-email");
+  const sifre = document.getElementById("hesap-sifre");
+
+  if (!window.supabase || typeof SUPABASE_URL === "undefined" || typeof SUPABASE_KEY === "undefined") {
+    durum.textContent = "Supabase bağlantı kütüphanesi veya bağlantı bilgileri eksik.";
+    return;
+  }
+
+  const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  function mesaj(yazi) {
+    durum.textContent = yazi;
+  }
+
+  document.getElementById("hesap-kayit").addEventListener("click", async function () {
+    if (!email.value.trim() || sifre.value.length < 6) {
+      mesaj("E-posta girin ve en az 6 karakterli bir şifre kullanın.");
+      return;
+    }
+
+    const { data, error } = await client.auth.signUp({
+      email: email.value.trim(),
+      password: sifre.value
+    });
+
+    if (error) {
+      mesaj("Kayıt hatası: " + error.message);
+      return;
+    }
+
+    mesaj(data.session
+      ? "Hesap oluşturuldu ve giriş yapıldı."
+      : "Kayıt isteği alındı. E-postanızı kontrol edin; doğrulama gerekebilir.");
+  });
+
+  document.getElementById("hesap-giris").addEventListener("click", async function () {
+    const { data, error } = await client.auth.signInWithPassword({
+      email: email.value.trim(),
+      password: sifre.value
+    });
+
+    if (error) {
+      mesaj("Giriş hatası: " + error.message);
+      return;
+    }
+
+    mesaj("Giriş yapıldı: " + data.user.email);
+  });
+
+  document.getElementById("hesap-cikis").addEventListener("click", async function () {
+    const { error } = await client.auth.signOut();
+    mesaj(error ? "Çıkış hatası: " + error.message : "Oturum kapatıldı.");
+  });
+
+  const { data } = await client.auth.getSession();
+  if (data.session) {
+    mesaj("Giriş yapıldı: " + data.session.user.email);
+  }
+})();
+</script>
+
 </body>
 </html>
