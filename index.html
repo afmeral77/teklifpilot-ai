@@ -11,10 +11,11 @@ const SUPABASE_URL = "https://ckochcakoiegwikstyew.supabase.co";
 const SUPABASE_KEY = "sb_publishable_s10Fz4cCqyYKLkmtvBE-1g_ZGiKu9HN";
 const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 </script>
+
 <style>
 :root{--blue:#173f8a;--blue2:#2457ad;--ink:#172033;--muted:#64748b;--line:#dbe3ef;--bg:#f3f6fb}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,sans-serif;line-height:1.55}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,sans-serif;line-height:1.5}
 header{background:#fff;border-bottom:1px solid var(--line);padding:16px 5%;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .logo{font-size:21px;font-weight:800;color:var(--blue)}
 header a{color:var(--blue);text-decoration:none;font-weight:700;font-size:14px}
@@ -39,7 +40,7 @@ button{font:inherit;font-weight:700;border:0;border-radius:8px;padding:12px 16px
 hr{border:0;border-top:1px solid var(--line);margin:15px 0}
 .result{display:none;background:white;border:1px solid var(--line);border-radius:12px;padding:24px;margin-top:22px;overflow-wrap:anywhere}
 .doc-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;border-bottom:3px solid var(--blue);padding-bottom:16px;margin-bottom:18px}
-.doc-brand{font-size:20px;font-weight:800;color:var(--blue)}
+.doc-brand{font-size:20px;font-weight:800;color:var(--blue);overflow-wrap:anywhere}
 .doc-sub{font-size:11px;color:var(--muted)}
 .doc-title{text-align:right}
 .doc-title h2{font-size:25px;letter-spacing:1px;color:var(--blue);margin:0}
@@ -73,6 +74,7 @@ th,td{padding:9px 7px;border:1px solid var(--line);vertical-align:top;overflow-w
 .feature p{font-size:13px;color:var(--muted);margin:0}
 footer{text-align:center;background:#111827;color:#cbd5e1;padding:24px 12px;font-size:12px}
 #hesap-paneli{max-width:650px;margin:30px auto;padding:20px;background:#fff;border:1px solid var(--line);border-radius:14px}
+
 @media(max-width:560px){
  .grid,.features{grid-template-columns:1fr}
  .panel{padding:15px}
@@ -85,27 +87,40 @@ footer{text-align:center;background:#111827;color:#cbd5e1;padding:24px 12px;font
  .signature-grid{gap:8px}
  .actions{flex-direction:column}
 }
+
 @media print{
- @page{size:A4;margin:10mm}
- html,body{width:100%;margin:0!important;padding:0!important;background:white!important;font-family:Arial,sans-serif;font-size:9pt;line-height:1.35}
+ @page{size:A4;margin:7mm}
+ html,body{margin:0!important;padding:0!important;width:100%;background:#fff!important;font-family:Arial,sans-serif;font-size:8pt;line-height:1.25}
  header,.hero,form,.features,footer,.no-print,#hesap-paneli,#tekliflerim{display:none!important}
- main.wrap{max-width:none;width:100%;margin:0;padding:0}
- .panel{border:0;border-radius:0;box-shadow:none;padding:0;margin:0}
- #sonuc{display:block!important;width:100%;margin:0;padding:0;border:0;border-radius:0;overflow:visible;font-size:9pt}
- .doc-head{padding-bottom:10px;margin-bottom:12px}
- .doc-brand{font-size:17pt}
- .doc-title h2{font-size:21pt}
- .doc-meta{margin-bottom:12px}
- .doc-box{padding:8px}
- .doc-section{margin:11px 0}
- th,td{padding:6px 5px}
- .total-final{font-size:17pt}
- .signature-grid{margin-top:18px}
- .doc-foot{margin-top:12px}
+ main.wrap{width:100%;max-width:none;margin:0;padding:0}
+ .panel{margin:0;padding:0;border:0;border-radius:0;box-shadow:none}
+ .panel>h2,.panel>.muted{display:none!important}
+ #sonuc{display:block!important;width:100%;margin:0;padding:0;border:0;border-radius:0;overflow:visible;font-size:8pt}
+ .doc-head{margin-bottom:8px;padding-bottom:8px}
+ .doc-brand{font-size:15pt}
+ .doc-title h2{font-size:19pt}
+ .doc-title p{font-size:8pt;margin:2px 0}
+ .doc-meta{margin-bottom:8px;gap:6px}
+ .doc-box{padding:6px}
+ .doc-box h3,.doc-section-title{font-size:8pt;margin-bottom:4px}
+ .doc-box p{font-size:8pt;margin:2px 0}
+ .doc-section{margin:8px 0}
+ .doc-section-title{padding-bottom:4px}
+ .doc-description{font-size:8pt;margin:4px 0}
+ th,td{padding:5px;font-size:8pt}
+ .totals{margin-top:6px;font-size:8pt}
+ .total-row{padding:3px 0}
+ .total-final{font-size:15pt;padding:5px 0}
+ .terms{font-size:8pt}
+ .signature-grid{margin-top:10px;gap:10px}
+ .signature{min-height:58px;padding:8px;font-size:8pt}
+ .signature strong{margin-bottom:12px}
+ .doc-foot{margin-top:8px;padding-top:6px;font-size:8pt}
 }
 </style>
 </head>
 <body>
+
 <header>
   <div class="logo">✦ TeklifPilot AI</div>
   <a href="#teklif">Yeni teklif oluştur</a>
@@ -124,22 +139,10 @@ footer{text-align:center;background:#111827;color:#cbd5e1;padding:24px 12px;font
   <form id="teklifFormu">
     <h3>Firma bilgileri</h3>
     <div class="grid">
-      <div>
-        <label for="firma">Firma / işletme adı *</label>
-        <input id="firma" required maxlength="120" placeholder="Firmanızın adı">
-      </div>
-      <div>
-        <label for="firmaTelefon">Firma telefonu</label>
-        <input id="firmaTelefon" maxlength="40" placeholder="Telefon numarası">
-      </div>
-      <div>
-        <label for="firmaEmail">Firma e-posta adresi</label>
-        <input id="firmaEmail" type="email" maxlength="120" placeholder="ornek@firma.com">
-      </div>
-      <div>
-        <label for="firmaVergi">Vergi dairesi / numarası</label>
-        <input id="firmaVergi" maxlength="120" placeholder="İsteğe bağlı">
-      </div>
+      <div><label for="firma">Firma / işletme adı *</label><input id="firma" required maxlength="120" placeholder="Firmanızın adı"></div>
+      <div><label for="firmaTelefon">Firma telefonu</label><input id="firmaTelefon" maxlength="40" placeholder="Telefon numarası"></div>
+      <div><label for="firmaEmail">Firma e-posta adresi</label><input id="firmaEmail" type="email" maxlength="120" placeholder="ornek@firma.com"></div>
+      <div><label for="firmaVergi">Vergi dairesi / numarası</label><input id="firmaVergi" maxlength="120" placeholder="İsteğe bağlı"></div>
     </div>
     <label for="firmaAdres">Firma adresi</label>
     <textarea id="firmaAdres" maxlength="500" placeholder="Firma adresi (isteğe bağlı)" style="min-height:65px"></textarea>
@@ -147,132 +150,54 @@ footer{text-align:center;background:#111827;color:#cbd5e1;padding:24px 12px;font
     <hr>
     <h3>Müşteri ve proje bilgileri</h3>
     <div class="grid">
-      <div>
-        <label for="sektor">Sektör *</label>
-        <input id="sektor" required maxlength="100" placeholder="Örn. İnşaat, emlak">
-      </div>
-      <div>
-        <label for="musteri">Müşteri / firma adı *</label>
-        <input id="musteri" required maxlength="120" placeholder="Müşteri adı">
-      </div>
-      <div>
-        <label for="telefon">Müşteri telefonu</label>
-        <input id="telefon" type="tel" maxlength="30" placeholder="05XX XXX XX XX">
-      </div>
-      <div>
-        <label for="projeAdres">Proje / uygulama adresi</label>
-        <input id="projeAdres" maxlength="250" placeholder="İşin yapılacağı adres">
-      </div>
+      <div><label for="sektor">Sektör *</label><input id="sektor" required maxlength="100" placeholder="Örn. İnşaat, emlak"></div>
+      <div><label for="musteri">Müşteri / firma adı *</label><input id="musteri" required maxlength="120" placeholder="Müşteri adı"></div>
+      <div><label for="telefon">Müşteri telefonu</label><input id="telefon" type="tel" maxlength="30" placeholder="05XX XXX XX XX"></div>
+      <div><label for="projeAdres">Proje / uygulama adresi</label><input id="projeAdres" maxlength="250" placeholder="İşin yapılacağı adres"></div>
     </div>
 
     <hr>
     <h3>Ürün / hizmet kapsamı</h3>
     <label for="hizmet">Ürün veya hizmet adı *</label>
     <input id="hizmet" required maxlength="200" placeholder="Örn. Cam balkon sistemi">
-
     <label for="detay">Teknik özellikler ve iş kapsamı</label>
     <textarea id="detay" maxlength="3000" placeholder="Malzeme, ölçüler, yapılacak işler ve kapsam..."></textarea>
     <button class="secondary" type="button" id="otomatikMetinBtn" style="width:100%;margin-top:10px">✨ Ücretsiz Teklif Açıklaması Hazırla</button>
     <p id="otomatikMetinDurum" aria-live="polite" class="help"></p>
 
     <div class="grid">
-      <div>
-        <label for="miktar">Miktar *</label>
-        <input id="miktar" type="number" min="0.01" step="0.01" value="1" required>
-      </div>
-      <div>
-        <label for="birim">Birim</label>
-        <select id="birim">
-          <option value="adet">Adet</option>
-          <option value="m²">m²</option>
-          <option value="metre">Metre</option>
-          <option value="saat">Saat</option>
-          <option value="gün">Gün</option>
-          <option value="iş">İş / Proje</option>
-          <option value="paket">Paket</option>
-        </select>
-      </div>
-      <div>
-        <label for="birimFiyat">Birim fiyat (TL) *</label>
-        <input id="birimFiyat" type="number" min="0.01" step="0.01" required placeholder="Örn. 300000">
-      </div>
-      <div>
-        <label for="kdvOran">KDV oranı</label>
-        <select id="kdvOran">
-          <option value="0">Belirtilmedi / uygulanmıyor</option>
-          <option value="1">%1</option>
-          <option value="10">%10</option>
-          <option value="20" selected>%20</option>
-        </select>
-      </div>
-    </div>
-    <div class="grid">
-      <div>
-        <label for="kdvDurum">Fiyatın KDV durumu</label>
-        <select id="kdvDurum">
-          <option value="KDV hariç">KDV hariç</option>
-          <option value="KDV dahil">KDV dahil</option>
-        </select>
-      </div>
-      <div>
-        <label for="odeme">Ödeme koşulları</label>
-        <input id="odeme" maxlength="250" placeholder="Örn. 6 eşit taksit">
-      </div>
-      <div>
-        <label for="teslimat">Teslimat süresi</label>
-        <input id="teslimat" maxlength="250" placeholder="Örn. 40 takvim günü">
-      </div>
-      <div>
-        <label for="garanti">Garanti koşulları</label>
-        <input id="garanti" maxlength="250" placeholder="Varsa garanti süresi ve kapsamı">
-      </div>
+      <div><label for="miktar">Miktar *</label><input id="miktar" type="number" min="0.01" step="0.01" value="1" required></div>
+      <div><label for="birim">Birim</label><select id="birim"><option value="adet">Adet</option><option value="m²">m²</option><option value="metre">Metre</option><option value="saat">Saat</option><option value="gün">Gün</option><option value="iş">İş / Proje</option><option value="paket">Paket</option></select></div>
+      <div><label for="birimFiyat">Birim fiyat (TL) *</label><input id="birimFiyat" type="number" min="0.01" step="0.01" required placeholder="Örn. 25000"></div>
+      <div><label for="kdvOran">KDV oranı</label><select id="kdvOran"><option value="0">Belirtilmedi / uygulanmıyor</option><option value="1">%1</option><option value="10">%10</option><option value="20" selected>%20</option></select></div>
+      <div><label for="kdvDurum">Fiyatın KDV durumu</label><select id="kdvDurum"><option value="KDV hariç">KDV hariç</option><option value="KDV dahil">KDV dahil</option></select></div>
+      <div><label for="odeme">Ödeme koşulları</label><input id="odeme" maxlength="250" placeholder="Örn. 6 eşit taksit"></div>
+      <div><label for="teslimat">Teslimat süresi</label><input id="teslimat" maxlength="250" placeholder="Örn. 40 takvim günü"></div>
+      <div><label for="garanti">Garanti koşulları</label><input id="garanti" maxlength="250" placeholder="Varsa garanti süresi ve kapsamı"></div>
     </div>
     <label for="kosullar">Ek ticari koşullar / kapsam dışı işler</label>
     <textarea id="kosullar" maxlength="1500" placeholder="Nakliye, montaj, istisnalar veya diğer koşullar" style="min-height:70px"></textarea>
-
     <label for="gecerlilik">Teklif geçerlilik süresi</label>
-    <select id="gecerlilik">
-      <option value="3">3 gün</option>
-      <option value="7" selected>7 gün</option>
-      <option value="15">15 gün</option>
-      <option value="30">30 gün</option>
-    </select>
-
-    <p id="hesapOnizleme" class="help" aria-live="polite">Fiyat bilgilerini girince toplam burada gösterilir.</p>
-    <div class="actions">
-      <button class="primary" type="submit">Teklif Oluştur ve Kaydet</button>
-    </div>
+    <select id="gecerlilik"><option value="3">3 gün</option><option value="7" selected>7 gün</option><option value="15">15 gün</option><option value="30">30 gün</option></select>
+    <p id="hesapOnizleme" class="help">Fiyat bilgilerini girince toplam burada gösterilir.</p>
+    <div class="actions"><button class="primary" type="submit">Teklif Oluştur ve Kaydet</button></div>
   </form>
 
   <section id="sonuc" class="result" aria-live="polite">
     <div class="doc-head">
-      <div>
-        <div class="doc-brand" id="rFirmaMarka">FİRMA ADI</div>
-        <div class="doc-sub" id="rFirmaAlt">Teklif belgesi</div>
-      </div>
-      <div class="doc-title">
-        <h2>TEKLİF</h2>
-        <p><strong>No:</strong> <span id="rNo"></span></p>
-        <p><strong>Tarih:</strong> <span id="rTarih"></span></p>
-        <p><strong>Son geçerlilik:</strong> <span id="rSonGun"></span></p>
-      </div>
+      <div><div class="doc-brand" id="rFirmaMarka"></div><div class="doc-sub" id="rFirmaAlt"></div></div>
+      <div class="doc-title"><h2>TEKLİF</h2><p><strong>No:</strong> <span id="rNo"></span></p><p><strong>Tarih:</strong> <span id="rTarih"></span></p><p><strong>Son geçerlilik:</strong> <span id="rSonGun"></span></p></div>
     </div>
 
     <div class="doc-meta">
       <div class="doc-box">
         <h3>Teklif veren</h3>
         <p><strong id="rFirma"></strong></p>
-        <p id="rFirmaTelefon"></p>
-        <p id="rFirmaEmail"></p>
-        <p id="rFirmaAdres"></p>
-        <p id="rFirmaVergi"></p>
+        <p id="rFirmaTelefon"></p><p id="rFirmaEmail"></p><p id="rFirmaAdres"></p><p id="rFirmaVergi"></p>
       </div>
       <div class="doc-box">
         <h3>Teklif sunulan müşteri</h3>
-        <p><strong id="rMusteri"></strong></p>
-        <p id="rTelefon"></p>
-        <p id="rProjeAdres"></p>
-        <p id="rSektor"></p>
+        <p><strong id="rMusteri"></strong></p><p id="rTelefon"></p><p id="rProjeAdres"></p><p id="rSektor"></p>
       </div>
     </div>
 
@@ -285,22 +210,8 @@ footer{text-align:center;background:#111827;color:#cbd5e1;padding:24px 12px;font
     <section class="doc-section">
       <h3 class="doc-section-title">02 · Fiyatlandırma</h3>
       <table>
-        <thead>
-          <tr>
-            <th>Ürün / hizmet</th>
-            <th class="num">Miktar</th>
-            <th class="num">Birim fiyat</th>
-            <th class="num">Tutar</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td id="rKalem"></td>
-            <td id="rMiktar" class="num"></td>
-            <td id="rBirimFiyat" class="num"></td>
-            <td id="rAraToplam" class="num"></td>
-          </tr>
-        </tbody>
+        <thead><tr><th>Ürün / hizmet</th><th class="num">Miktar</th><th class="num">Birim fiyat</th><th class="num">Tutar</th></tr></thead>
+        <tbody><tr><td id="rKalem"></td><td id="rMiktar" class="num"></td><td id="rBirimFiyat" class="num"></td><td id="rAraToplam" class="num"></td></tr></tbody>
       </table>
       <div class="totals">
         <div class="total-row"><span>Ara toplam</span><strong id="rAraToplam2"></strong></div>
@@ -313,32 +224,21 @@ footer{text-align:center;background:#111827;color:#cbd5e1;padding:24px 12px;font
     <section class="doc-section">
       <h3 class="doc-section-title">03 · Ticari koşullar</h3>
       <div class="doc-box">
-        <p><strong>Ödeme:</strong> <span id="rOdeme"></span></p>
-        <p><strong>Teslimat:</strong> <span id="rTeslimat"></span></p>
-        <p><strong>Garanti:</strong> <span id="rGaranti"></span></p>
+        <p id="rOdemeSatir"><strong>Ödeme:</strong> <span id="rOdeme"></span></p>
+        <p id="rTeslimatSatir"><strong>Teslimat:</strong> <span id="rTeslimat"></span></p>
+        <p id="rGarantiSatir"><strong>Garanti:</strong> <span id="rGaranti"></span></p>
         <p><strong>Teklif geçerliliği:</strong> <span id="rGecerlilikMetin"></span></p>
         <p id="rKosullar"></p>
       </div>
     </section>
 
     <p class="terms">Bu teklif, yukarıda belirtilen ürün/hizmet kapsamı ve ticari koşullar esas alınarak hazırlanmıştır. İşin başlatılması tarafların teklif ve koşulları onaylamasına bağlıdır.</p>
-
     <div class="signature-grid">
-      <div class="signature">
-        <strong>TEKLİF VEREN</strong>
-        Yetkili adı / imza:
-      </div>
-      <div class="signature">
-        <strong>MÜŞTERİ ONAYI</strong>
-        Kabul tarihi / ad / imza:
-      </div>
+      <div class="signature"><strong>TEKLİF VEREN</strong>Yetkili adı / imza:</div>
+      <div class="signature"><strong>MÜŞTERİ ONAYI</strong>Kabul tarihi / ad / imza:</div>
     </div>
     <div class="doc-foot">Bu belge TeklifPilot AI ile hazırlanmıştır.</div>
-
-    <div class="actions no-print">
-      <button class="primary" type="button" id="pdfBtn">PDF / Yazdır</button>
-      <button class="secondary" type="button" id="waBtn">WhatsApp ile paylaş</button>
-    </div>
+    <div class="actions no-print"><button class="primary" type="button" id="pdfBtn">PDF / Yazdır</button><button class="secondary" type="button" id="waBtn">WhatsApp ile paylaş</button></div>
   </section>
 </section>
 </main>
@@ -348,386 +248,262 @@ footer{text-align:center;background:#111827;color:#cbd5e1;padding:24px 12px;font
   <article class="feature"><h3>Fiyat tablosu</h3><p>Miktar, birim fiyat ve KDV toplamını görüntüleyin.</p></article>
   <article class="feature"><h3>Kolay paylaşım</h3><p>Belgenizi yazdırın veya teklif özetini paylaşın.</p></article>
 </section>
-
 <footer>© 2026 TeklifPilot AI · Profesyonel teklif hazırlama</footer>
 
 <script>
-const form = document.getElementById("teklifFormu");
-const sonuc = document.getElementById("sonuc");
-let sonTeklif = null;
+const form=document.getElementById("teklifFormu");
+const sonuc=document.getElementById("sonuc");
+let sonTeklif=null;
 
-function oku(id) {
-  return document.getElementById(id).value.trim();
+function oku(id){return document.getElementById(id).value.trim();}
+function yaz(id,value){document.getElementById(id).textContent=value||"";}
+function para(n){return Number(n||0).toLocaleString("tr-TR",{minimumFractionDigits:2,maximumFractionDigits:2})+" TL";}
+function tarihFormatla(value){
+ if(!value)return "Belirtilmedi";
+ const p=String(value).slice(0,10).split("-");
+ return p.length===3?p[2]+"."+p[1]+"."+p[0]:value;
 }
-function yaz(id, value) {
-  document.getElementById(id).textContent = value || "Belirtilmedi";
+function hesapla(){
+ const miktar=Number(oku("miktar"));
+ const birimFiyat=Number(oku("birimFiyat"));
+ const oran=Number(oku("kdvOran"))/100;
+ const kdvDahil=oku("kdvDurum")==="KDV dahil";
+ const fiyatAraToplam=miktar*birimFiyat;
+ let matrah,kdv,genel;
+ if(kdvDahil){genel=fiyatAraToplam;matrah=oran>0?genel/(1+oran):genel;kdv=genel-matrah;}
+ else{matrah=fiyatAraToplam;kdv=matrah*oran;genel=matrah+kdv;}
+ return {miktar,birimFiyat,oran,fiyatAraToplam,matrah,kdv,genel,kdvDahil};
 }
-function para(deger) {
-  return Number(deger || 0).toLocaleString("tr-TR", {
-    minimumFractionDigits:2,
-    maximumFractionDigits:2
-  }) + " TL";
+function formdanTeklif(){
+ const h=hesapla(),tarih=new Date(),sonGun=new Date(tarih);
+ sonGun.setDate(sonGun.getDate()+Number(oku("gecerlilik")||7));
+ return {
+  no:"TP-"+tarih.getTime().toString().slice(-8),
+  tarih:tarih.toLocaleDateString("tr-TR"),
+  sonGun:sonGun.toLocaleDateString("tr-TR"),
+  firma:oku("firma"),firmaTelefon:oku("firmaTelefon"),firmaEmail:oku("firmaEmail"),
+  firmaAdres:oku("firmaAdres"),firmaVergi:oku("firmaVergi"),
+  sektor:oku("sektor"),musteri:oku("musteri"),telefon:oku("telefon"),
+  projeAdres:oku("projeAdres"),hizmet:oku("hizmet"),detay:oku("detay"),
+  miktar:h.miktar,birim:oku("birim"),birimFiyat:h.birimFiyat,
+  fiyatAraToplam:h.fiyatAraToplam,matrah:h.matrah,
+  kdvOran:Number(oku("kdvOran")),kdvTutar:h.kdv,genelToplam:h.genel,
+  kdvDurum:oku("kdvDurum"),odeme:oku("odeme"),teslimat:oku("teslimat"),
+  garanti:oku("garanti"),kosullar:oku("kosullar"),
+  gecerlilik:Number(oku("gecerlilik")||7)
+ };
 }
-function hesapla() {
-  const miktar = Number(oku("miktar"));
-  const birimFiyat = Number(oku("birimFiyat"));
-  const oran = Number(oku("kdvOran")) / 100;
-  const kdvDahil = oku("kdvDurum") === "KDV dahil";
-  const araToplam = Math.max(0,miktar) * Math.max(0,birimFiyat);
-  let matrah, kdv, genel;
-
-  if (kdvDahil) {
-    genel = araToplam;
-    matrah = oran > 0 ? genel / (1 + oran) : genel;
-    kdv = genel - matrah;
-  } else {
-    matrah = araToplam;
-    kdv = matrah * oran;
-    genel = matrah + kdv;
-  }
-  return {miktar,birimFiyat,oran,araToplam,matrah,kdv,genel,kdvDahil};
-}
-function tarihFormatla(deger) {
-  if (!deger) return "Belirtilmedi";
-  const p = deger.slice(0,10).split("-");
-  return p.length === 3 ? p[2]+"."+p[1]+"."+p[0] : deger;
-}
-function teklifiGoster(t) {
-  sonTeklif = t;
-  yaz("rNo",t.no);
-  yaz("rTarih",t.tarih);
-  yaz("rSonGun",t.sonGun);
-  yaz("rFirmaMarka",t.firma);
-  yaz("rFirmaAlt",t.firmaEmail || t.firmaTelefon || "Profesyonel teklif belgesi");
-  yaz("rFirma",t.firma);
-  yaz("rFirmaTelefon",t.firmaTelefon);
-  yaz("rFirmaEmail",t.firmaEmail);
-  yaz("rFirmaAdres",t.firmaAdres);
-  yaz("rFirmaVergi",t.firmaVergi);
-  yaz("rMusteri",t.musteri);
-  yaz("rTelefon",t.telefon ? "Telefon: "+t.telefon : "");
-  yaz("rProjeAdres",t.projeAdres ? "Proje adresi: "+t.projeAdres : "");
-  yaz("rSektor",t.sektor ? "Sektör: "+t.sektor : "");
-  yaz("rHizmet",t.hizmet);
-  yaz("rDetay",t.detay);
-  yaz("rKalem",t.hizmet);
-  yaz("rMiktar",t.miktar+" "+t.birim);
-  yaz("rBirimFiyat",para(t.birimFiyat));
-  yaz("rAraToplam",para(t.fiyatAraToplam));
-  yaz("rAraToplam2",para(t.matrah));
-  yaz("rKdvEtiket","KDV (%"+t.kdvOran+")");
-  yaz("rKdvTutar",para(t.kdvTutar));
-  yaz("rTutar",para(t.genelToplam));
-  yaz("rKdvDurum",t.kdvDurum);
-  yaz("rOdeme",t.odeme);
-  yaz("rTeslimat",t.teslimat);
-  yaz("rGaranti",t.garanti);
-  yaz("rGecerlilikMetin",t.sonGun);
-  yaz("rKosullar",t.kosullar ? "Ek koşullar: "+t.kosullar : "");
-  sonuc.style.display = "block";
-  sonuc.scrollIntoView({behavior:"smooth",block:"start"});
-}
-function formdanTeklif() {
-  const h = hesapla();
-  const tarih = new Date();
-  const sonGun = new Date(tarih);
-  sonGun.setDate(sonGun.getDate() + Number(oku("gecerlilik") || 7));
-  return {
-    no:"TP-"+tarih.getTime().toString().slice(-8),
-    tarih:tarih.toLocaleDateString("tr-TR"),
-    sonGun:sonGun.toLocaleDateString("tr-TR"),
-    firma:oku("firma"),
-    firmaTelefon:oku("firmaTelefon"),
-    firmaEmail:oku("firmaEmail"),
-    firmaAdres:oku("firmaAdres"),
-    firmaVergi:oku("firmaVergi"),
-    sektor:oku("sektor"),
-    musteri:oku("musteri"),
-    telefon:oku("telefon"),
-    projeAdres:oku("projeAdres"),
-    hizmet:oku("hizmet"),
-    detay:oku("detay"),
-    miktar:h.miktar,
-    birim:oku("birim"),
-    birimFiyat:h.birimFiyat,
-    fiyatAraToplam:h.araToplam,
-    matrah:h.matrah,
-    kdvOran:Number(oku("kdvOran")),
-    kdvTutar:h.kdv,
-    genelToplam:h.genel,
-    kdvDurum:oku("kdvDurum"),
-    odeme:oku("odeme"),
-    teslimat:oku("teslimat"),
-    garanti:oku("garanti"),
-    kosullar:oku("kosullar")
-  };
+function teklifiGoster(t){
+ sonTeklif=t;
+ yaz("rNo",t.no);yaz("rTarih",t.tarih);yaz("rSonGun",t.sonGun);
+ yaz("rFirmaMarka",t.firma);yaz("rFirmaAlt",t.firmaEmail||t.firmaTelefon||"Profesyonel teklif belgesi");
+ yaz("rFirma",t.firma);yaz("rFirmaTelefon",t.firmaTelefon? "Telefon: "+t.firmaTelefon:"");
+ yaz("rFirmaEmail",t.firmaEmail? "E-posta: "+t.firmaEmail:"");
+ yaz("rFirmaAdres",t.firmaAdres? "Adres: "+t.firmaAdres:"");
+ yaz("rFirmaVergi",t.firmaVergi? "Vergi bilgisi: "+t.firmaVergi:"");
+ yaz("rMusteri",t.musteri);yaz("rTelefon",t.telefon?"Telefon: "+t.telefon:"");
+ yaz("rProjeAdres",t.projeAdres?"Proje adresi: "+t.projeAdres:"");
+ yaz("rSektor",t.sektor?"Sektör: "+t.sektor:"");
+ yaz("rHizmet",t.hizmet);yaz("rDetay",t.detay);
+ yaz("rKalem",t.hizmet);yaz("rMiktar",t.miktar+" "+t.birim);
+ yaz("rBirimFiyat",para(t.birimFiyat));yaz("rAraToplam",para(t.fiyatAraToplam));
+ yaz("rAraToplam2",para(t.matrah));yaz("rKdvEtiket",t.kdvOran>0?"KDV (%"+t.kdvOran+")":"KDV");
+ yaz("rKdvTutar",para(t.kdvTutar));yaz("rTutar",para(t.genelToplam));
+ yaz("rKdvDurum",t.kdvDurum+(t.kdvOran===0?" · KDV oranı belirtilmedi":""));
+ yaz("rOdeme",t.odeme);yaz("rTeslimat",t.teslimat);yaz("rGaranti",t.garanti);
+ yaz("rGecerlilikMetin",t.sonGun);yaz("rKosullar",t.kosullar?"Ek koşullar: "+t.kosullar:"");
+ document.getElementById("rOdemeSatir").style.display=t.odeme?"":"none";
+ document.getElementById("rTeslimatSatir").style.display=t.teslimat?"":"none";
+ document.getElementById("rGarantiSatir").style.display=t.garanti?"":"none";
+ sonuc.style.display="block";
+ sonuc.scrollIntoView({behavior:"smooth",block:"start"});
 }
 
-/* Ücretsiz, şablon tabanlı açıklama */
-document.getElementById("otomatikMetinBtn").addEventListener("click",function() {
-  const durum = document.getElementById("otomatikMetinDurum");
-  if (!oku("firma") || !oku("musteri") || !oku("sektor") || !oku("hizmet")) {
-    durum.textContent = "Lütfen firma, müşteri, sektör ve hizmet alanlarını doldur.";
-    return;
-  }
-  const t = formdanTeklif();
-  document.getElementById("detay").value =
-    "İŞİN KAPSAMI\n"+
-    t.hizmet+" hizmetinin, taraflarca kararlaştırılan teknik özellikler ve miktar doğrultusunda sunulması.\n"+
-    (t.detay ? "\nTEKNİK AÇIKLAMA\n"+t.detay : "")+
-    "\n\nMİKTAR VE FİYAT\n"+
-    t.miktar+" "+t.birim+" × "+para(t.birimFiyat)+
-    "\nFiyatın KDV durumu: "+t.kdvDurum+
-    "\n\nNot: Bu metin şablonla oluşturulmuştur. Teknik kapsamı ve koşulları göndermeden önce kontrol ediniz.";
-  durum.textContent = "Açıklama hazırlandı. Metni kontrol edip düzenleyebilirsin.";
+/* Ücretsiz açıklama şablonu */
+document.getElementById("otomatikMetinBtn").addEventListener("click",function(){
+ const durum=document.getElementById("otomatikMetinDurum");
+ if(!oku("firma")||!oku("musteri")||!oku("sektor")||!oku("hizmet")){
+  durum.textContent="Lütfen firma, müşteri, sektör ve hizmet alanlarını doldur.";return;
+ }
+ const mevcut=oku("detay");
+ const metin="İŞİN KAPSAMI\n"+oku("hizmet")+" hizmetinin, taraflarca kararlaştırılan teknik özellikler ve miktar doğrultusunda sunulması."+
+ (mevcut?"\n\nTEKNİK AÇIKLAMA\n"+mevcut:"")+
+ "\n\nNot: Bu açıklama şablonla oluşturulmuştur. Teknik kapsamı göndermeden önce kontrol ediniz.";
+ document.getElementById("detay").value=metin;
+ durum.textContent="Açıklama hazırlandı. Metni kontrol edip düzenleyebilirsin.";
 });
 
-["miktar","birimFiyat","kdvOran","kdvDurum"].forEach(function(id) {
-  document.getElementById(id).addEventListener("input",function() {
-    const h = hesapla();
-    document.getElementById("hesapOnizleme").textContent =
-      "Ara toplam: "+para(h.matrah)+" · KDV: "+para(h.kdv)+" · Genel toplam: "+para(h.genel);
+function onizlemeHesapla(){
+ const miktar=Number(oku("miktar")),fiyat=Number(oku("birimFiyat"));
+ if(!(miktar>0)||!(fiyat>0)){document.getElementById("hesapOnizleme").textContent="Miktar ve birim fiyat girildiğinde toplam gösterilir.";return;}
+ const h=hesapla();
+ document.getElementById("hesapOnizleme").textContent="Ara toplam: "+para(h.matrah)+" · KDV: "+para(h.kdv)+" · Genel toplam: "+para(h.genel);
+}
+["miktar","birimFiyat","kdvOran","kdvDurum"].forEach(id=>document.getElementById(id).addEventListener("input",onizlemeHesapla));
+
+/* Kaydetme: mevcut Supabase sütunları korunur */
+form.addEventListener("submit",async function(event){
+ event.preventDefault();
+ if(!form.reportValidity())return;
+ const t=formdanTeklif();
+ if(!(t.miktar>0)||!(t.birimFiyat>0)){alert("Miktar ve birim fiyat sıfırdan büyük olmalıdır.");return;}
+ try{
+  const {data:oturum,error:oturumHatasi}=await client.auth.getUser();
+  if(oturumHatasi||!oturum.user){alert("Teklif kaydetmek için önce hesabına giriş yapmalısın.");return;}
+  const sonGun=new Date();sonGun.setDate(sonGun.getDate()+t.gecerlilik);
+  const detayKaydi=[
+   t.detay,
+   "FİYAT DÖKÜMÜ",
+   "Miktar: "+t.miktar+" "+t.birim,
+   "Birim fiyat: "+para(t.birimFiyat),
+   "Ara toplam: "+para(t.fiyatAraToplam),
+   "KDV oranı: %"+t.kdvOran,
+   "KDV tutarı: "+para(t.kdvTutar),
+   "Fiyat durumu: "+t.kdvDurum,
+   "Genel toplam: "+para(t.genelToplam),
+   t.projeAdres?"Proje adresi: "+t.projeAdres:"",
+   t.firmaTelefon?"Firma telefonu: "+t.firmaTelefon:"",
+   t.firmaEmail?"Firma e-posta: "+t.firmaEmail:"",
+   t.firmaAdres?"Firma adresi: "+t.firmaAdres:"",
+   t.firmaVergi?"Vergi bilgisi: "+t.firmaVergi:"",
+   t.garanti?"Garanti: "+t.garanti:"",
+   t.kosullar?"Ek koşullar: "+t.kosullar:""
+  ].filter(Boolean).join("\n");
+  const {error}=await client.from("teklifler").insert({
+   user_id:oturum.user.id,teklif_no:t.no,sektor:t.sektor,firma:t.firma,
+   musteri:t.musteri,telefon:t.telefon||null,hizmet:t.hizmet,
+   detay:detayKaydi||null,tutar:t.genelToplam,
+   kdv:t.kdvDurum+" (%"+t.kdvOran+")",odeme:t.odeme||null,
+   teslimat:t.teslimat||null,gecerlilik_sonu:sonGun.toISOString().slice(0,10)
   });
+  if(error){alert("Teklif kaydedilemedi: "+error.message);return;}
+  teklifiGoster(t);alert("Teklif başarıyla kaydedildi.");
+ }catch(e){alert("Bir bağlantı hatası oluştu. Lütfen tekrar dene.");}
 });
 
-/* Teklif oluştur ve mevcut Supabase tablosuna kaydet */
-form.addEventListener("submit",async function(event) {
-  event.preventDefault();
-  if (!form.reportValidity()) return;
-
-  const t = formdanTeklif();
-  if (!(t.miktar > 0) || !(t.birimFiyat > 0)) {
-    alert("Miktar ve birim fiyat sıfırdan büyük olmalıdır.");
-    return;
-  }
-
-  try {
-    const {data:oturum,error:oturumHatasi} = await client.auth.getUser();
-    if (oturumHatasi || !oturum.user) {
-      alert("Teklif kaydetmek için önce hesabına giriş yapmalısın.");
-      return;
-    }
-
-    const detayKaydi = [
-      t.detay,
-      "",
-      "FİYAT DÖKÜMÜ",
-      "Ürün/hizmet: "+t.hizmet,
-      "Miktar: "+t.miktar+" "+t.birim,
-      "Birim fiyat: "+para(t.birimFiyat),
-      "Ara toplam: "+para(t.fiyatAraToplam),
-      "KDV oranı: %"+t.kdvOran,
-      "KDV tutarı: "+para(t.kdvTutar),
-      "Fiyat durumu: "+t.kdvDurum,
-      "Genel toplam: "+para(t.genelToplam),
-      t.projeAdres ? "Proje adresi: "+t.projeAdres : "",
-      t.firmaTelefon ? "Firma telefonu: "+t.firmaTelefon : "",
-      t.firmaEmail ? "Firma e-posta: "+t.firmaEmail : "",
-      t.firmaAdres ? "Firma adresi: "+t.firmaAdres : "",
-      t.firmaVergi ? "Vergi bilgisi: "+t.firmaVergi : "",
-      t.garanti ? "Garanti: "+t.garanti : "",
-      t.kosullar ? "Ek koşullar: "+t.kosullar : ""
-    ].filter(Boolean).join("\n");
-
-    const {error} = await client.from("teklifler").insert({
-      user_id:oturum.user.id,
-      teklif_no:t.no,
-      sektor:t.sektor,
-      firma:t.firma,
-      musteri:t.musteri,
-      telefon:t.telefon || null,
-      hizmet:t.hizmet,
-      detay:detayKaydi || null,
-      tutar:t.genelToplam,
-      kdv:t.kdvDurum+" (%"+t.kdvOran+")",
-      odeme:t.odeme || null,
-      teslimat:t.teslimat || null,
-      gecerlilik_sonu:new Date(Date.now()+Number(oku("gecerlilik"))*86400000).toISOString().slice(0,10)
-    });
-
-    if (error) {
-      alert("Teklif kaydedilemedi: "+error.message);
-      return;
-    }
-
-    t.detay = t.detay;
-    teklifiGoster(t);
-    alert("Teklif başarıyla kaydedildi.");
-  } catch (e) {
-    alert("Bir bağlantı hatası oluştu. Lütfen tekrar dene.");
-  }
-});
-
-document.getElementById("pdfBtn").addEventListener("click",function() {
-  window.print();
-});
-document.getElementById("waBtn").addEventListener("click",function() {
-  if (!sonTeklif) return;
-  const t = sonTeklif;
-  const mesaj = [
-    "TEKLİF · "+t.firma,
-    "Teklif No: "+t.no,
-    "Müşteri: "+t.musteri,
-    "Hizmet: "+t.hizmet,
-    "Miktar: "+t.miktar+" "+t.birim,
-    "Birim fiyat: "+para(t.birimFiyat),
-    "KDV durumu: "+t.kdvDurum,
-    "Genel toplam: "+para(t.genelToplam),
-    "Ödeme: "+(t.odeme || "Belirtilmedi"),
-    "Teslimat: "+(t.teslimat || "Belirtilmedi"),
-    "Geçerlilik sonu: "+t.sonGun
-  ].join("\n");
-  window.open("https://wa.me/?text="+encodeURIComponent(mesaj),"_blank");
+document.getElementById("pdfBtn").addEventListener("click",()=>window.print());
+document.getElementById("waBtn").addEventListener("click",function(){
+ if(!sonTeklif)return;
+ const t=sonTeklif;
+ const mesaj=[
+  "TEKLİF · "+t.firma,"Teklif No: "+t.no,"Müşteri: "+t.musteri,
+  "Hizmet: "+t.hizmet,"Miktar: "+t.miktar+" "+t.birim,
+  "Birim fiyat: "+para(t.birimFiyat),"KDV durumu: "+t.kdvDurum,
+  "Genel toplam: "+para(t.genelToplam),"Ödeme: "+(t.odeme||"Belirtilmedi"),
+  "Teslimat: "+(t.teslimat||"Belirtilmedi"),"Geçerlilik sonu: "+t.sonGun
+ ].join("\n");
+ window.open("https://wa.me/?text="+encodeURIComponent(mesaj),"_blank");
 });
 </script>
 
 <section id="hesap-paneli">
-  <h2>TeklifPilot AI Hesabım</h2>
-  <p id="hesap-durum">Giriş yapın veya yeni hesap oluşturun.</p>
-  <label for="hesap-email">E-posta</label>
-  <input id="hesap-email" type="email" autocomplete="email" placeholder="ornek@firma.com">
-  <label for="hesap-sifre">Şifre</label>
-  <input id="hesap-sifre" type="password" autocomplete="current-password" placeholder="En az 6 karakter">
-  <div class="actions">
-    <button id="hesap-kayit" class="primary" type="button">Kayıt Ol</button>
-    <button id="hesap-giris" class="secondary" type="button">Giriş Yap</button>
-    <button id="hesap-cikis" type="button">Çıkış Yap</button>
-  </div>
+ <h2>TeklifPilot AI Hesabım</h2>
+ <p id="hesap-durum">Giriş yapın veya yeni hesap oluşturun.</p>
+ <label for="hesap-email">E-posta</label><input id="hesap-email" type="email" autocomplete="email" placeholder="ornek@firma.com">
+ <label for="hesap-sifre">Şifre</label><input id="hesap-sifre" type="password" autocomplete="current-password" placeholder="En az 6 karakter">
+ <div class="actions">
+  <button id="hesap-kayit" class="primary" type="button">Kayıt Ol</button>
+  <button id="hesap-giris" class="secondary" type="button">Giriş Yap</button>
+  <button id="hesap-cikis" type="button">Çıkış Yap</button>
+ </div>
 </section>
 
 <script>
-(async function() {
-  const durum = document.getElementById("hesap-durum");
-  const email = document.getElementById("hesap-email");
-  const sifre = document.getElementById("hesap-sifre");
-  function mesaj(yazi){durum.textContent=yazi;}
+(async function(){
+ const durum=document.getElementById("hesap-durum");
+ const email=document.getElementById("hesap-email");
+ const sifre=document.getElementById("hesap-sifre");
+ function mesaj(y){durum.textContent=y;}
 
-  document.getElementById("hesap-kayit").addEventListener("click",async function() {
-    if (!email.value.trim() || sifre.value.length<6) {
-      mesaj("E-posta girin ve en az 6 karakterli şifre kullanın.");
-      return;
-    }
-    const {data,error}=await client.auth.signUp({email:email.value.trim(),password:sifre.value});
-    if(error){mesaj("Kayıt hatası: "+error.message);return;}
-    mesaj(data.session?"Hesap oluşturuldu ve giriş yapıldı.":"Kayıt isteği alındı. E-postanı kontrol et; doğrulama gerekebilir.");
-  });
-
-  document.getElementById("hesap-giris").addEventListener("click",async function() {
-    const {data,error}=await client.auth.signInWithPassword({email:email.value.trim(),password:sifre.value});
-    if(error){mesaj("Giriş hatası: "+error.message);return;}
-    mesaj("Giriş yapıldı: "+data.user.email);
-  });
-
-  document.getElementById("hesap-cikis").addEventListener("click",async function() {
-    const {error}=await client.auth.signOut();
-    mesaj(error?"Çıkış hatası: "+error.message:"Oturum kapatıldı.");
-  });
-
-  const {data}=await client.auth.getSession();
-  if(data.session) mesaj("Giriş yapıldı: "+data.session.user.email);
+ document.getElementById("hesap-kayit").addEventListener("click",async function(){
+  if(!email.value.trim()||sifre.value.length<6){mesaj("E-posta girin ve en az 6 karakterli şifre kullanın.");return;}
+  const {data,error}=await client.auth.signUp({email:email.value.trim(),password:sifre.value});
+  if(error){mesaj("Kayıt hatası: "+error.message);return;}
+  mesaj(data.session?"Hesap oluşturuldu ve giriş yapıldı.":"Kayıt isteği alındı. E-postanı kontrol et; doğrulama gerekebilir.");
+ });
+ document.getElementById("hesap-giris").addEventListener("click",async function(){
+  const {data,error}=await client.auth.signInWithPassword({email:email.value.trim(),password:sifre.value});
+  if(error){mesaj("Giriş hatası: "+error.message);return;}
+  mesaj("Giriş yapıldı: "+data.user.email);
+ });
+ document.getElementById("hesap-cikis").addEventListener("click",async function(){
+  const {error}=await client.auth.signOut();mesaj(error?"Çıkış hatası: "+error.message:"Oturum kapatıldı.");
+ });
+ const {data}=await client.auth.getSession();
+ if(data.session)mesaj("Giriş yapıldı: "+data.session.user.email);
 })();
 </script>
 
 <section id="tekliflerim" style="max-width:900px;margin:30px auto;padding:20px">
-  <h2>Tekliflerim</h2>
-  <p class="muted">Kaydettiğin teklifleri görüntüleyebilirsin.</p>
-  <button type="button" id="teklifleriGetir" class="primary">Tekliflerimi Getir</button>
-  <div id="teklifListesi" style="margin-top:20px"></div>
+ <h2>Tekliflerim</h2>
+ <p class="muted">Kaydettiğin teklifleri görüntüleyebilirsin.</p>
+ <button type="button" id="teklifleriGetir" class="primary">Tekliflerimi Getir</button>
+ <div id="teklifListesi" style="margin-top:20px"></div>
 </section>
 
 <script>
-document.getElementById("teklifleriGetir").addEventListener("click",async function() {
-  const liste=document.getElementById("teklifListesi");
-  liste.textContent="Teklifler yükleniyor...";
+function sayiyaCevir(value){
+ if(value===null||value===undefined)return 0;
+ const s=String(value).replace(/[^\d,.-]/g,"");
+ if(s.includes(",")&&s.includes("."))return Number(s.replace(/\./g,"").replace(",","."));
+ if(s.includes(","))return Number(s.replace(",","."));
+ return Number(s)||0;
+}
+document.getElementById("teklifleriGetir").addEventListener("click",async function(){
+ const liste=document.getElementById("teklifListesi");
+ liste.textContent="Teklifler yükleniyor...";
+ try{
+  const {data:oturum,error:oturumHatasi}=await client.auth.getUser();
+  if(oturumHatasi||!oturum.user){liste.textContent="Lütfen önce hesabına giriş yap.";return;}
+  const {data,error}=await client.from("teklifler").select("*").eq("user_id",oturum.user.id).order("created_at",{ascending:false});
+  if(error){liste.textContent="Teklifler alınamadı: "+error.message;return;}
+  if(!data||!data.length){liste.textContent="Henüz kayıtlı teklifin yok.";return;}
+  liste.replaceChildren();
 
-  try {
-    const {data:oturum,error:oturumHatasi}=await client.auth.getUser();
-    if(oturumHatasi || !oturum.user){liste.textContent="Lütfen önce hesabına giriş yap.";return;}
-
-    const {data,error}=await client.from("teklifler")
-      .select("*").eq("user_id",oturum.user.id)
-      .order("created_at",{ascending:false});
-
-    if(error){liste.textContent="Teklifler alınamadı: "+error.message;return;}
-    if(!data || !data.length){liste.textContent="Henüz kayıtlı teklifin yok.";return;}
-    liste.replaceChildren();
-
-    data.forEach(function(row) {
-      const kart=document.createElement("div");
-      kart.className="teklif-karti";
-      const baslik=document.createElement("h3");
-      baslik.textContent=row.musteri || "İsimsiz müşteri";
-      const hizmet=document.createElement("p");
-      hizmet.textContent="Ürün / Hizmet: "+(row.hizmet || "-");
-      const tutar=document.createElement("p");
-      tutar.textContent="Toplam: "+para(row.tutar);
-      const tarih=document.createElement("p");
-      tarih.textContent="Oluşturulma: "+(row.created_at?new Date(row.created_at).toLocaleDateString("tr-TR"):"-");
-      const btn=document.createElement("button");
-      btn.type="button";
-      btn.className="teklif-ac";
-      btn.textContent="📄 Teklifi Aç";
-      btn.addEventListener("click",function() {
-        const detay=row.detay || "";
-        const miktarEslesme=detay.match(/Miktar:\s*([\d.,]+)\s*(adet|m²|Metre|metre|Saat|saat|Gün|gün|İş \/ Proje|iş|Paket|paket)/i);
-        const birimFiyatEslesme=detay.match(/Birim fiyat:\s*([\d.,]+)\s*TL/i);
-        const kdvOranEslesme=detay.match(/KDV oranı:\s*%(\d+)/i);
-        const fiyatDurumEslesme=detay.match(/Fiyat durumu:\s*(KDV dahil|KDV hariç)/i);
-        const kdvTutarEslesme=detay.match(/KDV tutarı:\s*([\d.,]+)\s*TL/i);
-        const araEslesme=detay.match(/Ara toplam:\s*([\d.,]+)\s*TL/i);
-        const adresEslesme=detay.match(/Proje adresi:\s*(.+)/i);
-        const firmaTelefonEslesme=detay.match(/Firma telefonu:\s*(.+)/i);
-        const firmaEmailEslesme=detay.match(/Firma e-posta:\s*(.+)/i);
-        const firmaAdresEslesme=detay.match(/Firma adresi:\s*(.+)/i);
-        const firmaVergiEslesme=detay.match(/Vergi bilgisi:\s*(.+)/i);
-        const garantiEslesme=detay.match(/Garanti:\s*(.+)/i);
-        const kosulEslesme=detay.match(/Ek koşullar:\s*(.+)/i);
-        const genel=Number(row.tutar || 0);
-        const oran=kdvOranEslesme?Number(kdvOranEslesme[1]):0;
-        const kdvdahil=fiyatDurumEslesme?fiyatDurumEslesme[1]==="KDV dahil":true;
-        const miktar=miktarEslesme?Number(miktarEslesme[1].replace(/\./g,"").replace(",", ".")):1;
-        const birim=miktarEslesme?miktarEslesme[2]:"iş";
-        const birimFiyat=birimFiyatEslesme?Number(birimFiyatEslesme[1].replace(/\./g,"").replace(",", ".")):genel;
-        const tarihObj=row.created_at?new Date(row.created_at):new Date();
-
-        let temizDetay=detay.split("\nFİYAT DÖKÜMÜ")[0];
-        const yeni = {
-          no:row.teklif_no || "-",
-          tarih:tarihObj.toLocaleDateString("tr-TR"),
-          sonGun:tarihFormatla(row.gecerlilik_sonu),
-          firma:row.firma || "",
-          firmaTelefon:firmaTelefonEslesme?firmaTelefonEslesme[1]:"",
-          firmaEmail:firmaEmailEslesme?firmaEmailEslesme[1]:"",
-          firmaAdres:firmaAdresEslesme?firmaAdresEslesme[1]:"",
-          firmaVergi:firmaVergiEslesme?firmaVergiEslesme[1]:"",
-          sektor:row.sektor || "",
-          musteri:row.musteri || "",
-          telefon:row.telefon || "",
-          projeAdres:adresEslesme?adresEslesme[1]:"",
-          hizmet:row.hizmet || "",
-          detay:temizDetay,
-          miktar:miktar,
-          birim:birim,
-          birimFiyat:birimFiyat,
-          fiyatAraToplam:araEslesme?Number(araEslesme[1].replace(/\./g,"").replace(",", ".")):genel,
-          matrah:kdvdahil && oran>0 ? genel/(1+oran/100):genel,
-          kdvOran:oran,
-          kdvTutar:kdvTutarEslesme?Number(kdvTutarEslesme[1].replace(/\./g,"").replace(",", ".")):(kdvdahil && oran>0 ? genel*oran/(100+oran):0),
-          genelToplam:genel,
-          kdvDurum:fiyatDurumEslesme?fiyatDurumEslesme[1]:(row.kdv || "Belirtilmedi"),
-          odeme:row.odeme || "",
-          teslimat:row.teslimat || "",
-          garanti:garantiEslesme?garantiEslesme[1]:"",
-          kosullar:kosulEslesme?kosulEslesme[1]:""
-        };
-        teklifiGoster(yeni);
-      });
-      kart.append(baslik,hizmet,tutar,tarih,btn);
-      liste.appendChild(kart);
-    });
-  } catch(e) {
-    liste.textContent="Bir hata oluştu. Lütfen tekrar dene.";
-  }
+  data.forEach(function(row){
+   const kart=document.createElement("div");kart.className="teklif-karti";
+   const baslik=document.createElement("h3");baslik.textContent=row.musteri||"İsimsiz müşteri";
+   const hizmet=document.createElement("p");hizmet.textContent="Ürün / Hizmet: "+(row.hizmet||"-");
+   const tutar=document.createElement("p");tutar.textContent="Toplam: "+para(row.tutar);
+   const tarih=document.createElement("p");tarih.textContent="Oluşturulma: "+(row.created_at?new Date(row.created_at).toLocaleDateString("tr-TR"):"-");
+   const btn=document.createElement("button");btn.type="button";btn.className="teklif-ac";btn.textContent="📄 Teklifi Aç";
+   btn.addEventListener("click",function(){
+    const detay=row.detay||"";
+    const al=(regex)=>{const m=detay.match(regex);return m?m[1].trim():"";};
+    const oran=Number(al(/KDV oranı:\s*%(\d+)/i)||0);
+    const miktar=sayiyaCevir(al(/Miktar:\s*([\d.,]+)/i))||1;
+    const birim=al(/Miktar:\s*[\d.,]+\s*([^\n]+)/i)||"iş";
+    const birimFiyat=sayiyaCevir(al(/Birim fiyat:\s*([\d.,]+)\s*TL/i))||Number(row.tutar||0);
+    const ara=sayiyaCevir(al(/Ara toplam:\s*([\d.,]+)\s*TL/i));
+    const kdvTutar=sayiyaCevir(al(/KDV tutarı:\s*([\d.,]+)\s*TL/i));
+    const genel=Number(row.tutar||0);
+    const durumKdv=al(/Fiyat durumu:\s*(KDV dahil|KDV hariç)/i)||(String(row.kdv||"").includes("dahil")?"KDV dahil":"KDV hariç");
+    const temizDetay=detay.split("\nFİYAT DÖKÜMÜ")[0];
+    const tarihObj=row.created_at?new Date(row.created_at):new Date();
+    const proje=al(/Proje adresi:\s*([^\n]+)/i);
+    const fTel=al(/Firma telefonu:\s*([^\n]+)/i);
+    const fEmail=al(/Firma e-posta:\s*([^\n]+)/i);
+    const fAdres=al(/Firma adresi:\s*([^\n]+)/i);
+    const fVergi=al(/Vergi bilgisi:\s*([^\n]+)/i);
+    const garanti=al(/Garanti:\s*([^\n]+)/i);
+    const kosul=al(/Ek koşullar:\s*([^\n]+)/i);
+    const kdvDahil=durumKdv==="KDV dahil";
+    const matrah=ara>0?ara:(kdvDahil&&oran>0?genel/(1+oran/100):genel);
+    const yeni={
+     no:row.teklif_no||"-",tarih:tarihObj.toLocaleDateString("tr-TR"),sonGun:tarihFormatla(row.gecerlilik_sonu),
+     firma:row.firma||"",firmaTelefon:fTel,firmaEmail:fEmail,firmaAdres:fAdres,firmaVergi:fVergi,
+     sektor:row.sektor||"",musteri:row.musteri||"",telefon:row.telefon||"",projeAdres:proje,
+     hizmet:row.hizmet||"",detay:temizDetay,miktar:miktar,birim:birim,birimFiyat:birimFiyat,
+     fiyatAraToplam:ara>0?ara:miktar*birimFiyat,matrah:matrah,kdvOran:oran,
+     kdvTutar:kdvTutar>0?kdvTutar:(kdvDahil&&oran>0?genel-matrah:genel*oran/100),
+     genelToplam:genel,kdvDurum:durumKdv,odeme:row.odeme||"",teslimat:row.teslimat||"",
+     garanti:garanti,kosullar:kosul
+    };
+    teklifiGoster(yeni);
+   });
+   kart.append(baslik,hizmet,tutar,tarih,btn);liste.appendChild(kart);
+  });
+ }catch(e){liste.textContent="Bir hata oluştu. Lütfen tekrar dene.";}
 });
 </script>
 </body>
