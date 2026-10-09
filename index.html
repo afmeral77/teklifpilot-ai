@@ -47,15 +47,84 @@ footer{text-align:center;padding:27px 15px;background:#111827;color:#cbd5e1;font
 #teklifListesi .teklif-karti h3{margin-bottom:8px}
 #teklifListesi .teklif-karti p{margin:5px 0}
 #teklifListesi .teklif-ac{background:#1d4ed8;color:#fff;width:100%;margin-top:10px}
-#teklifListesi .teklif-karti{cursor:pointer}
-#teklifListesi .teklif-ac{cursor:pointer}
-@media(max-width:520px){.grid,.features{grid-template-columns:1fr}.panel{padding:17px}.actions{flex-direction:column}}
+@media(max-width:520px){
+  .grid,.features{grid-template-columns:1fr}
+  .panel{padding:17px}
+  .actions{flex-direction:column}
+}
 @media print{
-body{background:#fff}
-header,.hero,form,.features,footer,.no-print,#hesap-paneli,#tekliflerim{display:none!important}
-.wrap{padding:0}
-.panel{border:0;box-shadow:none;padding:0}
-.result{display:block!important;border:0;margin:0;padding:0}
+  @page{
+    size:A4;
+    margin:10mm;
+  }
+
+  html,body{
+    width:100%;
+    margin:0!important;
+    padding:0!important;
+    background:#fff!important;
+    color:#172033;
+    font-family:Arial,sans-serif;
+    font-size:10pt;
+    line-height:1.4;
+  }
+
+  header,.hero,form,.features,footer,.no-print,.muted,
+  #hesap-paneli,#tekliflerim{
+    display:none!important;
+  }
+
+  main.wrap{
+    max-width:none;
+    width:100%;
+    margin:0;
+    padding:0;
+  }
+
+  .panel{
+    border:0;
+    border-radius:0;
+    box-shadow:none;
+    padding:0;
+    margin:0;
+  }
+
+  #sonuc{
+    display:block!important;
+    width:100%;
+    margin:0;
+    padding:0;
+    border:0;
+    overflow:visible;
+    font-size:10pt;
+  }
+
+  #sonuc h2{
+    font-size:18pt;
+    margin-bottom:8px;
+  }
+
+  #sonuc p{
+    margin:5px 0;
+    overflow-wrap:anywhere;
+  }
+
+  #sonuc hr{
+    margin:8px 0;
+  }
+
+  #sonuc .amount{
+    font-size:21pt;
+    color:#1d4ed8!important;
+  }
+
+  #sonuc .actions{
+    display:none!important;
+  }
+
+  #sonuc p:last-of-type{
+    font-size:9pt;
+  }
 }
 </style>
 </head>
@@ -203,6 +272,32 @@ function yaz(id, value) {
   document.getElementById(id).textContent = value || "Belirtilmedi";
 }
 
+function teklifiGoster(teklif) {
+  yaz("rNo", teklif.no);
+  yaz("rTarih", teklif.tarih);
+  yaz("rSonGun", teklif.sonGun);
+  yaz("rSektor", teklif.sektor);
+  yaz("rFirma", teklif.firma);
+  yaz("rMusteri", teklif.musteri);
+  yaz("rTelefon", teklif.telefon);
+  yaz("rHizmet", teklif.hizmet);
+  yaz("rDetay", teklif.detay);
+  yaz("rTutar", teklif.tutar);
+  yaz("rKdv", teklif.kdv);
+  yaz("rOdeme", teklif.odeme);
+  yaz("rTeslimat", teklif.teslimat);
+
+  sonuc.style.display = "block";
+  sonuc.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function tarihFormatla(deger) {
+  if (!deger) return "Belirtilmedi";
+  const parcalar = deger.slice(0,10).split("-");
+  if (parcalar.length !== 3) return deger;
+  return parcalar[2] + "." + parcalar[1] + "." + parcalar[0];
+}
+
 /* ÜCRETSİZ ŞABLONLA TEKLİF METNİ OLUŞTURMA */
 document.getElementById("otomatikMetinBtn").addEventListener("click", function () {
   const durum = document.getElementById("otomatikMetinDurum");
@@ -224,8 +319,8 @@ document.getElementById("otomatikMetinBtn").addEventListener("click", function (
   }
 
   const fiyat = tutar.toLocaleString("tr-TR", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
+    minimumFractionDigits:2,
+    maximumFractionDigits:2
   }) + " TL";
 
   const metin = [
@@ -267,26 +362,26 @@ form.addEventListener("submit", async function(event) {
   sonGun.setDate(sonGun.getDate() + Number(oku("gecerlilik")));
 
   sonTeklif = {
-    no: "TP-" + tarih.getTime().toString().slice(-8),
-    tarih: tarih.toLocaleDateString("tr-TR"),
-    sonGun: sonGun.toLocaleDateString("tr-TR"),
-    sektor: oku("sektor"),
-    firma: oku("firma"),
-    musteri: oku("musteri"),
-    telefon: oku("telefon"),
-    hizmet: oku("hizmet"),
-    detay: oku("detay"),
-    tutar: tutar.toLocaleString("tr-TR", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
+    no:"TP-" + tarih.getTime().toString().slice(-8),
+    tarih:tarih.toLocaleDateString("tr-TR"),
+    sonGun:sonGun.toLocaleDateString("tr-TR"),
+    sektor:oku("sektor"),
+    firma:oku("firma"),
+    musteri:oku("musteri"),
+    telefon:oku("telefon"),
+    hizmet:oku("hizmet"),
+    detay:oku("detay"),
+    tutar:tutar.toLocaleString("tr-TR", {
+      minimumFractionDigits:2,
+      maximumFractionDigits:2
     }) + " TL",
-    kdv: oku("kdv"),
-    odeme: oku("odeme"),
-    teslimat: oku("teslimat")
+    kdv:oku("kdv"),
+    odeme:oku("odeme"),
+    teslimat:oku("teslimat")
   };
 
   try {
-    const { data: oturumBilgisi, error: oturumHatasi } = await client.auth.getUser();
+    const {data:oturumBilgisi,error:oturumHatasi} = await client.auth.getUser();
 
     if (oturumHatasi || !oturumBilgisi.user) {
       alert("Teklif kaydetmek için önce hesabına giriş yapmalısın.");
@@ -295,45 +390,28 @@ form.addEventListener("submit", async function(event) {
 
     const kullanici = oturumBilgisi.user;
 
-    const { error: kayitHatasi } = await client
-      .from("teklifler")
-      .insert({
-        user_id: kullanici.id,
-        teklif_no: sonTeklif.no,
-        sektor: sonTeklif.sektor,
-        firma: sonTeklif.firma,
-        musteri: sonTeklif.musteri,
-        telefon: sonTeklif.telefon || null,
-        hizmet: sonTeklif.hizmet,
-        detay: sonTeklif.detay || null,
-        tutar: tutar,
-        kdv: sonTeklif.kdv,
-        odeme: sonTeklif.odeme || null,
-        teslimat: sonTeklif.teslimat || null,
-        gecerlilik_sonu: sonGun.toISOString().slice(0, 10)
-      });
+    const {error:kayitHatasi} = await client.from("teklifler").insert({
+      user_id:kullanici.id,
+      teklif_no:sonTeklif.no,
+      sektor:sonTeklif.sektor,
+      firma:sonTeklif.firma,
+      musteri:sonTeklif.musteri,
+      telefon:sonTeklif.telefon || null,
+      hizmet:sonTeklif.hizmet,
+      detay:sonTeklif.detay || null,
+      tutar:tutar,
+      kdv:sonTeklif.kdv,
+      odeme:sonTeklif.odeme || null,
+      teslimat:sonTeklif.teslimat || null,
+      gecerlilik_sonu:sonGun.toISOString().slice(0,10)
+    });
 
     if (kayitHatasi) {
       alert("Teklif kaydedilemedi: " + kayitHatasi.message);
       return;
     }
 
-    yaz("rNo", sonTeklif.no);
-    yaz("rTarih", sonTeklif.tarih);
-    yaz("rSonGun", sonTeklif.sonGun);
-    yaz("rSektor", sonTeklif.sektor);
-    yaz("rFirma", sonTeklif.firma);
-    yaz("rMusteri", sonTeklif.musteri);
-    yaz("rTelefon", sonTeklif.telefon);
-    yaz("rHizmet", sonTeklif.hizmet);
-    yaz("rDetay", sonTeklif.detay);
-    yaz("rTutar", sonTeklif.tutar);
-    yaz("rKdv", sonTeklif.kdv);
-    yaz("rOdeme", sonTeklif.odeme);
-    yaz("rTeslimat", sonTeklif.teslimat);
-
-    sonuc.style.display = "block";
-    sonuc.scrollIntoView({behavior:"smooth",block:"start"});
+    teklifiGoster(sonTeklif);
     alert("Teklif başarıyla veritabanına kaydedildi!");
   } catch (hata) {
     alert("Bir bağlantı hatası oluştu. Lütfen tekrar dene.");
@@ -399,9 +477,9 @@ document.getElementById("waBtn").addEventListener("click", function() {
       return;
     }
 
-    const { data, error } = await client.auth.signUp({
-      email: email.value.trim(),
-      password: sifre.value
+    const {data,error} = await client.auth.signUp({
+      email:email.value.trim(),
+      password:sifre.value
     });
 
     if (error) {
@@ -415,9 +493,9 @@ document.getElementById("waBtn").addEventListener("click", function() {
   });
 
   document.getElementById("hesap-giris").addEventListener("click", async function () {
-    const { data, error } = await client.auth.signInWithPassword({
-      email: email.value.trim(),
-      password: sifre.value
+    const {data,error} = await client.auth.signInWithPassword({
+      email:email.value.trim(),
+      password:sifre.value
     });
 
     if (error) {
@@ -429,11 +507,11 @@ document.getElementById("waBtn").addEventListener("click", function() {
   });
 
   document.getElementById("hesap-cikis").addEventListener("click", async function () {
-    const { error } = await client.auth.signOut();
+    const {error} = await client.auth.signOut();
     mesaj(error ? "Çıkış hatası: " + error.message : "Oturum kapatıldı.");
   });
 
-  const { data } = await client.auth.getSession();
+  const {data} = await client.auth.getSession();
   if (data.session) {
     mesaj("Giriş yapıldı: " + data.session.user.email);
   }
@@ -455,19 +533,18 @@ document.getElementById("teklifleriGetir").addEventListener("click", async funct
   liste.textContent = "Teklifler yükleniyor...";
 
   try {
-    const { data: oturum, error: oturumHatasi } =
-      await client.auth.getUser();
+    const {data:oturum,error:oturumHatasi} = await client.auth.getUser();
 
     if (oturumHatasi || !oturum.user) {
       liste.textContent = "Lütfen önce hesabına giriş yap.";
       return;
     }
 
-    const { data, error } = await client
+    const {data,error} = await client
       .from("teklifler")
       .select("*")
-      .eq("user_id", oturum.user.id)
-      .order("created_at", { ascending: false });
+      .eq("user_id",oturum.user.id)
+      .order("created_at",{ascending:false});
 
     if (error) {
       liste.textContent = "Teklifler alınamadı: " + error.message;
@@ -481,7 +558,7 @@ document.getElementById("teklifleriGetir").addEventListener("click", async funct
 
     liste.replaceChildren();
 
-    data.forEach(function (teklif) {
+    data.forEach(function(teklif) {
       const kart = document.createElement("div");
       kart.className = "teklif-karti";
 
@@ -489,20 +566,17 @@ document.getElementById("teklifleriGetir").addEventListener("click", async funct
       baslik.textContent = teklif.musteri || "İsimsiz müşteri";
 
       const hizmet = document.createElement("p");
-      hizmet.textContent =
-        "Ürün / Hizmet: " + (teklif.hizmet || "-");
+      hizmet.textContent = "Ürün / Hizmet: " + (teklif.hizmet || "-");
 
       const tutar = document.createElement("p");
-      tutar.textContent =
-        "Tutar: " +
-        Number(teklif.tutar || 0).toLocaleString("tr-TR", {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2
+      tutar.textContent = "Tutar: " +
+        Number(teklif.tutar || 0).toLocaleString("tr-TR",{
+          minimumFractionDigits:2,
+          maximumFractionDigits:2
         }) + " TL";
 
       const tarih = document.createElement("p");
-      tarih.textContent =
-        "Oluşturulma: " +
+      tarih.textContent = "Oluşturulma: " +
         (teklif.created_at
           ? new Date(teklif.created_at).toLocaleDateString("tr-TR")
           : "-");
@@ -512,59 +586,34 @@ document.getElementById("teklifleriGetir").addEventListener("click", async funct
       acBtn.className = "teklif-ac";
       acBtn.textContent = "📄 Teklifi Aç";
 
-      acBtn.addEventListener("click", function () {
-        function tarihFormatla(deger) {
-          if (!deger) return "Belirtilmedi";
-          const parcalar = deger.slice(0, 10).split("-");
-          if (parcalar.length !== 3) return deger;
-          return parcalar[2] + "." + parcalar[1] + "." + parcalar[0];
-        }
-
+      acBtn.addEventListener("click",function() {
         const tarihObjesi = teklif.created_at
           ? new Date(teklif.created_at)
           : new Date();
 
         sonTeklif = {
-          no: teklif.teklif_no || "-",
-          tarih: tarihObjesi.toLocaleDateString("tr-TR"),
-          sonGun: tarihFormatla(teklif.gecerlilik_sonu),
-          sektor: teklif.sektor || "",
-          firma: teklif.firma || "",
-          musteri: teklif.musteri || "",
-          telefon: teklif.telefon || "",
-          hizmet: teklif.hizmet || "",
-          detay: teklif.detay || "",
-          tutar: Number(teklif.tutar || 0).toLocaleString("tr-TR", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
+          no:teklif.teklif_no || "-",
+          tarih:tarihObjesi.toLocaleDateString("tr-TR"),
+          sonGun:tarihFormatla(teklif.gecerlilik_sonu),
+          sektor:teklif.sektor || "",
+          firma:teklif.firma || "",
+          musteri:teklif.musteri || "",
+          telefon:teklif.telefon || "",
+          hizmet:teklif.hizmet || "",
+          detay:teklif.detay || "",
+          tutar:Number(teklif.tutar || 0).toLocaleString("tr-TR",{
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
           }) + " TL",
-          kdv: teklif.kdv || "Belirtilmedi",
-          odeme: teklif.odeme || "",
-          teslimat: teklif.teslimat || ""
+          kdv:teklif.kdv || "Belirtilmedi",
+          odeme:teklif.odeme || "",
+          teslimat:teklif.teslimat || ""
         };
 
-        yaz("rNo", sonTeklif.no);
-        yaz("rTarih", sonTeklif.tarih);
-        yaz("rSonGun", sonTeklif.sonGun);
-        yaz("rSektor", sonTeklif.sektor);
-        yaz("rFirma", sonTeklif.firma);
-        yaz("rMusteri", sonTeklif.musteri);
-        yaz("rTelefon", sonTeklif.telefon);
-        yaz("rHizmet", sonTeklif.hizmet);
-        yaz("rDetay", sonTeklif.detay);
-        yaz("rTutar", sonTeklif.tutar);
-        yaz("rKdv", sonTeklif.kdv);
-        yaz("rOdeme", sonTeklif.odeme);
-        yaz("rTeslimat", sonTeklif.teslimat);
-
-        sonuc.style.display = "block";
-        sonuc.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
+        teklifiGoster(sonTeklif);
       });
 
-      kart.append(baslik, hizmet, tutar, tarih, acBtn);
+      kart.append(baslik,hizmet,tutar,tarih,acBtn);
       liste.appendChild(kart);
     });
   } catch (hata) {
