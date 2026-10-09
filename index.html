@@ -379,5 +379,66 @@ document.getElementById("waBtn").addEventListener("click", function() {
 })();
 </script>
 
+<section id="tekliflerim" style="max-width:900px;margin:30px auto;padding:20px;font-family:Arial,sans-serif;">
+  <h2>Tekliflerim</h2>
+  <p>Kaydettiğin teklifleri burada görüntüleyebilirsin.</p>
+  <button type="button" id="teklifleriGetir" style="background:#2451d1;color:white;border:0;padding:12px 18px;border-radius:8px;">
+    Tekliflerimi Getir
+  </button>
+  <div id="teklifListesi" style="margin-top:20px;"></div>
+</section>
+
+<script>
+document.getElementById("teklifleriGetir").addEventListener("click", async function () {
+  const liste = document.getElementById("teklifListesi");
+  liste.textContent = "Teklifler yükleniyor...";
+
+  const { data: oturum, error: oturumHatasi } = await client.auth.getUser();
+
+  if (oturumHatasi || !oturum.user) {
+    liste.textContent = "Lütfen önce hesabına giriş yap.";
+    return;
+  }
+
+  const { data, error } = await client
+    .from("teklifler")
+    .select("*")
+    .eq("user_id", oturum.user.id)
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    liste.textContent = "Teklifler alınamadı: " + error.message;
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    liste.textContent = "Henüz kayıtlı teklifin yok.";
+    return;
+  }
+
+  liste.replaceChildren();
+
+  data.forEach(function (teklif) {
+    const kart = document.createElement("div");
+    kart.style.cssText = "border:1px solid #ddd;border-radius:10px;padding:16px;margin:12px 0;";
+
+    const baslik = document.createElement("h3");
+    baslik.textContent = teklif.musteri || "İsimsiz müşteri";
+
+    const hizmet = document.createElement("p");
+    hizmet.textContent = "Ürün / Hizmet: " + (teklif.hizmet || "-");
+
+    const tutar = document.createElement("p");
+    tutar.textContent = "Tutar: " + Number(teklif.tutar || 0).toLocaleString("tr-TR") + " TL";
+
+    const tarih = document.createElement("p");
+    tarih.textContent = "Oluşturulma: " + new Date(teklif.created_at).toLocaleDateString("tr-TR");
+
+    kart.append(baslik, hizmet, tutar, tarih);
+    liste.appendChild(kart);
+  });
+});
+</script>
+
 </body>
 </html>
