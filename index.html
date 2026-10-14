@@ -3,8 +3,8 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TeklifPilot AI | Profesyonel Teklif Asistanı</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#f3f6fb"><meta name="apple-mobile-web-app-capable" content="yes">
+<title>TeklifPilot | Teklif çalışma alanı</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const SUPABASE_URL="https://ckochcakoiegwikstyew.supabase.co";
@@ -12,102 +12,97 @@ const SUPABASE_KEY="sb_publishable_s10Fz4cCqyYKLkmtvBE-1g_ZGiKu9HN";
 const client=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 </script>
 <style>
-:root{--navy:#142c50;--blue:#2756d8;--blue-dark:#1d43b3;--ink:#17243b;--muted:#63728a;--line:#e0e7f0;--bg:#f5f7fb;--white:#fff;--mint:#dff7ef;--green:#16805d;--shadow:0 18px 50px rgba(20,44,80,.07)}
+:root{
+  --ink:#14243b;--muted:#6c7a91;--line:#e4eaf2;--surface:#fff;--canvas:#f3f6fb;
+  --blue:#315ee8;--blue-dark:#244bc7;--navy:#142c50;--mint:#eaf8f2;--green:#16805d;
+  --shadow:0 18px 44px rgba(20,44,80,.09);--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)
+}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}
-.topbar{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.topbar-inner{max-width:1120px;margin:auto;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.logo-wrap{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink)}
-.logo-mark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--navy);color:#fff;font-size:19px;font-weight:800;box-shadow:0 5px 12px #142c5030}
-.logo{font-size:17px;font-weight:800;letter-spacing:-.4px}.logo small{display:block;color:var(--muted);font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase}
-.nav-links{display:flex;align-items:center;gap:8px}.nav-links a{color:#506078;text-decoration:none;font-size:13px;font-weight:650;padding:9px 12px;border-radius:9px;transition:.2s}.nav-links a:hover{color:var(--blue);background:#eef3ff}
-.header-cta{background:var(--blue);color:#fff!important;padding:10px 15px!important;border-radius:10px!important;box-shadow:0 4px 12px #2756d833}
-.hero{max-width:1120px;margin:26px auto 8px;padding:0 24px}
-.hero-card{position:relative;overflow:hidden;border-radius:22px;padding:32px 36px;background:linear-gradient(115deg,#142c50 0%,#1d3f75 58%,#2756d8 100%);color:white;box-shadow:0 18px 38px #18345b20}
-.hero-card:after{content:"";position:absolute;width:310px;height:310px;border:1px solid #ffffff20;border-radius:50%;right:7%;top:-180px;box-shadow:0 0 0 32px #ffffff08,0 0 0 68px #ffffff06}
-.hero-content{position:relative;z-index:1;max-width:710px}.hero-badge{display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border-radius:20px;background:#ffffff19;color:#dce9ff;font-size:11px;font-weight:750;letter-spacing:.55px;text-transform:uppercase}
-.hero h1{font-size:clamp(28px,4vw,40px);letter-spacing:-1.2px;line-height:1.12;margin:15px 0 9px}.hero p{max-width:590px;color:#d3def0;margin:0;font-size:15px}
-.hero-steps{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}.hero-step{display:flex;align-items:center;gap:8px;color:#eff4ff;font-size:12px;font-weight:650}.hero-step:not(:last-child):after{content:"→";margin-left:5px;color:#9db7eb}.step-dot{width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:#ffffff20;color:white;font-size:11px}
-.wrap{max-width:1120px;padding:16px 24px 30px;margin:auto}.panel{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:var(--shadow)}
-h2{font-size:22px;letter-spacing:-.45px;margin:0 0 5px}h3{font-size:15px;letter-spacing:-.1px;margin:0 0 8px}.muted{color:var(--muted);font-size:13px;margin:0 0 22px}
-.panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:20px}.panel-kicker{display:block;font-size:10px;color:var(--blue);font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px}.secure-pill{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border:1px solid #d6f0e6;background:#f1fbf7;color:#247456;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}.secure-pill:before{content:"";width:7px;height:7px;border-radius:50%;background:#36ad7c}
-label{display:block;font-size:12px;font-weight:700;color:#35445d;margin:14px 0 6px}
-input,textarea,select{width:100%;padding:11px 12px;border:1px solid #d8e0eb;border-radius:9px;font:inherit;font-size:14px;background:#fff;color:var(--ink);transition:border-color .18s,box-shadow .18s}
-textarea{min-height:85px;resize:vertical}input::placeholder,textarea::placeholder{color:#9aa6b7}input:focus,textarea:focus,select:focus{outline:none;border-color:#7393f3;box-shadow:0 0 0 3px #2756d817}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}form>h3{margin:24px 0 8px;padding-bottom:9px;border-bottom:1px solid #edf0f5;color:#263c5d}form>h3:first-child{margin-top:0}
-button{font:inherit;font-size:13px;font-weight:750;border:0;border-radius:9px;padding:11px 16px;cursor:pointer;transition:transform .15s,background .15s,box-shadow .15s}button:not(:disabled):hover{transform:translateY(-1px)}button:disabled{opacity:.52;cursor:not-allowed}.primary{background:var(--blue);color:white;box-shadow:0 5px 13px #2756d82a}.primary:hover:not(:disabled){background:var(--blue-dark)}.secondary{background:#eef3ff;color:var(--blue)}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.actions button{min-width:150px}.help{font-size:12px;color:var(--muted);margin-top:5px}.notice{font-size:12px;padding:10px 12px;border:1px solid #f3dfb2;background:#fff9eb;color:#805d19;border-radius:9px;margin:12px 0}
-.confirm{display:flex;gap:10px;align-items:flex-start;font-size:12px;font-weight:550;line-height:1.5;margin:14px 0;color:#45536a}.confirm input{width:17px;height:17px;flex:0 0 17px;margin:1px 0;accent-color:var(--blue)}hr{border:0;border-top:1px solid #edf0f5;margin:20px 0}
-.approval{display:none;margin-top:22px;padding:21px;border:1px solid #b9caf9;background:linear-gradient(145deg,#f4f7ff,#fff);border-radius:14px}.approval h3{color:var(--navy);margin:0 0 5px;font-size:17px}.approval-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:15px 0;font-size:13px}.approval-summary div{padding:10px 11px;background:white;border:1px solid #e7ebf5;border-radius:9px}.approval-summary strong{color:#56647a}.approval-status{font-size:13px;min-height:20px;color:#334155}.approval .actions{margin-top:10px}
-.result{display:none;background:white;border:1px solid var(--line);border-radius:15px;padding:25px;margin-top:22px;overflow-wrap:anywhere}.doc-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;border-bottom:3px solid var(--blue);padding-bottom:10px;margin-bottom:11px}.doc-brand{font-size:20px;font-weight:800;color:var(--blue);overflow-wrap:anywhere}.doc-sub{font-size:10px;color:var(--muted)}.doc-title{text-align:right}.doc-title h2{font-size:24px;letter-spacing:1px;color:var(--blue);margin:0}.doc-title p{font-size:10px;color:var(--muted);margin:3px 0}.doc-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.doc-box{border:1px solid var(--line);border-radius:8px;padding:9px;min-width:0}.doc-box h3,.doc-section-title{font-size:10px;color:var(--blue);letter-spacing:.4px;margin:0 0 5px;text-transform:uppercase}.doc-box p{font-size:11px;margin:2px 0;white-space:pre-wrap;overflow-wrap:anywhere}.doc-section{margin:11px 0}.doc-section-title{border-bottom:1px solid var(--line);padding-bottom:4px}.doc-description{white-space:pre-wrap;font-size:11px;margin:6px 0}table{width:100%;border-collapse:collapse;font-size:10px}th{background:#eef3fb;color:var(--blue);text-align:left}th,td{padding:6px;border:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}.num{text-align:right;white-space:nowrap}.totals{width:min(100%,330px);margin:8px 0 0 auto;font-size:11px}.total-row{display:flex;justify-content:space-between;gap:12px;padding:4px 0;border-bottom:1px solid var(--line)}.total-final{font-size:17px;font-weight:800;color:var(--blue);border-bottom:3px solid var(--blue);padding:7px 0}.terms{font-size:10px}.signature-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.signature{border:1px solid var(--line);border-radius:8px;padding:8px;min-height:58px;font-size:10px}.signature strong{display:block;color:var(--blue);margin-bottom:13px}.doc-foot{border-top:1px solid var(--line);padding-top:6px;margin-top:8px;font-size:9px;color:var(--muted);text-align:center}
-#teklifListesi .teklif-karti{background:white;border:1px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;box-shadow:0 5px 16px #17203308}#teklifListesi .teklif-karti h3{margin:0 0 7px}#teklifListesi .teklif-karti p{margin:4px 0;color:var(--muted);font-size:13px}#teklifListesi .teklif-ac{background:#eef3ff;color:var(--blue);width:100%;margin-top:10px}
-.workflow-note{max-width:1072px;margin:0 auto 25px;padding:0 24px}.workflow-note-inner{display:flex;align-items:center;gap:12px;padding:13px 16px;border:1px solid #dfe7f5;background:#fff;border-radius:12px;color:#55647a;font-size:12px}.workflow-note strong{color:var(--navy)}.workflow-icon{width:30px;height:30px;flex:0 0 30px;display:grid;place-items:center;border-radius:9px;background:#eef3ff;color:var(--blue);font-weight:800}
-#hesap-paneli,#tekliflerim{max-width:1072px;margin:20px auto;padding:24px;background:white;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 24px #17203308}#hesap-paneli h2,#tekliflerim h2{margin-bottom:5px}#hesap-paneli label{max-width:520px}#hesap-paneli input{max-width:520px}#hesap-durum{padding:10px 12px;background:#f6f8fc;border-radius:8px;color:var(--muted);font-size:13px}
-footer{text-align:center;color:#748097;padding:18px 12px 28px;font-size:11px}
-@media(max-width:700px){.topbar-inner{padding:11px 16px}.nav-links{gap:2px}.nav-links a{font-size:12px;padding:8px}.nav-links a.header-cta{padding:9px 10px!important}.hero{margin-top:17px;padding:0 16px}.hero-card{padding:25px 22px;border-radius:17px}.hero p{font-size:14px}.hero-steps{gap:7px}.hero-step{font-size:11px}.hero-step:not(:last-child):after{margin-left:0}.wrap{padding:13px 16px 22px}.panel{padding:21px 17px}.approval-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.workflow-note{padding:0 16px}#hesap-paneli,#tekliflerim{margin:16px;padding:19px}}
-@media(max-width:480px){.logo{font-size:15px}.logo-mark{width:35px;height:35px}.logo small{font-size:9px}.nav-links a{font-size:11px;padding:7px 8px}.nav-links .nav-optional{display:none}.hero-step{font-size:10px}.grid,.doc-meta,.signature-grid{grid-template-columns:1fr}.panel-head{display:block}.secure-pill{margin-top:12px}.approval-summary{grid-template-columns:1fr 1fr}.actions{flex-direction:column}.actions button{width:100%}.result{padding:15px}.doc-head{gap:8px}.doc-brand{font-size:16px}.doc-title h2{font-size:20px}.doc-box{padding:7px}}
-@media print{@page{size:A4;margin:7mm}html,body{margin:0!important;padding:0!important;width:100%;background:white!important;font-family:Arial,sans-serif;font-size:8pt;line-height:1.22}.topbar,.hero,form,.workflow-note,footer,.no-print,#hesap-paneli,#tekliflerim,.approval{display:none!important}main.wrap{width:100%;max-width:none;margin:0;padding:0}.panel{margin:0;padding:0;border:0;border-radius:0;box-shadow:none}.panel>h2,.panel>.muted,.panel-head{display:none!important}#sonuc{display:block!important;width:100%;margin:0;padding:0;border:0;border-radius:0;overflow:visible;font-size:8pt}.doc-head{margin-bottom:7px;padding-bottom:7px}.doc-brand{font-size:15pt}.doc-title h2{font-size:19pt}.doc-title p{font-size:8pt;margin:2px 0}.doc-meta{margin-bottom:7px;gap:6px}.doc-box{padding:6px}.doc-box h3,.doc-section-title{font-size:8pt;margin-bottom:3px}.doc-box p{font-size:8pt;margin:2px 0}.doc-section{margin:7px 0}.doc-section-title{padding-bottom:3px}.doc-description{font-size:8pt;margin:4px 0}th,td{padding:4px;font-size:8pt}.totals{margin-top:5px;font-size:8pt}.total-row{padding:3px 0}.total-final{font-size:14pt;padding:5px 0}.terms{font-size:8pt}.signature-grid{margin-top:8px;gap:8px}.signature{min-height:48px;padding:7px;font-size:8pt}.signature strong{margin-bottom:9px}.doc-foot{margin-top:6px;padding-top:5px;font-size:8pt}.notice{font-size:8pt;padding:5px;margin-top:5px}}
+html,body{width:100%;height:100%;margin:0;overflow:hidden}
+body{background:var(--canvas);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.45;-webkit-font-smoothing:antialiased}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #315ee855;outline-offset:2px}
+[hidden]{display:none!important}
+.topbar{position:fixed;z-index:50;inset:0 0 auto;height:calc(62px + var(--safe-top));padding:var(--safe-top) max(18px,calc((100vw - 560px)/2 + 18px)) 0;background:rgba(255,255,255,.95);border-bottom:1px solid var(--line);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:space-between}
+.logo-wrap{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none}
+.logo-mark{height:36px;width:36px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(140deg,#183867,#315ee8);color:#fff;font-weight:850;font-size:13px;letter-spacing:-.6px;box-shadow:0 5px 13px #315ee833}
+.logo{font-size:15px;font-weight:800;letter-spacing:-.45px}.logo small{display:block;font-size:9px;color:var(--muted);font-weight:650;letter-spacing:.2px;margin-top:-1px}
+.topbar-actions{display:flex;align-items:center;gap:10px}.status-pill{display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;background:#f2f6ff;color:#49618e;font-size:10px;font-weight:750}.status-pill:before{content:"";height:7px;width:7px;border-radius:50%;background:#39ad7d}
+.account-shortcut{height:38px;width:38px;border-radius:50%;border:1px solid var(--line);background:#fff;color:#50617b;display:grid;place-items:center;padding:0}.account-shortcut svg{width:19px;height:19px}
+.app-screen{display:none;position:fixed;z-index:1;top:calc(62px + var(--safe-top));bottom:calc(72px + var(--safe-bottom));left:0;right:0;width:100%;height:calc(100vh - 134px - var(--safe-top) - var(--safe-bottom));height:calc(100dvh - 134px - var(--safe-top) - var(--safe-bottom));max-width:600px;margin:0 auto;padding:14px 18px 16px;overflow:auto;overscroll-behavior:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.app-screen::-webkit-scrollbar{display:none}.app-screen.is-active{display:flex;flex-direction:column}
+.home-screen.is-active{gap:12px;overflow:hidden}
+.home-hero{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;flex:1;min-height:255px;padding:23px 22px 18px;border-radius:25px;color:#fff;background:radial-gradient(circle at 88% 12%,#5680ff80 0,transparent 33%),linear-gradient(145deg,#142c50 0%,#1f4380 58%,#315ee8 100%);box-shadow:0 18px 42px #152d5128}
+.home-hero:before,.home-hero:after{content:"";position:absolute;z-index:-1;border:1px solid #ffffff1c;border-radius:50%;pointer-events:none}.home-hero:before{height:220px;width:220px;right:-80px;top:-74px;box-shadow:0 0 0 26px #ffffff08,0 0 0 54px #ffffff06}.home-hero:after{height:64px;width:64px;right:38px;top:26px;background:#ffffff0a}
+.hero-kicker{display:inline-flex;align-items:center;gap:7px;font-size:10px;text-transform:uppercase;letter-spacing:1.1px;font-weight:800;color:#c9d9ff}.hero-kicker:before{content:"";width:6px;height:6px;border-radius:50%;background:#7ee0bd;box-shadow:0 0 0 4px #7ee0bd22}
+.home-copy{max-width:420px}.home-copy h1{margin:18px 0 9px;font-size:clamp(29px,8vw,38px);line-height:1.08;letter-spacing:-1.25px;max-width:360px}.home-copy p{margin:0;max-width:350px;font-size:13px;line-height:1.55;color:#d5e1f6}
+.hero-cta{width:100%;min-height:50px;margin-top:18px;padding:12px 16px;border:0;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:9px;background:#fff;color:#2144a6;font-weight:800;font-size:14px;box-shadow:0 8px 20px #0719342b;transition:transform .15s,box-shadow .15s}.hero-cta:hover{transform:translateY(-1px);box-shadow:0 12px 24px #07193438}.hero-cta .plus{height:24px;width:24px;border-radius:8px;display:grid;place-items:center;background:#edf2ff;font-size:20px;line-height:1}
+.hero-foot{margin-top:11px;display:flex;align-items:center;gap:7px;color:#dce7fa;font-size:10px;font-weight:650}.hero-foot svg{height:14px;width:14px;color:#91e1c3;flex:none}
+.home-steps{padding:13px 12px;background:#fff;border:1px solid var(--line);border-radius:17px;box-shadow:0 8px 22px #17243b08}.home-steps-title{display:flex;align-items:center;justify-content:space-between;margin:0 2px 10px;font-size:11px;font-weight:800;color:#43536d}.home-steps-title span{color:#8794a8;font-size:9px;font-weight:650}.step-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.step-cell{min-width:0;display:flex;align-items:center;gap:7px;padding:8px 6px;background:#f7f9fc;border-radius:11px}.step-dot{width:23px;height:23px;flex:none;border-radius:8px;display:grid;place-items:center;background:#eaf0ff;color:#315ee8;font-size:10px;font-weight:850}.step-cell span:last-child{font-size:9px;font-weight:750;color:#53627a;line-height:1.2}
+.home-bottom{display:grid;grid-template-columns:1fr;gap:8px}.home-offers-link{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);text-align:left;font-size:12px;font-weight:800;box-shadow:0 5px 14px #17243b05}.home-offers-link small{display:block;margin-top:2px;color:var(--muted);font-size:10px;font-weight:550}.home-offers-link .arrow{color:var(--blue);font-size:19px}
+.bottom-nav{position:fixed;z-index:60;inset:auto 0 0;height:calc(72px + var(--safe-bottom));padding:7px max(10px,calc((100vw - 560px)/2 + 8px)) calc(var(--safe-bottom) + 5px);display:grid;grid-template-columns:repeat(4,1fr);align-items:center;background:rgba(255,255,255,.97);border-top:1px solid var(--line);backdrop-filter:blur(18px)}
+.nav-item{min-width:0;height:54px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px;border:0;border-radius:13px;background:transparent;color:#8792a4;padding:3px 2px;font-size:9px;font-weight:750;transition:color .15s,background .15s}.nav-item svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.nav-item.is-active{color:var(--blue);background:#f0f4ff}.nav-item.nav-new{color:#fff}.nav-new .nav-icon{height:34px;width:44px;margin-top:-13px;display:grid;place-items:center;border-radius:13px;background:linear-gradient(135deg,#315ee8,#5480ff);box-shadow:0 7px 15px #315ee83d}.nav-new svg{width:22px;height:22px}.nav-item.nav-new span:last-child{color:#5c6b83}.nav-item.nav-new.is-active .nav-icon{background:linear-gradient(135deg,#214bcf,#315ee8)}
+.new-screen{padding-top:12px}.screen-topline{display:flex;align-items:center;gap:10px;margin:0 0 10px}.back-button{height:34px;width:34px;display:grid;place-items:center;border:1px solid var(--line);border-radius:11px;background:#fff;color:#52617a;padding:0}.back-button svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.screen-topline strong{font-size:13px;letter-spacing:-.2px}
+.panel{padding:17px 16px 15px;background:var(--surface);border:1px solid var(--line);border-radius:21px;box-shadow:var(--shadow)}
+.panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}.panel-kicker{display:block;margin-bottom:4px;color:var(--blue);font-size:9px;font-weight:850;text-transform:uppercase;letter-spacing:1px}.panel-head h2{margin:0;font-size:19px;line-height:1.2;letter-spacing:-.5px}.panel-head .muted{margin:4px 0 0;color:var(--muted);font-size:10px}.secure-pill{flex:none;display:inline-flex;align-items:center;gap:5px;padding:6px 8px;border:1px solid #d8f0e5;background:#f1fbf7;color:#247456;border-radius:999px;font-size:9px;font-weight:750;white-space:nowrap}.secure-pill:before{content:"";width:6px;height:6px;border-radius:50%;background:#36ad7c}
+.wizard-progress{height:4px;margin:0 0 12px;overflow:hidden;border-radius:999px;background:#edf1f7}.wizard-progress span{display:block;width:25%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#315ee8,#6d8fff);transition:width .22s ease}
+.form-step{display:none}.form-step.is-current{display:block}.form-step h3{margin:0 0 4px;font-size:15px;letter-spacing:-.25px}.form-intro{margin:0 0 9px;color:var(--muted);font-size:10px}
+label{display:block;margin:9px 0 4px;color:#384860;font-size:10px;font-weight:750}input,textarea,select{width:100%;min-height:41px;padding:9px 10px;border:1px solid #dce3ed;border-radius:10px;background:#fff;color:var(--ink);font-size:13px;transition:border-color .15s,box-shadow .15s}input::placeholder,textarea::placeholder{color:#9aa6b6}input:focus,textarea:focus,select:focus{outline:none;border-color:#7191f1;box-shadow:0 0 0 3px #315ee817}textarea{min-height:74px;resize:vertical;line-height:1.45}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}.grid .full{grid-column:1/-1}.input-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}.optional-fields{margin-top:10px;border:1px solid #e6ebf3;border-radius:11px;background:#fafbfd}.optional-fields summary{padding:10px 11px;color:#52617a;font-size:10px;font-weight:750;cursor:pointer;list-style:none}.optional-fields summary::-webkit-details-marker{display:none}.optional-fields summary:after{content:"＋";float:right;color:var(--blue);font-size:14px;line-height:12px}.optional-fields[open] summary:after{content:"−"}.optional-body{padding:0 10px 10px}.help{margin:6px 0 0;color:var(--muted);font-size:10px;line-height:1.4}.notice{margin:10px 0;padding:9px 10px;border:1px solid #f0dfb6;border-radius:10px;background:#fff9eb;color:#7d5d22;font-size:9px;line-height:1.4}.confirm{display:flex;align-items:flex-start;gap:8px;margin:11px 0;color:#46546b;font-size:10px;font-weight:600;line-height:1.4}.confirm input{flex:0 0 17px;width:17px;min-height:17px;height:17px;margin:1px 0 0;accent-color:var(--blue)}
+.wizard-actions{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding-top:10px;border-top:1px solid #edf0f5}.wizard-actions button{min-height:42px;padding:10px 14px;border:0;border-radius:11px;font-size:12px;font-weight:800}.wizard-actions .primary{margin-left:auto;background:var(--blue);color:#fff;box-shadow:0 5px 13px #315ee82a}.wizard-actions .primary:hover{background:var(--blue-dark)}.wizard-actions .secondary{background:#edf2fc;color:#455b82}.wizard-actions .step-caption{font-size:9px;color:#8591a3;font-weight:700}
+button{border:0}.primary{background:var(--blue);color:#fff}.secondary{background:#eef3ff;color:var(--blue)}
+.approval{display:none;margin-top:10px;padding:16px;background:#fff;border:1px solid #c7d4ff;border-radius:18px;box-shadow:var(--shadow)}.approval h3{margin:0 0 4px;color:var(--navy);font-size:16px}.approval>.help{font-size:10px}.approval-summary{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:12px 0;font-size:10px}.approval-summary div{padding:9px;background:#f8faff;border:1px solid #e7ebf5;border-radius:10px;overflow-wrap:anywhere}.approval-summary strong{color:#56647a}.approval-status{min-height:18px;color:#334155;font-size:11px}.approval .actions{display:flex;gap:8px;margin-top:10px}.approval .actions button{flex:1;min-height:42px;padding:9px 12px;font-size:11px}.approval .primary{background:var(--blue);color:#fff}.approval .secondary{background:#eef3ff;color:var(--blue)}
+.result{display:none;margin-top:10px;padding:16px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow-x:auto}.doc-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;border-bottom:3px solid var(--blue);padding-bottom:10px;margin-bottom:11px}.doc-brand{font-size:19px;font-weight:850;color:var(--blue);overflow-wrap:anywhere}.doc-sub{font-size:9px;color:var(--muted)}.doc-title{text-align:right}.doc-title h2{font-size:21px;letter-spacing:1px;color:var(--blue);margin:0}.doc-title p{font-size:9px;color:var(--muted);margin:3px 0}.doc-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.doc-box{min-width:0;border:1px solid var(--line);border-radius:9px;padding:9px}.doc-box h3,.doc-section-title{font-size:9px;color:var(--blue);letter-spacing:.4px;margin:0 0 5px;text-transform:uppercase}.doc-box p{font-size:10px;margin:2px 0;white-space:pre-wrap;overflow-wrap:anywhere}.doc-section{margin:10px 0}.doc-section-title{border-bottom:1px solid var(--line);padding-bottom:4px}.doc-description{white-space:pre-wrap;font-size:10px;margin:6px 0}table{width:100%;border-collapse:collapse;font-size:9px}th{background:#eef3fb;color:var(--blue);text-align:left}th,td{padding:6px;border:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}.num{text-align:right;white-space:nowrap}.totals{width:min(100%,300px);margin:8px 0 0 auto;font-size:10px}.total-row{display:flex;justify-content:space-between;gap:12px;padding:4px 0;border-bottom:1px solid var(--line)}.total-final{font-size:15px;font-weight:850;color:var(--blue);border-bottom:3px solid var(--blue);padding:7px 0}.terms{font-size:9px}.signature-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.signature{border:1px solid var(--line);border-radius:8px;padding:8px;min-height:52px;font-size:9px}.signature strong{display:block;color:var(--blue);margin-bottom:10px}.doc-foot{border-top:1px solid var(--line);padding-top:6px;margin-top:8px;font-size:8px;color:var(--muted);text-align:center}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.actions button{flex:1;min-height:42px;padding:10px 12px;border-radius:11px;font-size:11px;font-weight:800}.no-print .primary{background:var(--blue);color:#fff}.no-print .secondary{background:#eef3ff;color:var(--blue)}
+.account-screen{padding-top:22px}.account-card{padding:19px;background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}.account-screen h1,.offers-screen h1{margin:0;font-size:23px;letter-spacing:-.6px}.screen-description{margin:5px 0 15px;color:var(--muted);font-size:11px}.account-screen label{font-size:11px}.account-screen input{min-height:46px}.account-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.account-actions button{min-height:44px;border-radius:11px;font-size:11px;font-weight:800}.account-actions #hesap-cikis{grid-column:1/-1;background:#f4f6fa;color:#56647b}.account-help{margin-top:12px;padding:10px 12px;border-radius:12px;background:#f5f7fb;color:#65738a;font-size:10px}
+.offers-screen{padding-top:20px}.offers-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px}.offers-head .muted{margin:4px 0 0;color:var(--muted);font-size:10px}.refresh-button{flex:none;min-height:36px;padding:8px 11px;border-radius:10px;background:#eaf0ff;color:var(--blue);font-size:10px;font-weight:800}.offer-list{height:calc(100% - 78px);min-height:180px;overflow:auto;overscroll-behavior:contain;scrollbar-width:none}.offer-list::-webkit-scrollbar{display:none}.empty-state{padding:18px 14px;border:1px dashed #ccd6e5;border-radius:14px;background:#fff;color:var(--muted);font-size:11px;text-align:center}
+#teklifListesi .teklif-karti{margin:8px 0;padding:13px;border:1px solid var(--line);border-radius:14px;background:#fff;box-shadow:0 5px 16px #17203307}#teklifListesi .teklif-karti h3{margin:0 0 5px;font-size:13px}#teklifListesi .teklif-karti p{margin:3px 0;color:var(--muted);font-size:10px}#teklifListesi .teklif-ac{width:100%;min-height:38px;margin-top:8px;border:0;border-radius:10px;background:#eef3ff;color:var(--blue);font-size:10px;font-weight:800}
+@media(min-width:700px){.app-screen{padding-left:24px;padding-right:24px}.home-screen.is-active{padding-top:22px;padding-bottom:22px}.home-hero{padding:28px 30px}.home-copy h1{font-size:40px}.home-steps{padding:16px}.step-cell span:last-child{font-size:10px}.panel{padding:20px}.form-step h3{font-size:17px}.form-step label{font-size:11px}.form-step input,.form-step select{min-height:44px}.new-screen{max-width:680px}}
+@media(max-height:700px){.home-screen.is-active{gap:8px;padding-top:9px;padding-bottom:9px}.home-hero{min-height:220px;padding:18px 19px 14px}.home-copy h1{margin:12px 0 6px;font-size:29px}.home-copy p{font-size:11px}.hero-cta{min-height:43px;margin-top:12px}.hero-foot{margin-top:7px}.home-steps{padding:9px}.home-steps-title{margin-bottom:6px}.step-cell{padding:6px}.step-dot{height:20px;width:20px}.home-offers-link{padding:9px 12px}.new-screen{padding-top:8px;padding-bottom:0}.screen-topline{margin-bottom:6px}.panel{padding:13px 14px 11px}.panel-head{margin-bottom:7px}.wizard-progress{margin-bottom:8px}.form-step label{margin-top:7px}.form-step input,.form-step select{min-height:37px;padding:7px 9px}.form-step textarea{min-height:58px}.optional-fields summary{padding:8px 9px}.wizard-actions{margin-top:8px;padding-top:7px}.wizard-actions button{min-height:38px}}
+@media(max-width:360px){.app-screen{padding-left:12px;padding-right:12px}.topbar{padding-left:13px;padding-right:13px}.home-hero{padding-left:17px;padding-right:17px}.home-copy h1{font-size:28px}.step-cell{gap:5px;padding:6px 4px}.step-cell span:last-child{font-size:8px}.secure-pill{font-size:8px;padding:5px 6px}.panel{padding:12px}.grid,.input-pair{gap:0 7px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+@media print{@page{size:A4;margin:7mm}html,body{height:auto!important;overflow:visible!important;background:#fff!important;font-family:Arial,sans-serif;font-size:8pt;line-height:1.22}.topbar,.bottom-nav,.app-screen:not(.new-screen),.screen-topline,.panel-head,.wizard-progress,#teklifFormu,.approval,.no-print{display:none!important}.app-screen.new-screen{position:static!important;display:block!important;width:100%;height:auto!important;min-height:0!important;max-width:none;margin:0;padding:0;overflow:visible}.panel{margin:0;padding:0;border:0;border-radius:0;box-shadow:none}.result{display:block!important;width:100%;margin:0;padding:0;border:0;border-radius:0;overflow:visible}.doc-head{margin-bottom:7px;padding-bottom:7px}.doc-brand{font-size:15pt}.doc-title h2{font-size:19pt}.doc-title p{font-size:8pt;margin:2px 0}.doc-meta{margin-bottom:7px;gap:6px}.doc-box{padding:6px}.doc-box h3,.doc-section-title{font-size:8pt;margin-bottom:3px}.doc-box p{font-size:8pt;margin:2px 0}.doc-section{margin:7px 0}.doc-section-title{padding-bottom:3px}th,td{padding:4px;font-size:8pt}.totals{margin-top:5px;font-size:8pt}.total-row{padding:3px 0}.total-final{font-size:14pt;padding:5px 0}.terms{font-size:8pt}.signature-grid{margin-top:8px;gap:8px}.signature{min-height:48px;padding:7px;font-size:8pt}.signature strong{margin-bottom:9px}.doc-foot{margin-top:6px;padding-top:5px;font-size:8pt}}
 </style>
 </head>
 <body>
-<header class="topbar"><div class="topbar-inner">
-<a class="logo-wrap" href="#ust" aria-label="TeklifPilot ana sayfa"><span class="logo-mark">T</span><span class="logo">TeklifPilot AI<small>Akıllı teklif çalışma alanı</small></span></a>
-<nav class="nav-links" aria-label="Ana menü"><a class="nav-optional" href="#tekliflerim">Tekliflerim</a><a class="nav-optional" href="#hesap-paneli">Hesabım</a><a class="header-cta" href="#teklif">＋ Yeni teklif</a></nav>
-</div></header>
-<section class="hero" id="ust"><div class="hero-card"><div class="hero-content">
-<span class="hero-badge"><span>✦</span> Teklif yönetimi, daha kolay</span>
-<h1>İyi bir teklif, iyi bir başlangıçtır.</h1>
-<p>Müşteri bilgilerini ve hizmet kapsamını gir. Teklifini kaydetmeden önce gözden geçirip onayla.</p>
-<div class="hero-steps" aria-label="Teklif hazırlama adımları"><span class="hero-step"><span class="step-dot">1</span> Bilgileri gir</span><span class="hero-step"><span class="step-dot">2</span> Taslağı incele</span><span class="hero-step"><span class="step-dot">3</span> Onayla ve kaydet</span></div>
-</div></div></section>
+<header class="topbar">
+<a class="logo-wrap" data-go="home" href="#home" aria-label="TeklifPilot ana sayfa"><span class="logo-mark">TP</span><span class="logo">TeklifPilot<small>Teklif çalışma alanı</small></span></a>
+<div class="topbar-actions"><span class="status-pill" id="headerState">Güvenli alan</span><button class="account-shortcut" type="button" data-go="account" aria-label="Hesabım"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.7-3.5 3-5.3 7-5.3s6.3 1.8 7 5.3"/></svg></button></div>
+</header>
+<section class="app-screen home-screen is-active" id="home-screen" data-screen="home" aria-labelledby="homeTitle">
+<div class="home-hero"><div class="hero-kicker">TeklifPilot · İşin kolay yolu</div><div class="home-copy"><h1 id="homeTitle">İyi bir teklif,<br>net bir başlangıç.</h1><p>Müşterini ve hizmetini ekle. Teklifini önce kontrol et, sonra güvenle kaydet.</p></div><div><button class="hero-cta" type="button" data-go="new"><span class="plus" aria-hidden="true">＋</span>Yeni teklif hazırla</button><div class="hero-foot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3 5 6v5c0 4.8 2.9 8.2 7 10 4.1-1.8 7-5.2 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>Sen onaylamadan hiçbir teklif kaydedilmez</div></div></div>
+<div class="home-steps"><div class="home-steps-title">Kısa ve güvenli akış <span>3 adım</span></div><div class="step-row"><div class="step-cell"><span class="step-dot">1</span><span>Bilgileri<br>gir</span></div><div class="step-cell"><span class="step-dot">2</span><span>Taslağı<br>incele</span></div><div class="step-cell"><span class="step-dot">3</span><span>Onayla ve<br>kaydet</span></div></div></div>
+<div class="home-bottom"><button class="home-offers-link" type="button" data-go="offers"><span>Tekliflerim<small>Kayıtlı tekliflerini görüntüle</small></span><span class="arrow" aria-hidden="true">›</span></button></div>
+</section>
 
-<main class="wrap" id="teklif">
-<section class="panel">
-<div class="panel-head"><div><span class="panel-kicker">Yeni çalışma</span><h2>Teklif bilgileri</h2><p class="muted">Bilgileri doldur; kaydetmeden önce taslağı inceleyebilirsin.</p></div><span class="secure-pill">Kaydetmeden önce onay gerekir</span></div>
+<section class="app-screen new-screen" id="new-screen" data-screen="new" aria-label="Yeni teklif">
+<div class="screen-topline"><button class="back-button" type="button" data-go="home" aria-label="Ana sayfaya dön"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/><path d="M9 12h11"/></svg></button><strong>Yeni teklif</strong></div>
+<section class="panel"><div class="panel-head" id="wizardHead"><div><span class="panel-kicker" id="wizardKicker">ADIM 1 / 4</span><h2 id="wizardTitle">Firma bilgileri</h2><p class="muted" id="wizardHint">Teklifte görünecek firma adını yaz.</p></div><span class="secure-pill">Onaysız kayıt yok</span></div><div class="wizard-progress" role="progressbar" aria-label="Teklif hazırlama adımı" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1"><span id="wizardProgress" style="width:25%"></span></div>
 <form id="teklifFormu">
-<h3>Firma bilgileri</h3>
-<div class="grid">
-<div><label for="firma">Firma / işletme adı *</label><input id="firma" required maxlength="120" placeholder="Firmanızın adı"></div>
-<div><label for="firmaTelefon">Firma telefonu</label><input id="firmaTelefon" maxlength="40" placeholder="Telefon numarası"></div>
-<div><label for="firmaEmail">Firma e-posta adresi</label><input id="firmaEmail" type="email" maxlength="120" placeholder="ornek@firma.com"></div>
-<div><label for="firmaVergi">Vergi dairesi / numarası</label><input id="firmaVergi" maxlength="120" placeholder="İsteğe bağlı"></div>
+<div class="form-step is-current" data-step="1" aria-label="Firma bilgileri">
+<label for="firma">Firma / işletme adı *</label><input id="firma" required maxlength="120" placeholder="Firmanızın adı" autocomplete="organization">
+<details class="optional-fields"><summary>İletişim ve vergi bilgileri ekle</summary><div class="optional-body">
+<div class="grid"><div><label for="firmaTelefon">Firma telefonu</label><input id="firmaTelefon" maxlength="40" placeholder="Telefon numarası" autocomplete="tel"></div><div><label for="firmaEmail">Firma e-posta adresi</label><input id="firmaEmail" type="email" maxlength="120" placeholder="ornek@firma.com" autocomplete="email"></div><div class="full"><label for="firmaVergi">Vergi dairesi / numarası</label><input id="firmaVergi" maxlength="120" placeholder="İsteğe bağlı"></div><div class="full"><label for="firmaAdres">Firma adresi</label><textarea id="firmaAdres" maxlength="500" placeholder="Firma adresi (isteğe bağlı)" rows="2"></textarea></div></div>
+</div></details>
 </div>
-<label for="firmaAdres">Firma adresi</label><textarea id="firmaAdres" maxlength="500" placeholder="Firma adresi (isteğe bağlı)" style="min-height:65px"></textarea>
-
-<hr><h3>Müşteri ve proje bilgileri</h3>
-<div class="grid">
-<div><label for="sektor">Sektör *</label><input id="sektor" required maxlength="100" placeholder="Örn. İnşaat, emlak"></div>
-<div><label for="musteri">Müşteri / firma adı *</label><input id="musteri" required maxlength="120" placeholder="Müşteri adı"></div>
-<div><label for="telefon">Müşteri telefonu</label><input id="telefon" type="tel" maxlength="30" placeholder="05XX XXX XX XX"></div>
-<div><label for="projeAdres">Proje / uygulama adresi</label><input id="projeAdres" maxlength="250" placeholder="İşin yapılacağı adres"></div>
+<div class="form-step" data-step="2" aria-label="Müşteri bilgileri">
+<label for="sektor">Sektör *</label><input id="sektor" required maxlength="100" placeholder="Örn. İnşaat, emlak">
+<label for="musteri">Müşteri / firma adı *</label><input id="musteri" required maxlength="120" placeholder="Müşteri adı" autocomplete="organization">
+<details class="optional-fields"><summary>Telefon ve proje adresi ekle</summary><div class="optional-body"><div class="grid"><div class="full"><label for="telefon">Müşteri telefonu</label><input id="telefon" type="tel" maxlength="30" placeholder="05XX XXX XX XX" autocomplete="tel"></div><div class="full"><label for="projeAdres">Proje / uygulama adresi</label><input id="projeAdres" maxlength="250" placeholder="İşin yapılacağı adres"></div></div></div></details>
 </div>
-
-<hr><h3>Ürün / hizmet kapsamı</h3>
+<div class="form-step" data-step="3" aria-label="Hizmet ve fiyat bilgileri">
 <label for="hizmet">Ürün veya hizmet adı *</label><input id="hizmet" required maxlength="200" placeholder="Örn. Cam balkon sistemi">
-<label for="detay">Teknik özellikler ve iş kapsamı</label>
-<textarea id="detay" maxlength="3000" placeholder="Malzeme, ölçüler, yapılacak işler ve kapsam..."></textarea>
-<button class="secondary" type="button" id="otomatikMetinBtn" style="width:100%;margin-top:10px">✨ Ücretsiz Teklif Açıklaması Hazırla</button>
-<p id="otomatikMetinDurum" aria-live="polite" class="help"></p>
-
-<div class="grid">
-<div><label for="miktar">Miktar *</label><input id="miktar" type="number" min="0.01" step="0.01" value="1" required></div>
-<div><label for="birim">Birim</label><select id="birim"><option value="adet">Adet</option><option value="m²">m²</option><option value="metre">Metre</option><option value="saat">Saat</option><option value="gün">Gün</option><option value="iş">İş / Proje</option><option value="paket">Paket</option></select></div>
-<div><label for="birimFiyat">Birim fiyat (TL) *</label><input id="birimFiyat" type="number" min="0.01" step="0.01" required placeholder="Örn. 25000"></div>
-<div><label for="kdvOran">KDV oranı *</label><select id="kdvOran" required><option value="">Önce doğru oranı seçin</option><option value="1">%1</option><option value="10">%10</option><option value="20">%20</option></select></div>
-<div><label for="kdvDurum">Fiyatın KDV durumu *</label><select id="kdvDurum" required><option value="KDV hariç">KDV hariç</option><option value="KDV dahil">KDV dahil</option></select></div>
-<div><label for="odeme">Ödeme koşulları</label><input id="odeme" maxlength="250" placeholder="Örn. 6 eşit taksit"></div>
-<div><label for="teslimat">Teslimat süresi</label><input id="teslimat" maxlength="250" placeholder="Örn. 40 takvim günü"></div>
-<div><label for="garanti">Garanti koşulları</label><input id="garanti" maxlength="250" placeholder="Varsa garanti süresi ve kapsamı"></div>
+<details class="optional-fields"><summary>Teknik kapsamı ve açıklamayı ekle</summary><div class="optional-body"><label for="detay">Teknik özellikler ve iş kapsamı</label><textarea id="detay" maxlength="3000" placeholder="Malzeme, ölçüler, yapılacak işler ve kapsam..." rows="3"></textarea><button class="secondary" type="button" id="otomatikMetinBtn" style="width:100%;margin-top:8px">Teklif açıklaması hazırla</button><p id="otomatikMetinDurum" aria-live="polite" class="help"></p></div></details>
+<div class="grid"><div><label for="miktar">Miktar *</label><input id="miktar" type="number" min="0.01" step="0.01" value="1" required inputmode="decimal"></div><div><label for="birim">Birim</label><select id="birim"><option value="adet">Adet</option><option value="m²">m²</option><option value="metre">Metre</option><option value="saat">Saat</option><option value="gün">Gün</option><option value="iş">İş / Proje</option><option value="paket">Paket</option></select></div><div class="full"><label for="birimFiyat">Birim fiyat (TL) *</label><input id="birimFiyat" type="number" min="0.01" step="0.01" required placeholder="Örn. 25000" inputmode="decimal"></div><div><label for="kdvOran">KDV oranı *</label><select id="kdvOran" required><option value="">Oranı seç</option><option value="1">%1</option><option value="10">%10</option><option value="20">%20</option></select></div><div><label for="kdvDurum">Fiyat durumu *</label><select id="kdvDurum" required><option value="KDV hariç">KDV hariç</option><option value="KDV dahil">KDV dahil</option></select></div></div>
 </div>
-<div class="notice">KDV oranını hizmetinize ve işlem koşullarınıza göre doğrulayın. Listede uygun oran yoksa yanlış bir oran seçmeyin; teklif oluşturmadan önce oranı netleştirin.</div>
-<label for="kosullar">Ek ticari koşullar / kapsam dışı işler</label>
-<textarea id="kosullar" maxlength="1500" placeholder="Nakliye, montaj, istisnalar veya diğer koşullar" style="min-height:70px"></textarea>
-<label for="gecerlilik">Teklif geçerlilik süresi</label>
-<select id="gecerlilik"><option value="3">3 gün</option><option value="7" selected>7 gün</option><option value="15">15 gün</option><option value="30">30 gün</option></select>
-<label class="confirm"><input id="kdvOnay" type="checkbox" required><span>Seçtiğim KDV oranının bu ürün veya hizmet için uygun olduğunu kontrol ettim.</span></label>
+<div class="form-step" data-step="4" aria-label="Ticari koşullar ve kontrol">
+<div class="grid"><div><label for="odeme">Ödeme koşulları</label><input id="odeme" maxlength="250" placeholder="Örn. 6 eşit taksit"></div><div><label for="teslimat">Teslimat süresi</label><input id="teslimat" maxlength="250" placeholder="Örn. 40 gün"></div><div class="full"><label for="gecerlilik">Teklif geçerlilik süresi</label><select id="gecerlilik"><option value="3">3 gün</option><option value="7" selected>7 gün</option><option value="15">15 gün</option><option value="30">30 gün</option></select></div></div>
+<details class="optional-fields"><summary>Garanti ve ek ticari koşullar</summary><div class="optional-body"><label for="garanti">Garanti koşulları</label><input id="garanti" maxlength="250" placeholder="Varsa garanti süresi ve kapsamı"><label for="kosullar">Ek ticari koşullar / kapsam dışı işler</label><textarea id="kosullar" maxlength="1500" placeholder="Nakliye, montaj, istisnalar veya diğer koşullar" rows="2"></textarea></div></details>
+<div class="notice">KDV oranının doğru olduğundan emin ol.</div>
+<label class="confirm"><input id="kdvOnay" type="checkbox" required><span>Seçtiğim KDV oranının uygun olduğunu kontrol ettim.</span></label>
 <p id="hesapOnizleme" class="help">Miktar ve birim fiyat girildiğinde toplam gösterilir.</p>
-<div class="actions"><button class="primary" type="submit">Taslak Hazırla</button></div>
+</div>
+<div class="wizard-actions"><button class="secondary" type="button" id="wizardPrev" hidden>Geri</button><span class="step-caption" id="wizardCaption">1 / 4</span><button class="primary" type="button" id="wizardNext">Devam et</button><button class="primary" type="submit" id="wizardSubmit" hidden>Taslağı incele</button></div>
 </form>
 
 <section id="onayPaneli" class="approval" aria-labelledby="onayBaslik" aria-live="polite">
@@ -148,13 +143,10 @@ footer{text-align:center;color:#748097;padding:18px 12px 28px;font-size:11px}
 <p class="terms">Bu teklif, belirtilen ürün/hizmet kapsamı ve ticari koşullar esas alınarak hazırlanmıştır. İşin başlatılması tarafların teklif ve koşulları onaylamasına bağlıdır.</p>
 <div class="signature-grid"><div class="signature"><strong>TEKLİF VEREN</strong>Yetkili adı / imza:</div><div class="signature"><strong>MÜŞTERİ ONAYI</strong>Kabul tarihi / ad / imza:</div></div>
 <div class="doc-foot">Bu belge TeklifPilot AI ile hazırlanmıştır.</div>
-<div class="actions no-print"><button class="primary" type="button" id="pdfBtn">PDF / Yazdır</button><button class="secondary" type="button" id="waBtn">WhatsApp ile paylaş</button></div>
+<div class="actions no-print"><button class="primary" type="button" id="pdfBtn">PDF / Yazdır</button><button class="secondary" type="button" id="waBtn">WhatsApp ile paylaş</button><button class="secondary" type="button" id="yeniTeklifBtn">Yeni teklif</button></div>
 </section>
 </section>
-</main>
-
-<section class="workflow-note"><div class="workflow-note-inner"><span class="workflow-icon">✓</span><span><strong>Güvenli çalışma:</strong> Teklif, sen taslağı onaylayana kadar kaydedilmez. PDF veya WhatsApp paylaşımı da onaylanan teklif üzerinden yapılır.</span></div></section>
-<footer>© 2026 TeklifPilot AI · Teklif hazırlamak artık daha kolay</footer>
+</section>
 
 <script>
 const form=document.getElementById("teklifFormu");
@@ -162,6 +154,30 @@ const sonuc=document.getElementById("sonuc");
 let sonTeklif=null;
 function oku(id){return document.getElementById(id).value.trim();}
 function yaz(id,value){document.getElementById(id).textContent=value||"";}
+let aktifAdim=1;
+const adimBasliklari=["Firma bilgileri","Müşteri bilgileri","Hizmet ve fiyat","Son kontrol"];
+const adimIpuclari=["Teklifte görünecek firma adını yaz.","Teklifin kime sunulacağını belirt.","Ürün/hizmetini ve fiyatını belirle.","Koşulları belirle ve toplamı gözden geçir."];
+const formAdimlari=Array.from(form.querySelectorAll(".form-step"));
+function adimiGoster(numara){
+ aktifAdim=Math.max(1,Math.min(4,numara));
+ formAdimlari.forEach(function(adim){const secili=Number(adim.dataset.step)===aktifAdim;adim.classList.toggle("is-current",secili);adim.setAttribute("aria-hidden",String(!secili));});
+ document.getElementById("wizardKicker").textContent="ADIM "+aktifAdim+" / 4";
+ document.getElementById("wizardTitle").textContent=adimBasliklari[aktifAdim-1];
+ document.getElementById("wizardHint").textContent=adimIpuclari[aktifAdim-1];
+ document.getElementById("wizardCaption").textContent=aktifAdim+" / 4";
+ document.querySelector(".wizard-progress").setAttribute("aria-valuenow",String(aktifAdim));
+ document.getElementById("wizardProgress").style.width=(aktifAdim*25)+"%";
+ document.getElementById("wizardPrev").hidden=aktifAdim===1;
+ document.getElementById("wizardNext").hidden=aktifAdim===4;
+ document.getElementById("wizardSubmit").hidden=aktifAdim!==4;
+}
+function adimiDogrula(numara){
+ const alanlar=Array.from(formAdimlari[numara-1].querySelectorAll("input,select,textarea"));
+ const hatali=alanlar.find(function(alan){return !alan.checkValidity();});
+ if(hatali){hatali.reportValidity();return false;}return true;
+}
+document.getElementById("wizardNext").addEventListener("click",function(){if(adimiDogrula(aktifAdim))adimiGoster(aktifAdim+1);});
+document.getElementById("wizardPrev").addEventListener("click",function(){adimiGoster(aktifAdim-1);});
 function para(n){return Number(n||0).toLocaleString("tr-TR",{minimumFractionDigits:2,maximumFractionDigits:2})+" TL";}
 function sayiyaCevir(value){
  if(value===null||value===undefined)return 0;
@@ -234,8 +250,7 @@ function teklifiGoster(t){
  document.getElementById("rOdemeSatir").style.display=t.odeme?"":"none";
  document.getElementById("rTeslimatSatir").style.display=t.teslimat?"":"none";
  document.getElementById("rGarantiSatir").style.display=t.garanti?"":"none";
- sonuc.style.display="block";
- sonuc.scrollIntoView({behavior:"smooth",block:"start"});
+ form.style.display="none";document.getElementById("wizardHead").style.display="none";onayPaneli.style.display="none";sonuc.style.display="block";
 }
 
 /* Ücretsiz açıklama oluşturucu */
@@ -272,9 +287,10 @@ const onayPaneli=document.getElementById("onayPaneli");
 const taslakOnay=document.getElementById("taslakOnay");
 const uygulaBtn=document.getElementById("taslagiUygula");
 const onayDurum=document.getElementById("onayDurum");
-function taslakTemizle(mesaj){
+function taslakTemizle(mesaj,formuGoster=true){
  bekleyenTaslak=null;taslakOnay.checked=false;uygulaBtn.disabled=true;
  onayPaneli.style.display="none";onayDurum.textContent="";
+ if(formuGoster){form.style.display="";document.getElementById("wizardHead").style.display="";}
  if(mesaj)document.getElementById("otomatikMetinDurum").textContent=mesaj;
 }
 function taslakOzetiGoster(t){
@@ -291,7 +307,7 @@ form.addEventListener("input",function(){if(bekleyenTaslak)taslakTemizle("Form d
 form.addEventListener("change",function(){if(bekleyenTaslak)taslakTemizle("Form değişti; kaydetmeden önce taslağı yeniden hazırlayın.");});
 form.addEventListener("submit",async function(event){
  event.preventDefault();
- if(!form.reportValidity())return;
+ const hatali=form.querySelector(":invalid");if(hatali){const bolum=hatali.closest(".form-step");if(bolum)adimiGoster(Number(bolum.dataset.step));hatali.reportValidity();return;}
  if(!oku("kdvOran")){alert("KDV oranını doğrulamadan teklif kaydedemezsin.");return;}
  if(!document.getElementById("kdvOnay").checked){alert("Devam etmeden önce KDV oranını kontrol ettiğini onayla.");return;}
  const t=formdanTeklif();
@@ -319,11 +335,11 @@ form.addEventListener("submit",async function(event){
   bekleyenTaslak={teklif:t,kayit:kayit,userId:oturum.user.id};
   taslakOzetiGoster(t);taslakOnay.checked=false;uygulaBtn.disabled=true;
   onayDurum.textContent="Taslak hazır. Henüz Supabase'e yazılmadı.";
-  onayPaneli.style.display="block";onayPaneli.scrollIntoView({behavior:"smooth",block:"center"});
+  form.style.display="none";document.getElementById("wizardHead").style.display="none";onayPaneli.style.display="block";
  }catch(e){alert("Taslak hazırlanırken oturum kontrolü yapılamadı. Lütfen tekrar dene.");}
 });
 taslakOnay.addEventListener("change",function(){uygulaBtn.disabled=!taslakOnay.checked||!bekleyenTaslak;});
-document.getElementById("taslagiIptal").addEventListener("click",function(){taslakTemizle("Taslak iptal edildi; veritabanına kayıt yapılmadı.");});
+document.getElementById("taslagiIptal").addEventListener("click",function(){taslakTemizle("Taslak iptal edildi; veritabanına kayıt yapılmadı.");adimiGoster(4);});
 uygulaBtn.addEventListener("click",async function(){
  if(!bekleyenTaslak||!taslakOnay.checked)return;
  const taslak=bekleyenTaslak;uygulaBtn.disabled=true;onayDurum.textContent="Onaylanan taslak kaydediliyor…";
@@ -332,7 +348,7 @@ uygulaBtn.addEventListener("click",async function(){
   if(oturumHatasi||!oturum.user||oturum.user.id!==taslak.userId){taslakTemizle("Oturum değişti veya sona erdi. Taslak güvenlik için iptal edildi.");return;}
   const {error}=await client.from("teklifler").insert(taslak.kayit);
   if(error){uygulaBtn.disabled=false;onayDurum.textContent="Kayıt başarısız: "+error.message;return;}
-  teklifiGoster(taslak.teklif);taslakTemizle("Teklif onaylandı ve kaydedildi.");
+  teklifiGoster(taslak.teklif);taslakTemizle("Teklif onaylandı ve kaydedildi.",false);
   document.getElementById("otomatikMetinDurum").textContent="Teklif başarıyla kaydedildi.";
  }catch(e){uygulaBtn.disabled=true;onayDurum.textContent="Bağlantı hatası; kayıt sonucu belirsiz olabilir. Çift kayıt riskini önlemek için yeniden deneme kapatıldı. Önce teklif listeni kontrol et; gerekirse taslağı iptal edip yeni bir taslak oluştur.";}
 });
@@ -353,54 +369,52 @@ document.getElementById("waBtn").addEventListener("click",function(){
 });
 </script>
 
-<section id="hesap-paneli">
-<h2>TeklifPilot AI Hesabım</h2><p id="hesap-durum">Giriş yapın veya yeni hesap oluşturun.</p>
+<section id="hesap-paneli" class="app-screen account-screen" data-screen="account" aria-labelledby="accountTitle">
+<div class="account-card"><span class="panel-kicker">HESAP</span><h1 id="accountTitle">Hesabın</h1><p class="screen-description">Tekliflerini kendi hesabında güvenle sakla.</p><p id="hesap-durum" class="account-help">Giriş yapın veya yeni hesap oluşturun.</p>
 <label for="hesap-email">E-posta</label><input id="hesap-email" type="email" autocomplete="email" placeholder="ornek@firma.com">
 <label for="hesap-sifre">Şifre</label><input id="hesap-sifre" type="password" autocomplete="current-password" placeholder="En az 6 karakter">
-<div class="actions"><button id="hesap-kayit" class="primary" type="button">Kayıt Ol</button><button id="hesap-giris" class="secondary" type="button">Giriş Yap</button><button id="hesap-cikis" type="button">Çıkış Yap</button></div>
+<div class="account-actions"><button id="hesap-kayit" class="primary" type="button">Kayıt ol</button><button id="hesap-giris" class="secondary" type="button">Giriş yap</button><button id="hesap-cikis" type="button">Çıkış yap</button></div></div>
 </section>
 
 <script>
 (async function(){
  const durum=document.getElementById("hesap-durum"),email=document.getElementById("hesap-email"),sifre=document.getElementById("hesap-sifre");
  function mesaj(y){durum.textContent=y;}
+ function ustDurum(oturumVar){document.getElementById("headerState").textContent=oturumVar?"Hesap bağlı":"Güvenli alan";}
  document.getElementById("hesap-kayit").addEventListener("click",async function(){
   if(!email.value.trim()||sifre.value.length<6){mesaj("E-posta girin ve en az 6 karakterli şifre kullanın.");return;}
   const {data,error}=await client.auth.signUp({email:email.value.trim(),password:sifre.value});
   if(error){mesaj("Kayıt hatası: "+error.message);return;}
-  mesaj(data.session?"Hesap oluşturuldu ve giriş yapıldı.":"Kayıt isteği alındı. E-postanı kontrol et; doğrulama gerekebilir.");
+  mesaj(data.session?"Hesap oluşturuldu ve giriş yapıldı.":"Kayıt isteği alındı. E-postanı kontrol et; doğrulama gerekebilir.");ustDurum(Boolean(data.session));
  });
  document.getElementById("hesap-giris").addEventListener("click",async function(){
   const {data,error}=await client.auth.signInWithPassword({email:email.value.trim(),password:sifre.value});
   if(error){mesaj("Giriş hatası: "+error.message);return;}
-  mesaj("Giriş yapıldı: "+data.user.email);
+  mesaj("Giriş yapıldı: "+data.user.email);ustDurum(true);
  });
  document.getElementById("hesap-cikis").addEventListener("click",async function(){
-  const {error}=await client.auth.signOut();mesaj(error?"Çıkış hatası: "+error.message:"Oturum kapatıldı.");
+  const {error}=await client.auth.signOut();mesaj(error?"Çıkış hatası: "+error.message:"Oturum kapatıldı.");if(!error)ustDurum(false);
  });
  const {data}=await client.auth.getSession();
- if(data.session)mesaj("Giriş yapıldı: "+data.session.user.email);
+ if(data.session){mesaj("Giriş yapıldı: "+data.session.user.email);ustDurum(true);}
 })();
 </script>
 
-<section id="tekliflerim" style="max-width:900px;margin:30px auto;padding:20px">
-<h2>Tekliflerim</h2><p class="muted">Kaydettiğin teklifleri görüntüleyebilirsin.</p>
-<button type="button" id="teklifleriGetir" class="primary">Tekliflerimi Getir</button>
-<div id="teklifListesi" style="margin-top:20px"></div>
-</section>
+<section id="tekliflerim" class="app-screen offers-screen" data-screen="offers" aria-labelledby="offersTitle"><div class="offers-head"><div><span class="panel-kicker">KAYITLI ÇALIŞMALAR</span><h1 id="offersTitle">Tekliflerim</h1><p class="muted">Kaydettiğin teklifleri burada bul.</p></div><button type="button" id="teklifleriGetir" class="refresh-button">Yenile</button></div><div id="teklifListesi" class="offer-list" aria-live="polite"><div class="empty-state">Tekliflerin yükleniyor…</div></div></section>
 
 <script>
 document.getElementById("teklifleriGetir").addEventListener("click",async function(){
  const liste=document.getElementById("teklifListesi");
- liste.textContent="Teklifler yükleniyor...";
+ liste.dataset.loaded="false";liste.textContent="Teklifler yükleniyor...";
  try{
   const {data:oturum,error:oturumHatasi}=await client.auth.getUser();
   if(oturumHatasi||!oturum.user){liste.textContent="Lütfen önce hesabına giriş yap.";return;}
-  const {data,error}=await client.from("teklifler").select("*").eq("user_id",oturum.user.id).order("created_at",{ascending:false});
-  if(error){liste.textContent="Teklifler alınamadı: "+error.message;return;}
-  if(!data||!data.length){liste.textContent="Henüz kayıtlı teklifin yok.";return;}
-  liste.replaceChildren();
-  data.forEach(function(row){
+	  const {data,error}=await client.from("teklifler").select("*").eq("user_id",oturum.user.id).order("created_at",{ascending:false});
+	  if(error){liste.textContent="Teklifler alınamadı: "+error.message;return;}
+	  if(!data||!data.length){const bos=document.createElement("div");bos.className="empty-state";bos.textContent="Henüz kayıtlı teklifin yok. Yeni teklif oluşturarak başlayabilirsin.";liste.replaceChildren(bos);liste.dataset.loaded="true";return;}
+	  liste.replaceChildren();
+	  liste.dataset.loaded="true";
+	  data.forEach(function(row){
    const kart=document.createElement("div");kart.className="teklif-karti";
    const baslik=document.createElement("h3");baslik.textContent=row.musteri||"İsimsiz müşteri";
    const hizmet=document.createElement("p");hizmet.textContent="Ürün / Hizmet: "+(row.hizmet||"-");
@@ -437,12 +451,35 @@ document.getElementById("teklifleriGetir").addEventListener("click",async functi
     if(yeni.kdvTutar===0&&yeni.kdvOran!==null&&yeni.kdvOran>0){
      yeni.kdvTutar=yeni.kdvDurum==="KDV dahil"?genel-yeni.matrah:yeni.matrah*yeni.kdvOran/100;
     }
-    teklifiGoster(yeni);
+    ekranaGit("new");teklifiGoster(yeni);
    });
    kart.append(baslik,hizmet,tutar,tarih,btn);liste.appendChild(kart);
   });
- }catch(e){liste.textContent="Bir hata oluştu. Lütfen tekrar dene.";}
+ }catch(e){liste.textContent="Bir hata oluştu. Lütfen tekrar dene.";liste.dataset.loaded="false";}
 });
+</script>
+<nav class="bottom-nav" aria-label="Uygulama menüsü">
+<button class="nav-item is-active" type="button" data-go="home" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9M9 20v-6h6v6"/></svg><span>Ana sayfa</span></button>
+<button class="nav-item" type="button" data-go="offers"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v5h5M9 12h7M9 16h7"/></svg><span>Teklifler</span></button>
+<button class="nav-item nav-new" type="button" data-go="new"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span>Yeni teklif</span></button>
+<button class="nav-item" type="button" data-go="account"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.7-3.5 3-5.3 7-5.3s6.3 1.8 7 5.3"/></svg><span>Hesap</span></button>
+</nav>
+<script>
+const ekranlar=Array.from(document.querySelectorAll(".app-screen"));
+const menuOgeleri=Array.from(document.querySelectorAll(".nav-item"));
+function yeniTeklifBaslat(){
+ form.reset();document.getElementById("kdvOnay").checked=false;document.getElementById("miktar").value="1";document.getElementById("gecerlilik").value="7";
+ document.getElementById("hesapOnizleme").textContent="Miktar ve birim fiyat girildiğinde toplam gösterilir.";
+ document.getElementById("otomatikMetinDurum").textContent="";onayPaneli.style.display="none";sonuc.style.display="none";form.style.display="";document.getElementById("wizardHead").style.display="";adimiGoster(1);
+}
+function ekranaGit(ad){
+ if(ad==="new"&&form.style.display==="none"&&sonuc.style.display==="block")yeniTeklifBaslat();
+ ekranlar.forEach(function(e){e.classList.toggle("is-active",e.dataset.screen===ad);});
+ menuOgeleri.forEach(function(b){const secili=b.dataset.go===ad;b.classList.toggle("is-active",secili);if(secili)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current");});
+ if(ad==="offers"&&document.getElementById("teklifListesi").dataset.loaded!=="true")document.getElementById("teklifleriGetir").click();
+}
+document.querySelectorAll("[data-go]").forEach(function(b){b.addEventListener("click",function(e){e.preventDefault();ekranaGit(b.dataset.go);});});
+document.getElementById("yeniTeklifBtn").addEventListener("click",function(){yeniTeklifBaslat();ekranaGit("new");});
 </script>
 </body>
 </html>
