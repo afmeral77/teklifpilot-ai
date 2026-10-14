@@ -12,122 +12,59 @@ const SUPABASE_KEY="sb_publishable_s10Fz4cCqyYKLkmtvBE-1g_ZGiKu9HN";
 const client=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 </script>
 <style>
-:root{--blue:#173f8a;--ink:#172033;--muted:#64748b;--line:#dbe3ef;--bg:#f3f6fb}
+:root{--navy:#142c50;--blue:#2756d8;--blue-dark:#1d43b3;--ink:#17243b;--muted:#63728a;--line:#e0e7f0;--bg:#f5f7fb;--white:#fff;--mint:#dff7ef;--green:#16805d;--shadow:0 18px 50px rgba(20,44,80,.07)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,sans-serif;line-height:1.45}
-header{background:white;border-bottom:1px solid var(--line);padding:16px 5%;display:flex;justify-content:space-between;align-items:center;gap:12px}
-.logo{font-size:21px;font-weight:800;color:var(--blue)}
-header a{color:var(--blue);text-decoration:none;font-weight:bold;font-size:14px}
-.hero{text-align:center;padding:28px 16px 18px}
-.hero h1{font-size:clamp(26px,5vw,38px);margin:0 0 8px;line-height:1.2}
-.hero p{color:var(--muted);margin:auto;max-width:650px}
-.wrap{max-width:850px;padding:16px;margin:auto}
-.panel{background:white;border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 5px 20px #1720330a}
-h2{font-size:22px;margin:0 0 6px}
-h3{font-size:16px;margin:0 0 6px}
-.muted{color:var(--muted);font-size:14px;margin:0 0 18px}
-label{display:block;font-size:14px;font-weight:bold;margin:13px 0 6px}
-input,textarea,select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:8px;font:inherit;font-size:16px;background:white;color:var(--ink)}
-textarea{min-height:85px;resize:vertical}
-input:focus,textarea:focus,select:focus{outline:2px solid #93c5fd;border-color:#2457ad}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
-button{font:inherit;font-weight:bold;border:0;border-radius:8px;padding:12px 16px;cursor:pointer}
-button:disabled{opacity:.55;cursor:not-allowed}
-.primary{background:var(--blue);color:white}
-.secondary{background:#e8efff;color:var(--blue)}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-.actions button{flex:1}
-.help{font-size:12px;color:var(--muted);margin-top:5px}
-.notice{font-size:12px;padding:9px;border:1px solid #fed7aa;background:#fff7ed;color:#92400e;border-radius:7px;margin:8px 0}
-.confirm{display:flex;gap:9px;align-items:flex-start;font-size:13px;font-weight:normal;line-height:1.4;margin:12px 0}
-.confirm input{width:18px;height:18px;flex:0 0 18px;margin:1px 0}
-hr{border:0;border-top:1px solid var(--line);margin:15px 0}
-.result{display:none;background:white;border:1px solid var(--line);border-radius:12px;padding:24px;margin-top:22px;overflow-wrap:anywhere}
-.doc-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;border-bottom:3px solid var(--blue);padding-bottom:10px;margin-bottom:11px}
-.doc-brand{font-size:20px;font-weight:800;color:var(--blue);overflow-wrap:anywhere}
-.doc-sub{font-size:10px;color:var(--muted)}
-.doc-title{text-align:right}
-.doc-title h2{font-size:24px;letter-spacing:1px;color:var(--blue);margin:0}
-.doc-title p{font-size:10px;color:var(--muted);margin:3px 0}
-.doc-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
-.doc-box{border:1px solid var(--line);border-radius:8px;padding:9px;min-width:0}
-.doc-box h3,.doc-section-title{font-size:10px;color:var(--blue);letter-spacing:.4px;margin:0 0 5px;text-transform:uppercase}
-.doc-box p{font-size:11px;margin:2px 0;white-space:pre-wrap;overflow-wrap:anywhere}
-.doc-section{margin:11px 0}
-.doc-section-title{border-bottom:1px solid var(--line);padding-bottom:4px}
-.doc-description{white-space:pre-wrap;font-size:11px;margin:6px 0}
-table{width:100%;border-collapse:collapse;font-size:10px}
-th{background:#eef3fb;color:var(--blue);text-align:left}
-th,td{padding:6px;border:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}
-.num{text-align:right;white-space:nowrap}
-.totals{width:min(100%,330px);margin:8px 0 0 auto;font-size:11px}
-.total-row{display:flex;justify-content:space-between;gap:12px;padding:4px 0;border-bottom:1px solid var(--line)}
-.total-final{font-size:17px;font-weight:800;color:var(--blue);border-bottom:3px solid var(--blue);padding:7px 0}
-.terms{font-size:10px}
-.signature-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.signature{border:1px solid var(--line);border-radius:8px;padding:8px;min-height:58px;font-size:10px}
-.signature strong{display:block;color:var(--blue);margin-bottom:13px}
-.doc-foot{border-top:1px solid var(--line);padding-top:6px;margin-top:8px;font-size:9px;color:var(--muted);text-align:center}
-#teklifListesi .teklif-karti{background:white;border:1px solid var(--line);border-radius:10px;padding:15px;margin:12px 0}
-#teklifListesi .teklif-karti h3{margin:0 0 7px}
-#teklifListesi .teklif-karti p{margin:4px 0}
-#teklifListesi .teklif-ac{background:var(--blue);color:white;width:100%;margin-top:10px}
-.features{max-width:900px;margin:24px auto 40px;padding:0 16px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.feature{background:white;border:1px solid var(--line);border-radius:10px;padding:16px}
-.feature h3{font-size:15px;margin:0 0 5px}
-.feature p{font-size:13px;color:var(--muted);margin:0}
-footer{text-align:center;background:#111827;color:#cbd5e1;padding:24px 12px;font-size:12px}
-#hesap-paneli{max-width:650px;margin:30px auto;padding:20px;background:white;border:1px solid var(--line);border-radius:14px}
-@media(max-width:560px){
- .grid,.features{grid-template-columns:1fr}
- .panel{padding:15px}
- .doc-head{gap:8px}
- .doc-brand{font-size:16px}
- .doc-title h2{font-size:20px}
- .result{padding:14px}
- .doc-box{padding:7px}
- .actions{flex-direction:column}
-}
-@media print{
- @page{size:A4;margin:7mm}
- html,body{margin:0!important;padding:0!important;width:100%;background:white!important;font-family:Arial,sans-serif;font-size:8pt;line-height:1.22}
- header,.hero,form,.features,footer,.no-print,#hesap-paneli,#tekliflerim{display:none!important}
- main.wrap{width:100%;max-width:none;margin:0;padding:0}
- .panel{margin:0;padding:0;border:0;border-radius:0;box-shadow:none}
- .panel>h2,.panel>.muted{display:none!important}
- #sonuc{display:block!important;width:100%;margin:0;padding:0;border:0;border-radius:0;overflow:visible;font-size:8pt}
- .doc-head{margin-bottom:7px;padding-bottom:7px}
- .doc-brand{font-size:15pt}
- .doc-title h2{font-size:19pt}
- .doc-title p{font-size:8pt;margin:2px 0}
- .doc-meta{margin-bottom:7px;gap:6px}
- .doc-box{padding:6px}
- .doc-box h3,.doc-section-title{font-size:8pt;margin-bottom:3px}
- .doc-box p{font-size:8pt;margin:2px 0}
- .doc-section{margin:7px 0}
- .doc-section-title{padding-bottom:3px}
- .doc-description{font-size:8pt;margin:4px 0}
- th,td{padding:4px;font-size:8pt}
- .totals{margin-top:5px;font-size:8pt}
- .total-row{padding:3px 0}
- .total-final{font-size:14pt;padding:5px 0}
- .terms{font-size:8pt}
- .signature-grid{margin-top:8px;gap:8px}
- .signature{min-height:48px;padding:7px;font-size:8pt}
- .signature strong{margin-bottom:9px}
- .doc-foot{margin-top:6px;padding-top:5px;font-size:8pt}
- .notice{font-size:8pt;padding:5px;margin-top:5px}
-}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}
+.topbar{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.topbar-inner{max-width:1120px;margin:auto;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo-wrap{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink)}
+.logo-mark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--navy);color:#fff;font-size:19px;font-weight:800;box-shadow:0 5px 12px #142c5030}
+.logo{font-size:17px;font-weight:800;letter-spacing:-.4px}.logo small{display:block;color:var(--muted);font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:8px}.nav-links a{color:#506078;text-decoration:none;font-size:13px;font-weight:650;padding:9px 12px;border-radius:9px;transition:.2s}.nav-links a:hover{color:var(--blue);background:#eef3ff}
+.header-cta{background:var(--blue);color:#fff!important;padding:10px 15px!important;border-radius:10px!important;box-shadow:0 4px 12px #2756d833}
+.hero{max-width:1120px;margin:26px auto 8px;padding:0 24px}
+.hero-card{position:relative;overflow:hidden;border-radius:22px;padding:32px 36px;background:linear-gradient(115deg,#142c50 0%,#1d3f75 58%,#2756d8 100%);color:white;box-shadow:0 18px 38px #18345b20}
+.hero-card:after{content:"";position:absolute;width:310px;height:310px;border:1px solid #ffffff20;border-radius:50%;right:7%;top:-180px;box-shadow:0 0 0 32px #ffffff08,0 0 0 68px #ffffff06}
+.hero-content{position:relative;z-index:1;max-width:710px}.hero-badge{display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border-radius:20px;background:#ffffff19;color:#dce9ff;font-size:11px;font-weight:750;letter-spacing:.55px;text-transform:uppercase}
+.hero h1{font-size:clamp(28px,4vw,40px);letter-spacing:-1.2px;line-height:1.12;margin:15px 0 9px}.hero p{max-width:590px;color:#d3def0;margin:0;font-size:15px}
+.hero-steps{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}.hero-step{display:flex;align-items:center;gap:8px;color:#eff4ff;font-size:12px;font-weight:650}.hero-step:not(:last-child):after{content:"→";margin-left:5px;color:#9db7eb}.step-dot{width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:#ffffff20;color:white;font-size:11px}
+.wrap{max-width:1120px;padding:16px 24px 30px;margin:auto}.panel{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:var(--shadow)}
+h2{font-size:22px;letter-spacing:-.45px;margin:0 0 5px}h3{font-size:15px;letter-spacing:-.1px;margin:0 0 8px}.muted{color:var(--muted);font-size:13px;margin:0 0 22px}
+.panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:20px}.panel-kicker{display:block;font-size:10px;color:var(--blue);font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px}.secure-pill{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border:1px solid #d6f0e6;background:#f1fbf7;color:#247456;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}.secure-pill:before{content:"";width:7px;height:7px;border-radius:50%;background:#36ad7c}
+label{display:block;font-size:12px;font-weight:700;color:#35445d;margin:14px 0 6px}
+input,textarea,select{width:100%;padding:11px 12px;border:1px solid #d8e0eb;border-radius:9px;font:inherit;font-size:14px;background:#fff;color:var(--ink);transition:border-color .18s,box-shadow .18s}
+textarea{min-height:85px;resize:vertical}input::placeholder,textarea::placeholder{color:#9aa6b7}input:focus,textarea:focus,select:focus{outline:none;border-color:#7393f3;box-shadow:0 0 0 3px #2756d817}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}form>h3{margin:24px 0 8px;padding-bottom:9px;border-bottom:1px solid #edf0f5;color:#263c5d}form>h3:first-child{margin-top:0}
+button{font:inherit;font-size:13px;font-weight:750;border:0;border-radius:9px;padding:11px 16px;cursor:pointer;transition:transform .15s,background .15s,box-shadow .15s}button:not(:disabled):hover{transform:translateY(-1px)}button:disabled{opacity:.52;cursor:not-allowed}.primary{background:var(--blue);color:white;box-shadow:0 5px 13px #2756d82a}.primary:hover:not(:disabled){background:var(--blue-dark)}.secondary{background:#eef3ff;color:var(--blue)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.actions button{min-width:150px}.help{font-size:12px;color:var(--muted);margin-top:5px}.notice{font-size:12px;padding:10px 12px;border:1px solid #f3dfb2;background:#fff9eb;color:#805d19;border-radius:9px;margin:12px 0}
+.confirm{display:flex;gap:10px;align-items:flex-start;font-size:12px;font-weight:550;line-height:1.5;margin:14px 0;color:#45536a}.confirm input{width:17px;height:17px;flex:0 0 17px;margin:1px 0;accent-color:var(--blue)}hr{border:0;border-top:1px solid #edf0f5;margin:20px 0}
+.approval{display:none;margin-top:22px;padding:21px;border:1px solid #b9caf9;background:linear-gradient(145deg,#f4f7ff,#fff);border-radius:14px}.approval h3{color:var(--navy);margin:0 0 5px;font-size:17px}.approval-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:15px 0;font-size:13px}.approval-summary div{padding:10px 11px;background:white;border:1px solid #e7ebf5;border-radius:9px}.approval-summary strong{color:#56647a}.approval-status{font-size:13px;min-height:20px;color:#334155}.approval .actions{margin-top:10px}
+.result{display:none;background:white;border:1px solid var(--line);border-radius:15px;padding:25px;margin-top:22px;overflow-wrap:anywhere}.doc-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;border-bottom:3px solid var(--blue);padding-bottom:10px;margin-bottom:11px}.doc-brand{font-size:20px;font-weight:800;color:var(--blue);overflow-wrap:anywhere}.doc-sub{font-size:10px;color:var(--muted)}.doc-title{text-align:right}.doc-title h2{font-size:24px;letter-spacing:1px;color:var(--blue);margin:0}.doc-title p{font-size:10px;color:var(--muted);margin:3px 0}.doc-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.doc-box{border:1px solid var(--line);border-radius:8px;padding:9px;min-width:0}.doc-box h3,.doc-section-title{font-size:10px;color:var(--blue);letter-spacing:.4px;margin:0 0 5px;text-transform:uppercase}.doc-box p{font-size:11px;margin:2px 0;white-space:pre-wrap;overflow-wrap:anywhere}.doc-section{margin:11px 0}.doc-section-title{border-bottom:1px solid var(--line);padding-bottom:4px}.doc-description{white-space:pre-wrap;font-size:11px;margin:6px 0}table{width:100%;border-collapse:collapse;font-size:10px}th{background:#eef3fb;color:var(--blue);text-align:left}th,td{padding:6px;border:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}.num{text-align:right;white-space:nowrap}.totals{width:min(100%,330px);margin:8px 0 0 auto;font-size:11px}.total-row{display:flex;justify-content:space-between;gap:12px;padding:4px 0;border-bottom:1px solid var(--line)}.total-final{font-size:17px;font-weight:800;color:var(--blue);border-bottom:3px solid var(--blue);padding:7px 0}.terms{font-size:10px}.signature-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.signature{border:1px solid var(--line);border-radius:8px;padding:8px;min-height:58px;font-size:10px}.signature strong{display:block;color:var(--blue);margin-bottom:13px}.doc-foot{border-top:1px solid var(--line);padding-top:6px;margin-top:8px;font-size:9px;color:var(--muted);text-align:center}
+#teklifListesi .teklif-karti{background:white;border:1px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;box-shadow:0 5px 16px #17203308}#teklifListesi .teklif-karti h3{margin:0 0 7px}#teklifListesi .teklif-karti p{margin:4px 0;color:var(--muted);font-size:13px}#teklifListesi .teklif-ac{background:#eef3ff;color:var(--blue);width:100%;margin-top:10px}
+.workflow-note{max-width:1072px;margin:0 auto 25px;padding:0 24px}.workflow-note-inner{display:flex;align-items:center;gap:12px;padding:13px 16px;border:1px solid #dfe7f5;background:#fff;border-radius:12px;color:#55647a;font-size:12px}.workflow-note strong{color:var(--navy)}.workflow-icon{width:30px;height:30px;flex:0 0 30px;display:grid;place-items:center;border-radius:9px;background:#eef3ff;color:var(--blue);font-weight:800}
+#hesap-paneli,#tekliflerim{max-width:1072px;margin:20px auto;padding:24px;background:white;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 24px #17203308}#hesap-paneli h2,#tekliflerim h2{margin-bottom:5px}#hesap-paneli label{max-width:520px}#hesap-paneli input{max-width:520px}#hesap-durum{padding:10px 12px;background:#f6f8fc;border-radius:8px;color:var(--muted);font-size:13px}
+footer{text-align:center;color:#748097;padding:18px 12px 28px;font-size:11px}
+@media(max-width:700px){.topbar-inner{padding:11px 16px}.nav-links{gap:2px}.nav-links a{font-size:12px;padding:8px}.nav-links a.header-cta{padding:9px 10px!important}.hero{margin-top:17px;padding:0 16px}.hero-card{padding:25px 22px;border-radius:17px}.hero p{font-size:14px}.hero-steps{gap:7px}.hero-step{font-size:11px}.hero-step:not(:last-child):after{margin-left:0}.wrap{padding:13px 16px 22px}.panel{padding:21px 17px}.approval-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.workflow-note{padding:0 16px}#hesap-paneli,#tekliflerim{margin:16px;padding:19px}}
+@media(max-width:480px){.logo{font-size:15px}.logo-mark{width:35px;height:35px}.logo small{font-size:9px}.nav-links a{font-size:11px;padding:7px 8px}.nav-links .nav-optional{display:none}.hero-step{font-size:10px}.grid,.doc-meta,.signature-grid{grid-template-columns:1fr}.panel-head{display:block}.secure-pill{margin-top:12px}.approval-summary{grid-template-columns:1fr 1fr}.actions{flex-direction:column}.actions button{width:100%}.result{padding:15px}.doc-head{gap:8px}.doc-brand{font-size:16px}.doc-title h2{font-size:20px}.doc-box{padding:7px}}
+@media print{@page{size:A4;margin:7mm}html,body{margin:0!important;padding:0!important;width:100%;background:white!important;font-family:Arial,sans-serif;font-size:8pt;line-height:1.22}.topbar,.hero,form,.workflow-note,footer,.no-print,#hesap-paneli,#tekliflerim,.approval{display:none!important}main.wrap{width:100%;max-width:none;margin:0;padding:0}.panel{margin:0;padding:0;border:0;border-radius:0;box-shadow:none}.panel>h2,.panel>.muted,.panel-head{display:none!important}#sonuc{display:block!important;width:100%;margin:0;padding:0;border:0;border-radius:0;overflow:visible;font-size:8pt}.doc-head{margin-bottom:7px;padding-bottom:7px}.doc-brand{font-size:15pt}.doc-title h2{font-size:19pt}.doc-title p{font-size:8pt;margin:2px 0}.doc-meta{margin-bottom:7px;gap:6px}.doc-box{padding:6px}.doc-box h3,.doc-section-title{font-size:8pt;margin-bottom:3px}.doc-box p{font-size:8pt;margin:2px 0}.doc-section{margin:7px 0}.doc-section-title{padding-bottom:3px}.doc-description{font-size:8pt;margin:4px 0}th,td{padding:4px;font-size:8pt}.totals{margin-top:5px;font-size:8pt}.total-row{padding:3px 0}.total-final{font-size:14pt;padding:5px 0}.terms{font-size:8pt}.signature-grid{margin-top:8px;gap:8px}.signature{min-height:48px;padding:7px;font-size:8pt}.signature strong{margin-bottom:9px}.doc-foot{margin-top:6px;padding-top:5px;font-size:8pt}.notice{font-size:8pt;padding:5px;margin-top:5px}}
 </style>
 </head>
 <body>
-<header><div class="logo">✦ TeklifPilot AI</div><a href="#teklif">Yeni teklif oluştur</a></header>
-<section class="hero"><h1>Profesyonel Teklif Asistanı</h1><p>Müşteri ve hizmet bilgilerinizi girin, kurumsal teklif belgenizi hazırlayın.</p></section>
+<header class="topbar"><div class="topbar-inner">
+<a class="logo-wrap" href="#ust" aria-label="TeklifPilot ana sayfa"><span class="logo-mark">T</span><span class="logo">TeklifPilot AI<small>Akıllı teklif çalışma alanı</small></span></a>
+<nav class="nav-links" aria-label="Ana menü"><a class="nav-optional" href="#tekliflerim">Tekliflerim</a><a class="nav-optional" href="#hesap-paneli">Hesabım</a><a class="header-cta" href="#teklif">＋ Yeni teklif</a></nav>
+</div></header>
+<section class="hero" id="ust"><div class="hero-card"><div class="hero-content">
+<span class="hero-badge"><span>✦</span> Teklif yönetimi, daha kolay</span>
+<h1>İyi bir teklif, iyi bir başlangıçtır.</h1>
+<p>Müşteri bilgilerini ve hizmet kapsamını gir. Teklifini kaydetmeden önce gözden geçirip onayla.</p>
+<div class="hero-steps" aria-label="Teklif hazırlama adımları"><span class="hero-step"><span class="step-dot">1</span> Bilgileri gir</span><span class="hero-step"><span class="step-dot">2</span> Taslağı incele</span><span class="hero-step"><span class="step-dot">3</span> Onayla ve kaydet</span></div>
+</div></div></section>
 
 <main class="wrap" id="teklif">
 <section class="panel">
-<h2>Yeni Teklif Oluştur</h2>
-<p class="muted">Bilgileri doldurun. PDF çıktısında yalnızca teklif belgesi yer alır.</p>
+<div class="panel-head"><div><span class="panel-kicker">Yeni çalışma</span><h2>Teklif bilgileri</h2><p class="muted">Bilgileri doldur; kaydetmeden önce taslağı inceleyebilirsin.</p></div><span class="secure-pill">Kaydetmeden önce onay gerekir</span></div>
 <form id="teklifFormu">
 <h3>Firma bilgileri</h3>
 <div class="grid">
@@ -170,9 +107,17 @@ footer{text-align:center;background:#111827;color:#cbd5e1;padding:24px 12px;font
 <select id="gecerlilik"><option value="3">3 gün</option><option value="7" selected>7 gün</option><option value="15">15 gün</option><option value="30">30 gün</option></select>
 <label class="confirm"><input id="kdvOnay" type="checkbox" required><span>Seçtiğim KDV oranının bu ürün veya hizmet için uygun olduğunu kontrol ettim.</span></label>
 <p id="hesapOnizleme" class="help">Miktar ve birim fiyat girildiğinde toplam gösterilir.</p>
-<div class="actions"><button class="primary" type="submit">Teklif Oluştur ve Kaydet</button></div>
+<div class="actions"><button class="primary" type="submit">Taslak Hazırla</button></div>
 </form>
 
+<section id="onayPaneli" class="approval" aria-labelledby="onayBaslik" aria-live="polite">
+<h3 id="onayBaslik">Taslak hazır — kaydetmeden önce kontrol et</h3>
+<p class="help">Bu aşamada veritabanına hiçbir kayıt yazılmadı. Aşağıdaki bilgiler onayladığın taslakla kaydedilecek.</p>
+<div id="onayOzeti" class="approval-summary"></div>
+<label class="confirm"><input id="taslakOnay" type="checkbox"><span>Teklif bilgilerini ve hesaplanan tutarı kontrol ettim; bu taslağın hesabıma kaydedilmesini onaylıyorum.</span></label>
+<p id="onayDurum" class="approval-status" role="status"></p>
+<div class="actions"><button class="primary" type="button" id="taslagiUygula" disabled>Onayla ve Kaydet</button><button class="secondary" type="button" id="taslagiIptal">Taslağı İptal Et</button></div>
+</section>
 <section id="sonuc" class="result" aria-live="polite">
 <div class="doc-head">
 <div><div class="doc-brand" id="rFirmaMarka"></div><div class="doc-sub" id="rFirmaAlt"></div></div>
@@ -208,12 +153,8 @@ footer{text-align:center;background:#111827;color:#cbd5e1;padding:24px 12px;font
 </section>
 </main>
 
-<section class="features">
-<article class="feature"><h3>Kurumsal teklif</h3><p>Firma ve müşteri bilgilerini düzenli gösterin.</p></article>
-<article class="feature"><h3>Fiyat tablosu</h3><p>Miktar, birim fiyat ve KDV tutarını gösterin.</p></article>
-<article class="feature"><h3>Kolay paylaşım</h3><p>Belgenizi yazdırın veya teklif özetini paylaşın.</p></article>
-</section>
-<footer>© 2026 TeklifPilot AI · Profesyonel teklif hazırlama</footer>
+<section class="workflow-note"><div class="workflow-note-inner"><span class="workflow-icon">✓</span><span><strong>Güvenli çalışma:</strong> Teklif, sen taslağı onaylayana kadar kaydedilmez. PDF veya WhatsApp paylaşımı da onaylanan teklif üzerinden yapılır.</span></div></section>
+<footer>© 2026 TeklifPilot AI · Teklif hazırlamak artık daha kolay</footer>
 
 <script>
 const form=document.getElementById("teklifFormu");
@@ -325,17 +266,39 @@ document.getElementById("kdvOran").addEventListener("change",function(){
  onizlemeHesapla();
 });
 
-/* Teklif kaydetme: mevcut Supabase sütunları korunur. */
+/* Oku -> analiz et -> taslak hazırla -> kullanıcı onayı -> uygula. */
+let bekleyenTaslak=null;
+const onayPaneli=document.getElementById("onayPaneli");
+const taslakOnay=document.getElementById("taslakOnay");
+const uygulaBtn=document.getElementById("taslagiUygula");
+const onayDurum=document.getElementById("onayDurum");
+function taslakTemizle(mesaj){
+ bekleyenTaslak=null;taslakOnay.checked=false;uygulaBtn.disabled=true;
+ onayPaneli.style.display="none";onayDurum.textContent="";
+ if(mesaj)document.getElementById("otomatikMetinDurum").textContent=mesaj;
+}
+function taslakOzetiGoster(t){
+ const o=document.getElementById("onayOzeti");o.replaceChildren();
+ [["Teklif no",t.no],["Firma",t.firma],["Müşteri",t.musteri],["Hizmet",t.hizmet],
+  ["Miktar",t.miktar+" "+t.birim],["Birim fiyat",para(t.birimFiyat)],
+  ["KDV",t.kdvDurum+" · %"+t.kdvOran],["Genel toplam",para(t.genelToplam)],
+  ["Geçerlilik sonu",t.sonGun]].forEach(([etiket,deger])=>{
+   const item=document.createElement("div"),strong=document.createElement("strong");
+   strong.textContent=etiket+": ";item.append(strong,document.createTextNode(String(deger||"-")));o.appendChild(item);
+  });
+}
+form.addEventListener("input",function(){if(bekleyenTaslak)taslakTemizle("Form değişti; kaydetmeden önce taslağı yeniden hazırlayın.");});
+form.addEventListener("change",function(){if(bekleyenTaslak)taslakTemizle("Form değişti; kaydetmeden önce taslağı yeniden hazırlayın.");});
 form.addEventListener("submit",async function(event){
  event.preventDefault();
  if(!form.reportValidity())return;
  if(!oku("kdvOran")){alert("KDV oranını doğrulamadan teklif kaydedemezsin.");return;}
  if(!document.getElementById("kdvOnay").checked){alert("Devam etmeden önce KDV oranını kontrol ettiğini onayla.");return;}
  const t=formdanTeklif();
- if(!(t.miktar>0)||!(t.birimFiyat>0)){alert("Miktar ve birim fiyat sıfırdan büyük olmalıdır.");return;}
+ if(!(t.miktar>0)||!(t.birimFiyat>0)||!Number.isFinite(t.genelToplam)){alert("Miktar ve birim fiyat geçerli, sıfırdan büyük değerler olmalıdır.");return;}
  try{
   const {data:oturum,error:oturumHatasi}=await client.auth.getUser();
-  if(oturumHatasi||!oturum.user){alert("Teklif kaydetmek için önce hesabına giriş yapmalısın.");return;}
+  if(oturumHatasi||!oturum.user){alert("Taslak hazırlamak için önce hesabına giriş yapmalısın.");return;}
   const sonGun=new Date();sonGun.setDate(sonGun.getDate()+t.gecerlilik);
   const detayKaydi=[
    t.detay,"FİYAT DÖKÜMÜ","Miktar: "+t.miktar+" "+t.birim,
@@ -347,22 +310,32 @@ form.addEventListener("submit",async function(event){
    t.firmaEmail?"Firma e-posta: "+t.firmaEmail:"",
    t.firmaAdres?"Firma adresi: "+t.firmaAdres:"",
    t.firmaVergi?"Vergi bilgisi: "+t.firmaVergi:"",
-   t.garanti?"Garanti: "+t.garanti:"",
-   t.kosullar?"Ek koşullar: "+t.kosullar:""
+   t.garanti?"Garanti: "+t.garanti:"",t.kosullar?"Ek koşullar: "+t.kosullar:""
   ].filter(Boolean).join("\n");
-  const {error}=await client.from("teklifler").insert({
-   user_id:oturum.user.id,teklif_no:t.no,sektor:t.sektor,firma:t.firma,
-   musteri:t.musteri,telefon:t.telefon||null,hizmet:t.hizmet,
-   detay:detayKaydi||null,tutar:t.genelToplam,
-   kdv:t.kdvDurum+" (%"+t.kdvOran+")",odeme:t.odeme||null,
-   teslimat:t.teslimat||null,gecerlilik_sonu:sonGun.toISOString().slice(0,10)
-  });
-  if(error){alert("Teklif kaydedilemedi: "+error.message);return;}
-  teklifiGoster(t);
-  alert("Teklif başarıyla kaydedildi.");
- }catch(e){alert("Bağlantı hatası oluştu. Lütfen tekrar dene.");}
+  const kayit={user_id:oturum.user.id,teklif_no:t.no,sektor:t.sektor,firma:t.firma,
+   musteri:t.musteri,telefon:t.telefon||null,hizmet:t.hizmet,detay:detayKaydi||null,
+   tutar:t.genelToplam,kdv:t.kdvDurum+" (%"+t.kdvOran+")",odeme:t.odeme||null,
+   teslimat:t.teslimat||null,gecerlilik_sonu:sonGun.toISOString().slice(0,10)};
+  bekleyenTaslak={teklif:t,kayit:kayit,userId:oturum.user.id};
+  taslakOzetiGoster(t);taslakOnay.checked=false;uygulaBtn.disabled=true;
+  onayDurum.textContent="Taslak hazır. Henüz Supabase'e yazılmadı.";
+  onayPaneli.style.display="block";onayPaneli.scrollIntoView({behavior:"smooth",block:"center"});
+ }catch(e){alert("Taslak hazırlanırken oturum kontrolü yapılamadı. Lütfen tekrar dene.");}
 });
-
+taslakOnay.addEventListener("change",function(){uygulaBtn.disabled=!taslakOnay.checked||!bekleyenTaslak;});
+document.getElementById("taslagiIptal").addEventListener("click",function(){taslakTemizle("Taslak iptal edildi; veritabanına kayıt yapılmadı.");});
+uygulaBtn.addEventListener("click",async function(){
+ if(!bekleyenTaslak||!taslakOnay.checked)return;
+ const taslak=bekleyenTaslak;uygulaBtn.disabled=true;onayDurum.textContent="Onaylanan taslak kaydediliyor…";
+ try{
+  const {data:oturum,error:oturumHatasi}=await client.auth.getUser();
+  if(oturumHatasi||!oturum.user||oturum.user.id!==taslak.userId){taslakTemizle("Oturum değişti veya sona erdi. Taslak güvenlik için iptal edildi.");return;}
+  const {error}=await client.from("teklifler").insert(taslak.kayit);
+  if(error){uygulaBtn.disabled=false;onayDurum.textContent="Kayıt başarısız: "+error.message;return;}
+  teklifiGoster(taslak.teklif);taslakTemizle("Teklif onaylandı ve kaydedildi.");
+  document.getElementById("otomatikMetinDurum").textContent="Teklif başarıyla kaydedildi.";
+ }catch(e){uygulaBtn.disabled=true;onayDurum.textContent="Bağlantı hatası; kayıt sonucu belirsiz olabilir. Çift kayıt riskini önlemek için yeniden deneme kapatıldı. Önce teklif listeni kontrol et; gerekirse taslağı iptal edip yeni bir taslak oluştur.";}
+});
 document.getElementById("pdfBtn").addEventListener("click",()=>window.print());
 document.getElementById("waBtn").addEventListener("click",function(){
  if(!sonTeklif)return;
