@@ -63,6 +63,32 @@ button{border:0}.primary{background:var(--blue);color:#fff}.secondary{background
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
 @media print{@page{size:A4;margin:7mm}html,body{height:auto!important;overflow:visible!important;background:#fff!important;font-family:Arial,sans-serif;font-size:8pt;line-height:1.22}.topbar,.bottom-nav,.app-screen:not(.new-screen),.screen-topline,.panel-head,.wizard-progress,#teklifFormu,.approval,.no-print{display:none!important}.app-screen.new-screen{position:static!important;display:block!important;width:100%;height:auto!important;min-height:0!important;max-width:none;margin:0;padding:0;overflow:visible}.panel{margin:0;padding:0;border:0;border-radius:0;box-shadow:none}.result{display:block!important;width:100%;margin:0;padding:0;border:0;border-radius:0;overflow:visible}.doc-head{margin-bottom:7px;padding-bottom:7px}.doc-brand{font-size:15pt}.doc-title h2{font-size:19pt}.doc-title p{font-size:8pt;margin:2px 0}.doc-meta{margin-bottom:7px;gap:6px}.doc-box{padding:6px}.doc-box h3,.doc-section-title{font-size:8pt;margin-bottom:3px}.doc-box p{font-size:8pt;margin:2px 0}.doc-section{margin:7px 0}.doc-section-title{padding-bottom:3px}th,td{padding:4px;font-size:8pt}.totals{margin-top:5px;font-size:8pt}.total-row{padding:3px 0}.total-final{font-size:14pt;padding:5px 0}.terms{font-size:8pt}.signature-grid{margin-top:8px;gap:8px}.signature{min-height:48px;padding:7px;font-size:8pt}.signature strong{margin-bottom:9px}.doc-foot{margin-top:6px;padding-top:5px;font-size:8pt}}
 </style>
+<style>
+.form-step label{margin:12px 0 6px;color:#33445f;font-size:11px;letter-spacing:.05px}
+.form-step input,.form-step select,.form-step textarea{min-height:45px;border-color:#d9e2ef;border-radius:12px;box-shadow:0 2px 5px #1b355109}
+.form-step textarea{min-height:82px}
+.form-step input:focus,.form-step select:focus,.form-step textarea:focus{border-color:#6487f2;box-shadow:0 0 0 4px #315ee81c,0 3px 8px #1b35510d}
+.price-inputs{column-gap:12px;row-gap:1px}
+.live-price-card{position:sticky;bottom:58px;z-index:3;margin-top:14px;padding:14px 15px;border:1px solid #d9e4fa;border-radius:17px;background:linear-gradient(145deg,#f8fbff 0%,#eff4ff 100%);box-shadow:0 8px 20px #315ee80d;transition:border-color .2s,box-shadow .2s}
+.live-price-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.live-price-caption{display:flex;align-items:center;gap:7px;color:#405474;font-size:10px;font-weight:800;letter-spacing:.25px}
+.live-price-spark{display:grid;width:22px;height:22px;place-items:center;border-radius:8px;background:#e2eaff;color:#315ee8;font-size:14px;font-weight:900}
+.live-price-status{padding:5px 8px;border:1px solid #dfe7f4;border-radius:999px;background:#fff;color:#75829a;font-size:9px;font-weight:700;white-space:nowrap}
+.live-price-total{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:12px 0 10px}
+.live-price-total span{padding-bottom:3px;color:#60708a;font-size:10px;font-weight:650}
+.live-price-total strong{color:#244bc7;font-size:clamp(19px,5vw,24px);font-weight:850;letter-spacing:-.7px;line-height:1.1;text-align:right;font-variant-numeric:tabular-nums}
+.live-price-breakdown{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-top:10px;border-top:1px solid #dce5f4}
+.live-price-breakdown div{display:flex;flex-direction:column;gap:3px;min-width:0}
+.live-price-breakdown span{color:#78869c;font-size:9px;font-weight:650}
+.live-price-breakdown strong{overflow-wrap:anywhere;color:#344761;font-size:11px;font-weight:800;font-variant-numeric:tabular-nums}
+.live-price-note{margin:9px 0 0;color:#78869b;font-size:9px;line-height:1.4}
+.wizard-actions{position:sticky;bottom:-1px;z-index:4;padding:9px 0 calc(7px + var(--safe-bottom));background:linear-gradient(180deg,#ffffffd9 0%,#fff 28% 100%)}
+.live-price-card.has-total{border-color:#cbd9fb;box-shadow:0 10px 24px #315ee817}
+.optional-fields{border-color:#e0e7f1;background:linear-gradient(180deg,#fbfcfe,#f7f9fc)}
+.optional-fields summary{min-height:42px;display:flex;align-items:center}
+@media(max-height:700px){.form-step label{margin-top:8px;margin-bottom:4px}.form-step input,.form-step select{min-height:39px}.form-step textarea{min-height:62px}.live-price-card{margin-top:9px;padding:10px 12px}.live-price-total{margin:8px 0}.live-price-total strong{font-size:19px}.live-price-breakdown{padding-top:7px}.live-price-note{margin-top:6px}}
+@media(max-width:360px){.live-price-card{padding:11px 12px}.live-price-caption{font-size:9px}.live-price-status{padding:4px 6px;font-size:8px}.live-price-total strong{font-size:18px}}
+</style>
 </head>
 <body>
 <header class="topbar">
@@ -93,7 +119,13 @@ button{border:0}.primary{background:var(--blue);color:#fff}.secondary{background
 <div class="form-step" data-step="3" aria-label="Hizmet ve fiyat bilgileri">
 <label for="hizmet">Ürün veya hizmet adı *</label><input id="hizmet" required maxlength="200" placeholder="Örn. Cam balkon sistemi">
 <details class="optional-fields"><summary>Teknik kapsamı ve açıklamayı ekle</summary><div class="optional-body"><label for="detay">Teknik özellikler ve iş kapsamı</label><textarea id="detay" maxlength="3000" placeholder="Malzeme, ölçüler, yapılacak işler ve kapsam..." rows="3"></textarea><button class="secondary" type="button" id="otomatikMetinBtn" style="width:100%;margin-top:8px">Teklif açıklaması hazırla</button><p id="otomatikMetinDurum" aria-live="polite" class="help"></p></div></details>
-<div class="grid"><div><label for="miktar">Miktar *</label><input id="miktar" type="number" min="0.01" step="0.01" value="1" required inputmode="decimal"></div><div><label for="birim">Birim</label><select id="birim"><option value="adet">Adet</option><option value="m²">m²</option><option value="metre">Metre</option><option value="saat">Saat</option><option value="gün">Gün</option><option value="iş">İş / Proje</option><option value="paket">Paket</option></select></div><div class="full"><label for="birimFiyat">Birim fiyat (TL) *</label><input id="birimFiyat" type="number" min="0.01" step="0.01" required placeholder="Örn. 25000" inputmode="decimal"></div><div><label for="kdvOran">KDV oranı *</label><select id="kdvOran" required><option value="">Oranı seç</option><option value="1">%1</option><option value="10">%10</option><option value="20">%20</option></select></div><div><label for="kdvDurum">Fiyat durumu *</label><select id="kdvDurum" required><option value="KDV hariç">KDV hariç</option><option value="KDV dahil">KDV dahil</option></select></div></div>
+<div class="grid price-inputs"><div><label for="miktar">Miktar *</label><input id="miktar" type="number" min="0.01" step="0.01" value="1" required inputmode="decimal"></div><div><label for="birim">Birim</label><select id="birim"><option value="adet">Adet</option><option value="m²">m²</option><option value="metre">Metre</option><option value="saat">Saat</option><option value="gün">Gün</option><option value="iş">İş / Proje</option><option value="paket">Paket</option></select></div><div class="full"><label for="birimFiyat">Birim fiyat (TL) *</label><input id="birimFiyat" type="number" min="0.01" step="0.01" required placeholder="Örn. 25000" inputmode="decimal"></div><div><label for="kdvOran">KDV oranı *</label><select id="kdvOran" required><option value="">Oranı seç</option><option value="1">%1</option><option value="10">%10</option><option value="20">%20</option></select></div><div><label for="kdvDurum">Fiyat durumu *</label><select id="kdvDurum"><option value="KDV hariç">KDV hariç</option><option value="KDV dahil">KDV dahil</option></select></div></div>
+<section class="live-price-card" id="livePriceCard" aria-label="Canlı fiyat özeti" aria-live="polite" aria-atomic="true">
+<div class="live-price-head"><span class="live-price-caption"><span class="live-price-spark" aria-hidden="true">↗</span> Canlı fiyat özeti</span><span class="live-price-status" id="livePriceStatus">Bilgiler bekleniyor</span></div>
+<div class="live-price-total"><span>Genel toplam</span><strong id="liveGrandTotal">Fiyatı girince hesaplanır</strong></div>
+<div class="live-price-breakdown"><div><span>KDV hariç</span><strong id="liveNetAmount">—</strong></div><div><span id="liveTaxLabel">KDV</span><strong id="liveTaxAmount">—</strong></div></div>
+<p class="live-price-note" id="livePriceNote">Miktar, birim fiyat ve KDV oranı girildikçe güncellenir.</p>
+</section>
 </div>
 <div class="form-step" data-step="4" aria-label="Ticari koşullar ve kontrol">
 <div class="grid"><div><label for="odeme">Ödeme koşulları</label><input id="odeme" maxlength="250" placeholder="Örn. 6 eşit taksit"></div><div><label for="teslimat">Teslimat süresi</label><input id="teslimat" maxlength="250" placeholder="Örn. 40 gün"></div><div class="full"><label for="gecerlilik">Teklif geçerlilik süresi</label><select id="gecerlilik"><option value="3">3 gün</option><option value="7" selected>7 gün</option><option value="15">15 gün</option><option value="30">30 gün</option></select></div></div>
@@ -269,13 +301,38 @@ document.getElementById("otomatikMetinBtn").addEventListener("click",function(){
 });
 
 function onizlemeHesapla(){
- const miktar=Number(oku("miktar")),fiyat=Number(oku("birimFiyat"));
- if(!(miktar>0)||!(fiyat>0)){document.getElementById("hesapOnizleme").textContent="Miktar ve birim fiyat girildiğinde toplam gösterilir.";return;}
- if(!oku("kdvOran")){document.getElementById("hesapOnizleme").textContent="KDV oranını seçmeden kesin toplam hesaplanamaz.";return;}
- const h=hesapla();
- document.getElementById("hesapOnizleme").textContent="Ara toplam: "+para(h.matrah)+" · KDV: "+para(h.kdv)+" · Genel toplam: "+para(h.genel);
+	 const miktar=Number(oku("miktar")),fiyat=Number(oku("birimFiyat"));
+	 const kart=document.getElementById("livePriceCard");
+	 const durum=document.getElementById("livePriceStatus");
+	 const toplam=document.getElementById("liveGrandTotal");
+	 const net=document.getElementById("liveNetAmount");
+	 const kdv=document.getElementById("liveTaxAmount");
+	 const kdvEtiket=document.getElementById("liveTaxLabel");
+	 const not=document.getElementById("livePriceNote");
+	 const onizleme=document.getElementById("hesapOnizleme");
+	 if(!(miktar>0)||!(fiyat>0)){
+	  durum.textContent="Bilgiler bekleniyor";toplam.textContent="Fiyatı girince hesaplanır";
+	  net.textContent="—";kdv.textContent="—";kdvEtiket.textContent="KDV";
+	  not.textContent="Miktar, birim fiyat ve KDV oranı girildikçe güncellenir.";kart.classList.remove("has-total");
+	  onizleme.textContent="Miktar ve birim fiyat girildiğinde toplam gösterilir.";return;
+	 }
+	 const h=hesapla(),oran=Number(oku("kdvOran")),birim=oku("birim");
+	 net.textContent=para(h.matrah);kdvEtiket.textContent=oran?"KDV · %"+oran:"KDV";
+	 if(!oran){
+	  durum.textContent="KDV oranı gerekli";toplam.textContent="KDV oranını seç";kdv.textContent="Oran seçilmedi";
+	  not.textContent=miktar+" "+birim+" × "+para(fiyat)+" · Vergi oranı seçilmeden toplam kesinleşmez.";
+	  kart.classList.remove("has-total");onizleme.textContent="KDV oranını seçmeden kesin toplam hesaplanamaz.";return;
+	 }
+	 toplam.textContent=para(h.genel);kdv.textContent=para(h.kdv);
+	 durum.textContent="Canlı olarak güncellendi";
+	 not.textContent=miktar+" "+birim+" × "+para(fiyat)+" · "+(h.kdvDahil?"KDV dahil fiyat":"KDV hariç fiyat");
+	 kart.classList.add("has-total");
+	 onizleme.textContent="Ara toplam: "+para(h.matrah)+" · KDV: "+para(h.kdv)+" · Genel toplam: "+para(h.genel);
 }
-["miktar","birimFiyat","kdvOran","kdvDurum"].forEach(id=>document.getElementById(id).addEventListener("input",onizlemeHesapla));
+["miktar","birimFiyat","kdvOran","kdvDurum","birim"].forEach(id=>{
+	 document.getElementById(id).addEventListener("input",onizlemeHesapla);
+	 document.getElementById(id).addEventListener("change",onizlemeHesapla);
+});
 document.getElementById("kdvOran").addEventListener("change",function(){
  document.getElementById("kdvOnay").checked=false;
  onizlemeHesapla();
